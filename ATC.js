@@ -9,7 +9,7 @@
 
 **************************************
 [rewrite_local] 
-^https?:\/\/fastword\.quickleading\.cn\/api\/v1\/user\/get url script-response-body https://raw.githubusercontent.com/iosDG001/_/main/ATC.jS
+^https?:\/\/fastword\.quickleading\.cn\/api\/v1\/user\/get url script-response-body https://raw.githubusercontent.com/iosDG001/_/main/ATC.js
 [MITM]
 hostname = fastword.quickleading.cn
 
