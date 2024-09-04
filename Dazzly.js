@@ -8,7 +8,7 @@
 
 [rewrite_local] 
 
-^https?:\/\/public-api\.geode\.com\/start url script-response-body https://raw.githubusercontent.com/iosDG001/_/main/Dazzly.js
+^https?:\/\/public-api\.geode\.com\/iap\/validate-receipt url script-response-body https://raw.githubusercontent.com/iosDG001/_/main/Dazzly.js
 [MITM]
 hostname = public-api.geode.com
 
