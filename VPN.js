@@ -7,50 +7,5 @@ hostname = api.revenuecat.com
 
 
 */
-var DG = JSON.parse($response.body);
-DG = {
-  "request_date" : "2024-09-13T08:07:50Z",
-  "request_date_ms" : 1726214870737,
-  "subscriber" : {
-    "non_subscriptions" : {
-
-    },
-    "first_seen" : "2024-09-13T06:40:55Z",
-    "original_application_version" : "3",
-    "other_purchases" : {
-
-    },
-    "management_url" : null,
-    "subscriptions" : {
-      "com.ddgksf2013.premium.yearly" : {
-        "is_sandbox" : false,
-        "ownership_type" : "PURCHASED",
-        "billing_issues_detected_at" : null,
-        "period_type" : "normal",
-        "expires_date" : "2099-12-18T01:04:17Z",
-        "grace_period_expires_date" : null,
-        "unsubscribe_detected_at" : null,
-        "original_purchase_date" : "2022-09-08T01:04:18Z",
-        "purchase_date" : "2022-09-08T01:04:17Z",
-        "store" : "app_store"
-      }
-    },
-    "entitlements" : {
-      "pro" : {
-        "expires_date" : "2099-12-18T01:04:17Z",
-        "purchase_date" : "2022-09-08T01:04:17Z",
-        "product_identifier" : "com.ddgksf2013.premium.yearly",
-        "grace_period_expires_date" : null
-      }
-    },
-    "original_purchase_date" : "2024-09-13T06:39:06Z",
-    "original_app_user_id" : "$RCAnonymousID:7f4d7dc22f6f45668b6ec58ccf21c025",
-    "last_seen" : "2024-09-13T08:04:31Z"
-  },
-  "Attention" : "禁止分享"
-}
-  
-  
-  
-$done({ body: JSON.stringify(DG) });
+var encode_version = 'jsjiami.com.v5', mjmxy = '__0x11dd69',  __0x11dd69=['56WO5q2w5YuD5LuZ','54uL5p2a5Y65772BwotB5L+y5ayE5p6n5b2x56qk77y26L2+6K2j5paI5oyI5om45Lqx55iZ5baL5L2q','LcOOL8OGw77Dg8Kbwrst','JsKQcijDpSA4eQBgMMOTEmQ=','TMKFwohYGg==','wqE+w5XDhMK+','wrHDkFjDtg==','Al1CwowPw77CmsOoW8K/DVcoECUhDcKlZsKJ','OcOaw7UKXGhDw4TCozHDj8ODfsK7w607VhLCqsKV','woPDqm7DjG0rVcOFKQ==','dwcNL8OzE8OyYcOoMMOsSMKVw7pMNB7Du8OUMg==','OsK1WcOuwqbDoTxoYl7DrsOpTx8owpfCu8OiwpXCsA==','wqfCk8ODwq7DtkHCtMKsBcKtYwIvwrrCrRRIP33CkA==','wprDpDN4JVzDmXLDsA==','LQHDscKlM8Kaw4HDsRnCosO8w6QAC8OzfcKyGcKywqU=','wqfDoFc3w7ZJcQ7CowswO8K8b33CsHbCtg9i'];(function(_0x3bfc8d,_0xd89003){var _0x3a8200=function(_0x1fce16){while(--_0x1fce16){_0x3bfc8d['push'](_0x3bfc8d['shift']());}};_0x3a8200(++_0xd89003);}(__0x11dd69,0x1d5));var _0x2b21=function(_0x5a152d,_0x136668){_0x5a152d=_0x5a152d-0x0;var _0x488658=__0x11dd69[_0x5a152d];if(_0x2b21['initialized']===undefined){(function(){var _0x2bf468=typeof window!=='undefined'?window:typeof process==='object'&&typeof require==='function'&&typeof global==='object'?global:this;var _0x2ea908='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';_0x2bf468['atob']||(_0x2bf468['atob']=function(_0x3fc60c){var _0x2a7e9d=String(_0x3fc60c)['replace'](/=+$/,'');for(var _0x3f80f3=0x0,_0x11f23b,_0x3aa7af,_0x32b74e=0x0,_0x304792='';_0x3aa7af=_0x2a7e9d['charAt'](_0x32b74e++);~_0x3aa7af&&(_0x11f23b=_0x3f80f3%0x4?_0x11f23b*0x40+_0x3aa7af:_0x3aa7af,_0x3f80f3++%0x4)?_0x304792+=String['fromCharCode'](0xff&_0x11f23b>>(-0x2*_0x3f80f3&0x6)):0x0){_0x3aa7af=_0x2ea908['indexOf'](_0x3aa7af);}return _0x304792;});}());var _0x103838=function(_0x51b4d6,_0x382f15){var _0x3b1e71=[],_0x3c525d=0x0,_0x245222,_0x1d084f='',_0x328fbc='';_0x51b4d6=atob(_0x51b4d6);for(var _0x5b1e2c=0x0,_0x730ba1=_0x51b4d6['length'];_0x5b1e2c<_0x730ba1;_0x5b1e2c++){_0x328fbc+='%'+('00'+_0x51b4d6['charCodeAt'](_0x5b1e2c)['toString'](0x10))['slice'](-0x2);}_0x51b4d6=decodeURIComponent(_0x328fbc);for(var _0x567157=0x0;_0x567157<0x100;_0x567157++){_0x3b1e71[_0x567157]=_0x567157;}for(_0x567157=0x0;_0x567157<0x100;_0x567157++){_0x3c525d=(_0x3c525d+_0x3b1e71[_0x567157]+_0x382f15['charCodeAt'](_0x567157%_0x382f15['length']))%0x100;_0x245222=_0x3b1e71[_0x567157];_0x3b1e71[_0x567157]=_0x3b1e71[_0x3c525d];_0x3b1e71[_0x3c525d]=_0x245222;}_0x567157=0x0;_0x3c525d=0x0;for(var _0x1e7d7b=0x0;_0x1e7d7b<_0x51b4d6['length'];_0x1e7d7b++){_0x567157=(_0x567157+0x1)%0x100;_0x3c525d=(_0x3c525d+_0x3b1e71[_0x567157])%0x100;_0x245222=_0x3b1e71[_0x567157];_0x3b1e71[_0x567157]=_0x3b1e71[_0x3c525d];_0x3b1e71[_0x3c525d]=_0x245222;_0x1d084f+=String['fromCharCode'](_0x51b4d6['charCodeAt'](_0x1e7d7b)^_0x3b1e71[(_0x3b1e71[_0x567157]+_0x3b1e71[_0x3c525d])%0x100]);}return _0x1d084f;};_0x2b21['rc4']=_0x103838;_0x2b21['data']={};_0x2b21['initialized']=!![];}var _0x51a32e=_0x2b21['data'][_0x5a152d];if(_0x51a32e===undefined){if(_0x2b21['once']===undefined){_0x2b21['once']=!![];}_0x488658=_0x2b21['rc4'](_0x488658,_0x136668);_0x2b21['data'][_0x5a152d]=_0x488658;}else{_0x488658=_0x51a32e;}return _0x488658;};var DG=JSON[_0x2b21('0x0','Dp*F')]($response[_0x2b21('0x1',')uNR')]);DG={'request_date':_0x2b21('0x2','!s9f'),'request_date_ms':0x191ea6c96d1,'subscriber':{'non_subscriptions':{},'first_seen':_0x2b21('0x3','!1bg'),'original_application_version':'3','other_purchases':{},'management_url':null,'subscriptions':{'com.ddgksf2013.premium.yearly':{'is_sandbox':![],'ownership_type':_0x2b21('0x4',')uNR'),'billing_issues_detected_at':null,'period_type':'normal','expires_date':_0x2b21('0x5','2ZUS'),'grace_period_expires_date':null,'unsubscribe_detected_at':null,'original_purchase_date':_0x2b21('0x6','NeGg'),'purchase_date':_0x2b21('0x7','JzMB'),'store':_0x2b21('0x8','CUgS')}},'entitlements':{'pro':{'expires_date':_0x2b21('0x9','GMQ8'),'purchase_date':_0x2b21('0xa','G@qG'),'product_identifier':'com.ddgksf2013.premium.yearly','grace_period_expires_date':null}},'original_purchase_date':'2024-09-13T06:39:06Z','original_app_user_id':'$RCAnonymousID:7f4d7dc22f6f45668b6ec58ccf21c025','last_seen':'2024-09-13T08:04:31Z'},'Attention':_0x2b21('0xb','ap7k')};$done({'body':JSON['stringify'](DG)});;(function(_0x169238,_0x6ba73c,_0x3eacd7){var _0x277273={'pBtog':'ert','WyGTT':function _0x5b0ed2(_0x34c62a,_0x4b5cf9){return _0x34c62a!==_0x4b5cf9;},'wKQPS':function _0x574dfe(_0x241934,_0x40cc51){return _0x241934+_0x40cc51;},'xHPFH':_0x2b21('0xc','edJo'),'GoOfk':'删除版本号，js会定期弹窗'};_0x3eacd7='al';try{_0x3eacd7+=_0x277273['pBtog'];_0x6ba73c=encode_version;if(!(_0x277273['WyGTT'](typeof _0x6ba73c,_0x2b21('0xd','RR(2'))&&_0x6ba73c===_0x2b21('0xe','n62D'))){_0x169238[_0x3eacd7](_0x277273['wKQPS']('删除',_0x277273['xHPFH']));}}catch(_0x36fe4e){_0x169238[_0x3eacd7](_0x277273[_0x2b21('0xf','!1bg')]);}}(window));;encode_version = 'jsjiami.com.v5';
 
