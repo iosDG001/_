@@ -7,7 +7,8 @@ hostname = api.revenuecat.com
 
 
 */
-{
+var DG = JSON.parse($response.body);
+DG = {
   "request_date" : "2024-09-13T08:07:50Z",
   "request_date_ms" : 1726214870737,
   "subscriber" : {
@@ -48,3 +49,8 @@ hostname = api.revenuecat.com
   },
   "Attention" : "禁止分享"
 }
+  
+  
+  
+$done({ body: JSON.stringify(DG) });
+
