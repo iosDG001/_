@@ -5,63 +5,58 @@ mode: Rule
 log-level: info
 external-controller: :9090
 proxies:
-  - {name: "🇺🇸 VIP(US, Boardman 3)", server: 35.94.28.76, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
-  - {name: "🇺🇸 VIP(US, Boardman 2)", server: 52.10.42.63, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
-  - {name: "🇯🇵 VIP(JP, Tokyo)", server: 43.207.204.166, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
-  - {name: "🇰🇷 VIP(KR, Asia/Seoul 1)", server: 13.125.44.158, port: 443, type: ss, cipher: aes-256-cfb, password: yijian0503}
-  - {name: "🇰🇷 VIP(KR, Asia/Seoul 2)", server: 13.125.42.210, port: 443, type: ss, cipher: aes-256-cfb, password: yijian0503}
-  - {name: "🇸🇬 VIP(SG, Singapore 2)", server: 47.129.171.139, port: 443, type: ss, cipher: aes-256-cfb, password: qawszxc123}
-  - {name: "🇸🇬 VIP(SG, Singapore 3)", server: 54.255.250.144, port: 443, type: ss, cipher: aes-256-cfb, password: qawszxc123}
-  - {name: "🇺🇸 VIP(US, Boardman 2) 2", server: 54.189.133.159, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
-  - {name: "🇺🇸 VIP(US, Boardman 1)", server: 35.93.248.165, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
-  - {name: "🇯🇵 VIP(JP, Tokyo) 2", server: 13.231.234.158, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
-  - {name: "🇯🇵 VIP(JP, Tokyo 1)", server: 18.177.137.176, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
-  - {name: "🇯🇵 VIP(JP, Tokyo 4)", server: 43.207.232.162, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
-  - {name: "🇸🇬 VIP(SG, Singapore)", server: 54.255.177.49, port: 443, type: ss, cipher: aes-256-cfb, password: qawszxc123}
-  - {name: "🇰🇷 VIP(KR, Incheon)", server: 52.79.253.103, port: 443, type: ss, cipher: aes-256-cfb, password: yijian0503}
-  - {name: "🇰🇷 VIP(KR, Incheon 1)", server: 54.180.244.127, port: 443, type: ss, cipher: aes-256-cfb, password: yijian0503}
-  - {name: "🇯🇵 VIP(JP, Tokyo) 3", server: 13.231.38.126, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
-  - {name: "🇰🇷 VIP(KR, Incheon) 2", server: 43.201.45.81, port: 443, type: ss, cipher: aes-256-cfb, password: yijian0503}
-  - {name: "🇯🇵 VIP(JP, Tokyo 1) 2", server: 13.231.107.29, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
+  - {name: "🇺🇸 VIP(US, Boardman 3)", server: 52.10.42.63, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
+  - {name: "🇺🇸 VIP(US, Boardman 1)", server: 54.189.133.159, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
+  - {name: "🇺🇸 VIP(US, Boardman)", server: 54.245.35.79, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
+  - {name: "🇯🇵 VIP(JP, Tokyo)", server: 54.249.98.175, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
+  - {name: "🇯🇵 VIP(JP, Tokyo 1)", server: 43.207.204.166, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
+  - {name: "🇸🇬 VIP(SG, Singapore)", server: 54.179.227.125, port: 443, type: ss, cipher: aes-256-cfb, password: qawszxc123}
+  - {name: "🇯🇵 VIP(JP, Tokyo 2)", server: 57.180.52.58, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
+  - {name: "🇺🇸 VIP(US, Boardman 2)", server: 35.93.248.165, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
+  - {name: "🇰🇷 VIP(KR, Incheon)", server: 43.201.45.81, port: 443, type: ss, cipher: aes-256-cfb, password: yijian0503}
+  - {name: "🇯🇵 VIP(JP, Tokyo 1) 2", server: 13.231.38.126, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
+  - {name: "🇯🇵 VIP(JP, Tokyo 3)", server: 13.231.234.158, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
   - {name: "🇸🇬 VIP(SG, Singapore 1)", server: 13.212.193.32, port: 443, type: ss, cipher: aes-256-cfb, password: qawszxc123}
-  - {name: "🇸🇬 VIP(SG, Singapore 3) 2", server: 13.250.22.208, port: 443, type: ss, cipher: aes-256-cfb, password: qawszxc123}
-  - {name: "🇸🇬 VIP(SG, Singapore) 2", server: 47.128.228.156, port: 443, type: ss, cipher: aes-256-cfb, password: qawszxc123}
-  - {name: "🇸🇬 VIP(SG, Singapore 1) 2", server: 54.179.227.125, port: 443, type: ss, cipher: aes-256-cfb, password: qawszxc123}
+  - {name: "🇰🇷 VIP(KR, Incheon 1)", server: 54.180.244.127, port: 443, type: ss, cipher: aes-256-cfb, password: yijian0503}
+  - {name: "🇯🇵 VIP(JP, Tokyo 2) 2", server: 18.177.137.176, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
+  - {name: "🇰🇷 VIP(KR, Incheon 2)", server: 52.79.253.103, port: 443, type: ss, cipher: aes-256-cfb, password: yijian0503}
+  - {name: "🇸🇬 VIP(SG, Singapore) 2", server: 54.255.177.49, port: 443, type: ss, cipher: aes-256-cfb, password: qawszxc123}
+  - {name: "🇸🇬 VIP(SG, Singapore 1) 2", server: 54.255.250.144, port: 443, type: ss, cipher: aes-256-cfb, password: qawszxc123}
+  - {name: "🇸🇬 VIP(SG, Singapore 3)", server: 13.250.22.208, port: 443, type: ss, cipher: aes-256-cfb, password: qawszxc123}
+  - {name: "🇸🇬 VIP(SG, Singapore 1) 3", server: 47.129.171.139, port: 443, type: ss, cipher: aes-256-cfb, password: qawszxc123}
+  - {name: "🇸🇬 VIP(SG, Singapore) 3", server: 47.128.228.156, port: 443, type: ss, cipher: aes-256-cfb, password: qawszxc123}
   - {name: "🇺🇸 VIP(US, Boardman 3) 2", server: 35.86.251.49, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
-  - {name: "🇺🇸 VIP(US, Boardman)", server: 44.249.147.9, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
-  - {name: "🇺🇸 VIP(US, Boardman) 2", server: 54.245.35.79, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
-  - {name: "🇯🇵 VIP(JP, Tokyo 1) 3", server: 57.180.52.58, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
+  - {name: "🇺🇸 VIP(US, Boardman) 2", server: 44.249.147.9, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
+  - {name: "🇰🇷 VIP(KR, Asia/Seoul)", server: 13.125.44.158, port: 443, type: ss, cipher: aes-256-cfb, password: yijian0503}
+  - {name: "🇰🇷 VIP(KR, Asia/Seoul 1)", server: 13.125.42.210, port: 443, type: ss, cipher: aes-256-cfb, password: yijian0503}
   - {name: "🇺🇸 VIP(US, Boardman 1) 2", server: 18.237.107.147, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
   - {name: "🇰🇷 VIP(KR, Incheon 1) 2", server: 43.203.218.90, port: 443, type: ss, cipher: aes-256-cfb, password: yijian0503}
-  - {name: "🇯🇵 VIP(JP, Tokyo) 4", server: 13.158.140.61, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
-  - {name: "🇯🇵 VIP(JP, Tokyo) 5", server: 54.249.98.175, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
-  - {name: "🇰🇷 VIP(KR, Asia/Seoul)", server: 13.124.50.74, port: 443, type: ss, cipher: aes-256-cfb, password: yijian0503}
+  - {name: "🇯🇵 VIP(JP, Tokyo) 2", server: 13.158.140.61, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
+  - {name: "🇺🇸 VIP(US, Boardman) 3", server: 35.94.28.76, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
+  - {name: "🇰🇷 VIP(KR, Asia/Seoul) 2", server: 13.124.50.74, port: 443, type: ss, cipher: aes-256-cfb, password: yijian0503}
   - {name: "🇰🇷 VIP(KR, Incheon 4)", server: 3.38.192.162, port: 443, type: ss, cipher: aes-256-cfb, password: yijian0503}
-  - {name: "🇯🇵 VIP(JP, Tokyo) 6", server: 54.178.20.12, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
-  - {name: "🇺🇸 VIP(US, Columbus 1)-gcm", server: 18.118.164.61, port: 80, type: ss, cipher: aes-256-gcm, password: awsps0607}
-  - {name: "🇮🇳 VIP(IN, Mumbai)-gcm", server: 3.110.127.68, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
+  - {name: "🇯🇵 VIP(JP, Tokyo) 3", server: 54.178.20.12, port: 443, type: ss, cipher: aes-256-cfb, password: awsps0501}
+  - {name: "🇺🇸 VIP(US, Columbus)-gcm", server: 18.118.164.61, port: 80, type: ss, cipher: aes-256-gcm, password: awsps0607}
+  - {name: "🇦🇺 VIP(AU, Sydney 1)-gcm", server: 3.107.1.39, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
+  - {name: "🇦🇺 VIP(AU, Sydney 2)-gcm", server: 3.107.184.18, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
   - {name: "🇮🇳 VIP(IN, Mumbai 1)-gcm", server: 13.201.79.125, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
-  - {name: "🇦🇺 VIP(AU, Sydney 1)-gcm", server: 54.79.190.159, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
-  - {name: "🇺🇸 VIP(US, Columbus 3)-gcm", server: 18.222.20.166, port: 80, type: ss, cipher: aes-256-gcm, password: awsps0607}
-  - {name: "🇦🇺 VIP(AU, Sydney)-gcm", server: 3.107.2.250, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
+  - {name: "🇺🇸 VIP(US, Columbus 1)-gcm", server: 18.222.20.166, port: 80, type: ss, cipher: aes-256-gcm, password: awsps0607}
+  - {name: "🇮🇳 VIP(IN, Mumbai 3)-gcm", server: 3.110.127.68, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
   - {name: "🇮🇳 VIP(IN, Mumbai 2)-gcm", server: 13.232.81.156, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
-  - {name: "🇦🇺 VIP(AU, Sydney 2)-gcm", server: 16.176.215.212, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
-  - {name: "🇮🇳 VIP(IN, Mumbai)-gcm 2", server: 3.108.190.141, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
-  - {name: "🇦🇺 VIP(AU, Sydney)-gcm 2", server: 3.107.84.4, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
-  - {name: "🇺🇸 VIP(US, Columbus 3)-gcm 2", server: 18.188.15.84, port: 80, type: ss, cipher: aes-256-gcm, password: awsps0607}
-  - {name: "🇮🇳 VIP(IN, Mumbai 3)-gcm", server: 13.233.138.174, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
-  - {name: "🇺🇸 VIP(US, Columbus)-gcm", server: 18.191.157.189, port: 80, type: ss, cipher: aes-256-gcm, password: awsps0607}
-  - {name: "🇺🇸 VIP(US, Columbus)-gcm 2", server: 18.116.89.234, port: 80, type: ss, cipher: aes-256-gcm, password: awsps0607}
-  - {name: "🇦🇺 VIP(AU, Sydney 1)-gcm 2", server: 54.253.137.126, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
-  - {name: "🇦🇺 VIP(AU, Sydney)-gcm 3", server: 16.176.141.116, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
-  - {name: "🇦🇺 VIP(AU, Sydney 1)-gcm 3", server: 3.107.183.63, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
-  - {name: "🇦🇺 VIP(AU, Sydney)-gcm 4", server: 3.107.1.39, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
+  - {name: "🇦🇺 VIP(AU, Sydney 1)-gcm 2", server: 54.79.190.159, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
+  - {name: "🇦🇺 VIP(AU, Sydney 2)-gcm 2", server: 16.176.215.212, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
+  - {name: "🇮🇳 VIP(IN, Mumbai)-gcm", server: 3.108.190.141, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
+  - {name: "🇦🇺 VIP(AU, Sydney)-gcm", server: 3.107.84.4, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
+  - {name: "🇺🇸 VIP(US, Columbus 3)-gcm", server: 18.188.15.84, port: 80, type: ss, cipher: aes-256-gcm, password: awsps0607}
+  - {name: "🇮🇳 VIP(IN, Mumbai 3)-gcm 2", server: 13.233.138.174, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
+  - {name: "🇺🇸 VIP(US, Columbus)-gcm 2", server: 18.191.157.189, port: 80, type: ss, cipher: aes-256-gcm, password: awsps0607}
+  - {name: "🇺🇸 VIP(US, Columbus)-gcm 3", server: 18.116.89.234, port: 80, type: ss, cipher: aes-256-gcm, password: awsps0607}
+  - {name: "🇦🇺 VIP(AU, Sydney 1)-gcm 3", server: 54.253.137.126, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
+  - {name: "🇦🇺 VIP(AU, Sydney)-gcm 2", server: 16.176.141.116, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
   - {name: "🇦🇺 VIP(AU, Sydney 3)-gcm", server: 3.107.195.101, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
-  - {name: "🇮🇳 VIP(IN, Mumbai)-gcm 3", server: 13.233.190.243, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
+  - {name: "🇮🇳 VIP(IN, Mumbai)-gcm 2", server: 13.233.190.243, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
   - {name: "🇮🇳 VIP(IN, Mumbai 1)-gcm 2", server: 13.232.22.171, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
-  - {name: "🇦🇺 VIP(AU, Sydney 3)-gcm 2", server: 3.107.79.194, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
-  - {name: "🇦🇺 VIP(AU, Sydney 1)-gcm 4", server: 3.107.184.18, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
-  - {name: "🇦🇺 VIP(AU, Sydney 1)-gcm 5", server: 13.211.212.242, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
+  - {name: "🇦🇺 VIP(AU, Sydney 1)-gcm 4", server: 13.211.212.242, port: 80, type: ss, cipher: aes-256-gcm, password: dada0607}
 proxy-groups:
   - name: 🚀 节点选择
     type: select
@@ -69,62 +64,57 @@ proxy-groups:
       - ♻️ 自动选择
       - DIRECT
       - 🇺🇸 VIP(US, Boardman 3)
-      - 🇺🇸 VIP(US, Boardman 2)
-      - 🇯🇵 VIP(JP, Tokyo)
-      - 🇰🇷 VIP(KR, Asia/Seoul 1)
-      - 🇰🇷 VIP(KR, Asia/Seoul 2)
-      - 🇸🇬 VIP(SG, Singapore 2)
-      - 🇸🇬 VIP(SG, Singapore 3)
-      - 🇺🇸 VIP(US, Boardman 2) 2
       - 🇺🇸 VIP(US, Boardman 1)
-      - 🇯🇵 VIP(JP, Tokyo) 2
+      - 🇺🇸 VIP(US, Boardman)
+      - 🇯🇵 VIP(JP, Tokyo)
       - 🇯🇵 VIP(JP, Tokyo 1)
-      - 🇯🇵 VIP(JP, Tokyo 4)
       - 🇸🇬 VIP(SG, Singapore)
+      - 🇯🇵 VIP(JP, Tokyo 2)
+      - 🇺🇸 VIP(US, Boardman 2)
       - 🇰🇷 VIP(KR, Incheon)
-      - 🇰🇷 VIP(KR, Incheon 1)
-      - 🇯🇵 VIP(JP, Tokyo) 3
-      - 🇰🇷 VIP(KR, Incheon) 2
       - 🇯🇵 VIP(JP, Tokyo 1) 2
+      - 🇯🇵 VIP(JP, Tokyo 3)
       - 🇸🇬 VIP(SG, Singapore 1)
-      - 🇸🇬 VIP(SG, Singapore 3) 2
+      - 🇰🇷 VIP(KR, Incheon 1)
+      - 🇯🇵 VIP(JP, Tokyo 2) 2
+      - 🇰🇷 VIP(KR, Incheon 2)
       - 🇸🇬 VIP(SG, Singapore) 2
       - 🇸🇬 VIP(SG, Singapore 1) 2
+      - 🇸🇬 VIP(SG, Singapore 3)
+      - 🇸🇬 VIP(SG, Singapore 1) 3
+      - 🇸🇬 VIP(SG, Singapore) 3
       - 🇺🇸 VIP(US, Boardman 3) 2
-      - 🇺🇸 VIP(US, Boardman)
       - 🇺🇸 VIP(US, Boardman) 2
-      - 🇯🇵 VIP(JP, Tokyo 1) 3
+      - 🇰🇷 VIP(KR, Asia/Seoul)
+      - 🇰🇷 VIP(KR, Asia/Seoul 1)
       - 🇺🇸 VIP(US, Boardman 1) 2
       - 🇰🇷 VIP(KR, Incheon 1) 2
-      - 🇯🇵 VIP(JP, Tokyo) 4
-      - 🇯🇵 VIP(JP, Tokyo) 5
-      - 🇰🇷 VIP(KR, Asia/Seoul)
+      - 🇯🇵 VIP(JP, Tokyo) 2
+      - 🇺🇸 VIP(US, Boardman) 3
+      - 🇰🇷 VIP(KR, Asia/Seoul) 2
       - 🇰🇷 VIP(KR, Incheon 4)
-      - 🇯🇵 VIP(JP, Tokyo) 6
-      - 🇺🇸 VIP(US, Columbus 1)-gcm
-      - 🇮🇳 VIP(IN, Mumbai)-gcm
-      - 🇮🇳 VIP(IN, Mumbai 1)-gcm
-      - 🇦🇺 VIP(AU, Sydney 1)-gcm
-      - 🇺🇸 VIP(US, Columbus 3)-gcm
-      - 🇦🇺 VIP(AU, Sydney)-gcm
-      - 🇮🇳 VIP(IN, Mumbai 2)-gcm
-      - 🇦🇺 VIP(AU, Sydney 2)-gcm
-      - 🇮🇳 VIP(IN, Mumbai)-gcm 2
-      - 🇦🇺 VIP(AU, Sydney)-gcm 2
-      - 🇺🇸 VIP(US, Columbus 3)-gcm 2
-      - 🇮🇳 VIP(IN, Mumbai 3)-gcm
+      - 🇯🇵 VIP(JP, Tokyo) 3
       - 🇺🇸 VIP(US, Columbus)-gcm
-      - 🇺🇸 VIP(US, Columbus)-gcm 2
+      - 🇦🇺 VIP(AU, Sydney 1)-gcm
+      - 🇦🇺 VIP(AU, Sydney 2)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 1)-gcm
+      - 🇺🇸 VIP(US, Columbus 1)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 3)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 2)-gcm
       - 🇦🇺 VIP(AU, Sydney 1)-gcm 2
-      - 🇦🇺 VIP(AU, Sydney)-gcm 3
+      - 🇦🇺 VIP(AU, Sydney 2)-gcm 2
+      - 🇮🇳 VIP(IN, Mumbai)-gcm
+      - 🇦🇺 VIP(AU, Sydney)-gcm
+      - 🇺🇸 VIP(US, Columbus 3)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 3)-gcm 2
+      - 🇺🇸 VIP(US, Columbus)-gcm 2
+      - 🇺🇸 VIP(US, Columbus)-gcm 3
       - 🇦🇺 VIP(AU, Sydney 1)-gcm 3
-      - 🇦🇺 VIP(AU, Sydney)-gcm 4
+      - 🇦🇺 VIP(AU, Sydney)-gcm 2
       - 🇦🇺 VIP(AU, Sydney 3)-gcm
-      - 🇮🇳 VIP(IN, Mumbai)-gcm 3
+      - 🇮🇳 VIP(IN, Mumbai)-gcm 2
       - 🇮🇳 VIP(IN, Mumbai 1)-gcm 2
-      - 🇦🇺 VIP(AU, Sydney 3)-gcm 2
       - 🇦🇺 VIP(AU, Sydney 1)-gcm 4
-      - 🇦🇺 VIP(AU, Sydney 1)-gcm 5
   - name: ♻️ 自动选择
     type: url-test
     url: http://www.gstatic.com/generate_204
@@ -132,62 +122,57 @@ proxy-groups:
     tolerance: 50
     proxies:
       - 🇺🇸 VIP(US, Boardman 3)
-      - 🇺🇸 VIP(US, Boardman 2)
-      - 🇯🇵 VIP(JP, Tokyo)
-      - 🇰🇷 VIP(KR, Asia/Seoul 1)
-      - 🇰🇷 VIP(KR, Asia/Seoul 2)
-      - 🇸🇬 VIP(SG, Singapore 2)
-      - 🇸🇬 VIP(SG, Singapore 3)
-      - 🇺🇸 VIP(US, Boardman 2) 2
       - 🇺🇸 VIP(US, Boardman 1)
-      - 🇯🇵 VIP(JP, Tokyo) 2
+      - 🇺🇸 VIP(US, Boardman)
+      - 🇯🇵 VIP(JP, Tokyo)
       - 🇯🇵 VIP(JP, Tokyo 1)
-      - 🇯🇵 VIP(JP, Tokyo 4)
       - 🇸🇬 VIP(SG, Singapore)
+      - 🇯🇵 VIP(JP, Tokyo 2)
+      - 🇺🇸 VIP(US, Boardman 2)
       - 🇰🇷 VIP(KR, Incheon)
-      - 🇰🇷 VIP(KR, Incheon 1)
-      - 🇯🇵 VIP(JP, Tokyo) 3
-      - 🇰🇷 VIP(KR, Incheon) 2
       - 🇯🇵 VIP(JP, Tokyo 1) 2
+      - 🇯🇵 VIP(JP, Tokyo 3)
       - 🇸🇬 VIP(SG, Singapore 1)
-      - 🇸🇬 VIP(SG, Singapore 3) 2
+      - 🇰🇷 VIP(KR, Incheon 1)
+      - 🇯🇵 VIP(JP, Tokyo 2) 2
+      - 🇰🇷 VIP(KR, Incheon 2)
       - 🇸🇬 VIP(SG, Singapore) 2
       - 🇸🇬 VIP(SG, Singapore 1) 2
+      - 🇸🇬 VIP(SG, Singapore 3)
+      - 🇸🇬 VIP(SG, Singapore 1) 3
+      - 🇸🇬 VIP(SG, Singapore) 3
       - 🇺🇸 VIP(US, Boardman 3) 2
-      - 🇺🇸 VIP(US, Boardman)
       - 🇺🇸 VIP(US, Boardman) 2
-      - 🇯🇵 VIP(JP, Tokyo 1) 3
+      - 🇰🇷 VIP(KR, Asia/Seoul)
+      - 🇰🇷 VIP(KR, Asia/Seoul 1)
       - 🇺🇸 VIP(US, Boardman 1) 2
       - 🇰🇷 VIP(KR, Incheon 1) 2
-      - 🇯🇵 VIP(JP, Tokyo) 4
-      - 🇯🇵 VIP(JP, Tokyo) 5
-      - 🇰🇷 VIP(KR, Asia/Seoul)
+      - 🇯🇵 VIP(JP, Tokyo) 2
+      - 🇺🇸 VIP(US, Boardman) 3
+      - 🇰🇷 VIP(KR, Asia/Seoul) 2
       - 🇰🇷 VIP(KR, Incheon 4)
-      - 🇯🇵 VIP(JP, Tokyo) 6
-      - 🇺🇸 VIP(US, Columbus 1)-gcm
-      - 🇮🇳 VIP(IN, Mumbai)-gcm
-      - 🇮🇳 VIP(IN, Mumbai 1)-gcm
-      - 🇦🇺 VIP(AU, Sydney 1)-gcm
-      - 🇺🇸 VIP(US, Columbus 3)-gcm
-      - 🇦🇺 VIP(AU, Sydney)-gcm
-      - 🇮🇳 VIP(IN, Mumbai 2)-gcm
-      - 🇦🇺 VIP(AU, Sydney 2)-gcm
-      - 🇮🇳 VIP(IN, Mumbai)-gcm 2
-      - 🇦🇺 VIP(AU, Sydney)-gcm 2
-      - 🇺🇸 VIP(US, Columbus 3)-gcm 2
-      - 🇮🇳 VIP(IN, Mumbai 3)-gcm
+      - 🇯🇵 VIP(JP, Tokyo) 3
       - 🇺🇸 VIP(US, Columbus)-gcm
-      - 🇺🇸 VIP(US, Columbus)-gcm 2
+      - 🇦🇺 VIP(AU, Sydney 1)-gcm
+      - 🇦🇺 VIP(AU, Sydney 2)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 1)-gcm
+      - 🇺🇸 VIP(US, Columbus 1)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 3)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 2)-gcm
       - 🇦🇺 VIP(AU, Sydney 1)-gcm 2
-      - 🇦🇺 VIP(AU, Sydney)-gcm 3
+      - 🇦🇺 VIP(AU, Sydney 2)-gcm 2
+      - 🇮🇳 VIP(IN, Mumbai)-gcm
+      - 🇦🇺 VIP(AU, Sydney)-gcm
+      - 🇺🇸 VIP(US, Columbus 3)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 3)-gcm 2
+      - 🇺🇸 VIP(US, Columbus)-gcm 2
+      - 🇺🇸 VIP(US, Columbus)-gcm 3
       - 🇦🇺 VIP(AU, Sydney 1)-gcm 3
-      - 🇦🇺 VIP(AU, Sydney)-gcm 4
+      - 🇦🇺 VIP(AU, Sydney)-gcm 2
       - 🇦🇺 VIP(AU, Sydney 3)-gcm
-      - 🇮🇳 VIP(IN, Mumbai)-gcm 3
+      - 🇮🇳 VIP(IN, Mumbai)-gcm 2
       - 🇮🇳 VIP(IN, Mumbai 1)-gcm 2
-      - 🇦🇺 VIP(AU, Sydney 3)-gcm 2
       - 🇦🇺 VIP(AU, Sydney 1)-gcm 4
-      - 🇦🇺 VIP(AU, Sydney 1)-gcm 5
   - name: 🌍 国外媒体
     type: select
     proxies:
@@ -195,248 +180,228 @@ proxy-groups:
       - ♻️ 自动选择
       - 🎯 全球直连
       - 🇺🇸 VIP(US, Boardman 3)
-      - 🇺🇸 VIP(US, Boardman 2)
-      - 🇯🇵 VIP(JP, Tokyo)
-      - 🇰🇷 VIP(KR, Asia/Seoul 1)
-      - 🇰🇷 VIP(KR, Asia/Seoul 2)
-      - 🇸🇬 VIP(SG, Singapore 2)
-      - 🇸🇬 VIP(SG, Singapore 3)
-      - 🇺🇸 VIP(US, Boardman 2) 2
       - 🇺🇸 VIP(US, Boardman 1)
-      - 🇯🇵 VIP(JP, Tokyo) 2
+      - 🇺🇸 VIP(US, Boardman)
+      - 🇯🇵 VIP(JP, Tokyo)
       - 🇯🇵 VIP(JP, Tokyo 1)
-      - 🇯🇵 VIP(JP, Tokyo 4)
       - 🇸🇬 VIP(SG, Singapore)
+      - 🇯🇵 VIP(JP, Tokyo 2)
+      - 🇺🇸 VIP(US, Boardman 2)
       - 🇰🇷 VIP(KR, Incheon)
-      - 🇰🇷 VIP(KR, Incheon 1)
-      - 🇯🇵 VIP(JP, Tokyo) 3
-      - 🇰🇷 VIP(KR, Incheon) 2
       - 🇯🇵 VIP(JP, Tokyo 1) 2
+      - 🇯🇵 VIP(JP, Tokyo 3)
       - 🇸🇬 VIP(SG, Singapore 1)
-      - 🇸🇬 VIP(SG, Singapore 3) 2
+      - 🇰🇷 VIP(KR, Incheon 1)
+      - 🇯🇵 VIP(JP, Tokyo 2) 2
+      - 🇰🇷 VIP(KR, Incheon 2)
       - 🇸🇬 VIP(SG, Singapore) 2
       - 🇸🇬 VIP(SG, Singapore 1) 2
+      - 🇸🇬 VIP(SG, Singapore 3)
+      - 🇸🇬 VIP(SG, Singapore 1) 3
+      - 🇸🇬 VIP(SG, Singapore) 3
       - 🇺🇸 VIP(US, Boardman 3) 2
-      - 🇺🇸 VIP(US, Boardman)
       - 🇺🇸 VIP(US, Boardman) 2
-      - 🇯🇵 VIP(JP, Tokyo 1) 3
+      - 🇰🇷 VIP(KR, Asia/Seoul)
+      - 🇰🇷 VIP(KR, Asia/Seoul 1)
       - 🇺🇸 VIP(US, Boardman 1) 2
       - 🇰🇷 VIP(KR, Incheon 1) 2
-      - 🇯🇵 VIP(JP, Tokyo) 4
-      - 🇯🇵 VIP(JP, Tokyo) 5
-      - 🇰🇷 VIP(KR, Asia/Seoul)
+      - 🇯🇵 VIP(JP, Tokyo) 2
+      - 🇺🇸 VIP(US, Boardman) 3
+      - 🇰🇷 VIP(KR, Asia/Seoul) 2
       - 🇰🇷 VIP(KR, Incheon 4)
-      - 🇯🇵 VIP(JP, Tokyo) 6
-      - 🇺🇸 VIP(US, Columbus 1)-gcm
-      - 🇮🇳 VIP(IN, Mumbai)-gcm
-      - 🇮🇳 VIP(IN, Mumbai 1)-gcm
-      - 🇦🇺 VIP(AU, Sydney 1)-gcm
-      - 🇺🇸 VIP(US, Columbus 3)-gcm
-      - 🇦🇺 VIP(AU, Sydney)-gcm
-      - 🇮🇳 VIP(IN, Mumbai 2)-gcm
-      - 🇦🇺 VIP(AU, Sydney 2)-gcm
-      - 🇮🇳 VIP(IN, Mumbai)-gcm 2
-      - 🇦🇺 VIP(AU, Sydney)-gcm 2
-      - 🇺🇸 VIP(US, Columbus 3)-gcm 2
-      - 🇮🇳 VIP(IN, Mumbai 3)-gcm
+      - 🇯🇵 VIP(JP, Tokyo) 3
       - 🇺🇸 VIP(US, Columbus)-gcm
-      - 🇺🇸 VIP(US, Columbus)-gcm 2
+      - 🇦🇺 VIP(AU, Sydney 1)-gcm
+      - 🇦🇺 VIP(AU, Sydney 2)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 1)-gcm
+      - 🇺🇸 VIP(US, Columbus 1)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 3)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 2)-gcm
       - 🇦🇺 VIP(AU, Sydney 1)-gcm 2
-      - 🇦🇺 VIP(AU, Sydney)-gcm 3
+      - 🇦🇺 VIP(AU, Sydney 2)-gcm 2
+      - 🇮🇳 VIP(IN, Mumbai)-gcm
+      - 🇦🇺 VIP(AU, Sydney)-gcm
+      - 🇺🇸 VIP(US, Columbus 3)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 3)-gcm 2
+      - 🇺🇸 VIP(US, Columbus)-gcm 2
+      - 🇺🇸 VIP(US, Columbus)-gcm 3
       - 🇦🇺 VIP(AU, Sydney 1)-gcm 3
-      - 🇦🇺 VIP(AU, Sydney)-gcm 4
+      - 🇦🇺 VIP(AU, Sydney)-gcm 2
       - 🇦🇺 VIP(AU, Sydney 3)-gcm
-      - 🇮🇳 VIP(IN, Mumbai)-gcm 3
+      - 🇮🇳 VIP(IN, Mumbai)-gcm 2
       - 🇮🇳 VIP(IN, Mumbai 1)-gcm 2
-      - 🇦🇺 VIP(AU, Sydney 3)-gcm 2
       - 🇦🇺 VIP(AU, Sydney 1)-gcm 4
-      - 🇦🇺 VIP(AU, Sydney 1)-gcm 5
   - name: 📲 电报信息
     type: select
     proxies:
       - 🚀 节点选择
       - 🎯 全球直连
       - 🇺🇸 VIP(US, Boardman 3)
-      - 🇺🇸 VIP(US, Boardman 2)
-      - 🇯🇵 VIP(JP, Tokyo)
-      - 🇰🇷 VIP(KR, Asia/Seoul 1)
-      - 🇰🇷 VIP(KR, Asia/Seoul 2)
-      - 🇸🇬 VIP(SG, Singapore 2)
-      - 🇸🇬 VIP(SG, Singapore 3)
-      - 🇺🇸 VIP(US, Boardman 2) 2
       - 🇺🇸 VIP(US, Boardman 1)
-      - 🇯🇵 VIP(JP, Tokyo) 2
+      - 🇺🇸 VIP(US, Boardman)
+      - 🇯🇵 VIP(JP, Tokyo)
       - 🇯🇵 VIP(JP, Tokyo 1)
-      - 🇯🇵 VIP(JP, Tokyo 4)
       - 🇸🇬 VIP(SG, Singapore)
+      - 🇯🇵 VIP(JP, Tokyo 2)
+      - 🇺🇸 VIP(US, Boardman 2)
       - 🇰🇷 VIP(KR, Incheon)
-      - 🇰🇷 VIP(KR, Incheon 1)
-      - 🇯🇵 VIP(JP, Tokyo) 3
-      - 🇰🇷 VIP(KR, Incheon) 2
       - 🇯🇵 VIP(JP, Tokyo 1) 2
+      - 🇯🇵 VIP(JP, Tokyo 3)
       - 🇸🇬 VIP(SG, Singapore 1)
-      - 🇸🇬 VIP(SG, Singapore 3) 2
+      - 🇰🇷 VIP(KR, Incheon 1)
+      - 🇯🇵 VIP(JP, Tokyo 2) 2
+      - 🇰🇷 VIP(KR, Incheon 2)
       - 🇸🇬 VIP(SG, Singapore) 2
       - 🇸🇬 VIP(SG, Singapore 1) 2
+      - 🇸🇬 VIP(SG, Singapore 3)
+      - 🇸🇬 VIP(SG, Singapore 1) 3
+      - 🇸🇬 VIP(SG, Singapore) 3
       - 🇺🇸 VIP(US, Boardman 3) 2
-      - 🇺🇸 VIP(US, Boardman)
       - 🇺🇸 VIP(US, Boardman) 2
-      - 🇯🇵 VIP(JP, Tokyo 1) 3
+      - 🇰🇷 VIP(KR, Asia/Seoul)
+      - 🇰🇷 VIP(KR, Asia/Seoul 1)
       - 🇺🇸 VIP(US, Boardman 1) 2
       - 🇰🇷 VIP(KR, Incheon 1) 2
-      - 🇯🇵 VIP(JP, Tokyo) 4
-      - 🇯🇵 VIP(JP, Tokyo) 5
-      - 🇰🇷 VIP(KR, Asia/Seoul)
+      - 🇯🇵 VIP(JP, Tokyo) 2
+      - 🇺🇸 VIP(US, Boardman) 3
+      - 🇰🇷 VIP(KR, Asia/Seoul) 2
       - 🇰🇷 VIP(KR, Incheon 4)
-      - 🇯🇵 VIP(JP, Tokyo) 6
-      - 🇺🇸 VIP(US, Columbus 1)-gcm
-      - 🇮🇳 VIP(IN, Mumbai)-gcm
-      - 🇮🇳 VIP(IN, Mumbai 1)-gcm
-      - 🇦🇺 VIP(AU, Sydney 1)-gcm
-      - 🇺🇸 VIP(US, Columbus 3)-gcm
-      - 🇦🇺 VIP(AU, Sydney)-gcm
-      - 🇮🇳 VIP(IN, Mumbai 2)-gcm
-      - 🇦🇺 VIP(AU, Sydney 2)-gcm
-      - 🇮🇳 VIP(IN, Mumbai)-gcm 2
-      - 🇦🇺 VIP(AU, Sydney)-gcm 2
-      - 🇺🇸 VIP(US, Columbus 3)-gcm 2
-      - 🇮🇳 VIP(IN, Mumbai 3)-gcm
+      - 🇯🇵 VIP(JP, Tokyo) 3
       - 🇺🇸 VIP(US, Columbus)-gcm
-      - 🇺🇸 VIP(US, Columbus)-gcm 2
+      - 🇦🇺 VIP(AU, Sydney 1)-gcm
+      - 🇦🇺 VIP(AU, Sydney 2)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 1)-gcm
+      - 🇺🇸 VIP(US, Columbus 1)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 3)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 2)-gcm
       - 🇦🇺 VIP(AU, Sydney 1)-gcm 2
-      - 🇦🇺 VIP(AU, Sydney)-gcm 3
+      - 🇦🇺 VIP(AU, Sydney 2)-gcm 2
+      - 🇮🇳 VIP(IN, Mumbai)-gcm
+      - 🇦🇺 VIP(AU, Sydney)-gcm
+      - 🇺🇸 VIP(US, Columbus 3)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 3)-gcm 2
+      - 🇺🇸 VIP(US, Columbus)-gcm 2
+      - 🇺🇸 VIP(US, Columbus)-gcm 3
       - 🇦🇺 VIP(AU, Sydney 1)-gcm 3
-      - 🇦🇺 VIP(AU, Sydney)-gcm 4
+      - 🇦🇺 VIP(AU, Sydney)-gcm 2
       - 🇦🇺 VIP(AU, Sydney 3)-gcm
-      - 🇮🇳 VIP(IN, Mumbai)-gcm 3
+      - 🇮🇳 VIP(IN, Mumbai)-gcm 2
       - 🇮🇳 VIP(IN, Mumbai 1)-gcm 2
-      - 🇦🇺 VIP(AU, Sydney 3)-gcm 2
       - 🇦🇺 VIP(AU, Sydney 1)-gcm 4
-      - 🇦🇺 VIP(AU, Sydney 1)-gcm 5
   - name: Ⓜ️ 微软服务
     type: select
     proxies:
       - 🎯 全球直连
       - 🚀 节点选择
       - 🇺🇸 VIP(US, Boardman 3)
-      - 🇺🇸 VIP(US, Boardman 2)
-      - 🇯🇵 VIP(JP, Tokyo)
-      - 🇰🇷 VIP(KR, Asia/Seoul 1)
-      - 🇰🇷 VIP(KR, Asia/Seoul 2)
-      - 🇸🇬 VIP(SG, Singapore 2)
-      - 🇸🇬 VIP(SG, Singapore 3)
-      - 🇺🇸 VIP(US, Boardman 2) 2
       - 🇺🇸 VIP(US, Boardman 1)
-      - 🇯🇵 VIP(JP, Tokyo) 2
+      - 🇺🇸 VIP(US, Boardman)
+      - 🇯🇵 VIP(JP, Tokyo)
       - 🇯🇵 VIP(JP, Tokyo 1)
-      - 🇯🇵 VIP(JP, Tokyo 4)
       - 🇸🇬 VIP(SG, Singapore)
+      - 🇯🇵 VIP(JP, Tokyo 2)
+      - 🇺🇸 VIP(US, Boardman 2)
       - 🇰🇷 VIP(KR, Incheon)
-      - 🇰🇷 VIP(KR, Incheon 1)
-      - 🇯🇵 VIP(JP, Tokyo) 3
-      - 🇰🇷 VIP(KR, Incheon) 2
       - 🇯🇵 VIP(JP, Tokyo 1) 2
+      - 🇯🇵 VIP(JP, Tokyo 3)
       - 🇸🇬 VIP(SG, Singapore 1)
-      - 🇸🇬 VIP(SG, Singapore 3) 2
+      - 🇰🇷 VIP(KR, Incheon 1)
+      - 🇯🇵 VIP(JP, Tokyo 2) 2
+      - 🇰🇷 VIP(KR, Incheon 2)
       - 🇸🇬 VIP(SG, Singapore) 2
       - 🇸🇬 VIP(SG, Singapore 1) 2
+      - 🇸🇬 VIP(SG, Singapore 3)
+      - 🇸🇬 VIP(SG, Singapore 1) 3
+      - 🇸🇬 VIP(SG, Singapore) 3
       - 🇺🇸 VIP(US, Boardman 3) 2
-      - 🇺🇸 VIP(US, Boardman)
       - 🇺🇸 VIP(US, Boardman) 2
-      - 🇯🇵 VIP(JP, Tokyo 1) 3
+      - 🇰🇷 VIP(KR, Asia/Seoul)
+      - 🇰🇷 VIP(KR, Asia/Seoul 1)
       - 🇺🇸 VIP(US, Boardman 1) 2
       - 🇰🇷 VIP(KR, Incheon 1) 2
-      - 🇯🇵 VIP(JP, Tokyo) 4
-      - 🇯🇵 VIP(JP, Tokyo) 5
-      - 🇰🇷 VIP(KR, Asia/Seoul)
+      - 🇯🇵 VIP(JP, Tokyo) 2
+      - 🇺🇸 VIP(US, Boardman) 3
+      - 🇰🇷 VIP(KR, Asia/Seoul) 2
       - 🇰🇷 VIP(KR, Incheon 4)
-      - 🇯🇵 VIP(JP, Tokyo) 6
-      - 🇺🇸 VIP(US, Columbus 1)-gcm
-      - 🇮🇳 VIP(IN, Mumbai)-gcm
-      - 🇮🇳 VIP(IN, Mumbai 1)-gcm
-      - 🇦🇺 VIP(AU, Sydney 1)-gcm
-      - 🇺🇸 VIP(US, Columbus 3)-gcm
-      - 🇦🇺 VIP(AU, Sydney)-gcm
-      - 🇮🇳 VIP(IN, Mumbai 2)-gcm
-      - 🇦🇺 VIP(AU, Sydney 2)-gcm
-      - 🇮🇳 VIP(IN, Mumbai)-gcm 2
-      - 🇦🇺 VIP(AU, Sydney)-gcm 2
-      - 🇺🇸 VIP(US, Columbus 3)-gcm 2
-      - 🇮🇳 VIP(IN, Mumbai 3)-gcm
+      - 🇯🇵 VIP(JP, Tokyo) 3
       - 🇺🇸 VIP(US, Columbus)-gcm
-      - 🇺🇸 VIP(US, Columbus)-gcm 2
+      - 🇦🇺 VIP(AU, Sydney 1)-gcm
+      - 🇦🇺 VIP(AU, Sydney 2)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 1)-gcm
+      - 🇺🇸 VIP(US, Columbus 1)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 3)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 2)-gcm
       - 🇦🇺 VIP(AU, Sydney 1)-gcm 2
-      - 🇦🇺 VIP(AU, Sydney)-gcm 3
+      - 🇦🇺 VIP(AU, Sydney 2)-gcm 2
+      - 🇮🇳 VIP(IN, Mumbai)-gcm
+      - 🇦🇺 VIP(AU, Sydney)-gcm
+      - 🇺🇸 VIP(US, Columbus 3)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 3)-gcm 2
+      - 🇺🇸 VIP(US, Columbus)-gcm 2
+      - 🇺🇸 VIP(US, Columbus)-gcm 3
       - 🇦🇺 VIP(AU, Sydney 1)-gcm 3
-      - 🇦🇺 VIP(AU, Sydney)-gcm 4
+      - 🇦🇺 VIP(AU, Sydney)-gcm 2
       - 🇦🇺 VIP(AU, Sydney 3)-gcm
-      - 🇮🇳 VIP(IN, Mumbai)-gcm 3
+      - 🇮🇳 VIP(IN, Mumbai)-gcm 2
       - 🇮🇳 VIP(IN, Mumbai 1)-gcm 2
-      - 🇦🇺 VIP(AU, Sydney 3)-gcm 2
       - 🇦🇺 VIP(AU, Sydney 1)-gcm 4
-      - 🇦🇺 VIP(AU, Sydney 1)-gcm 5
   - name: 🍎 苹果服务
     type: select
     proxies:
       - 🚀 节点选择
       - 🎯 全球直连
       - 🇺🇸 VIP(US, Boardman 3)
-      - 🇺🇸 VIP(US, Boardman 2)
-      - 🇯🇵 VIP(JP, Tokyo)
-      - 🇰🇷 VIP(KR, Asia/Seoul 1)
-      - 🇰🇷 VIP(KR, Asia/Seoul 2)
-      - 🇸🇬 VIP(SG, Singapore 2)
-      - 🇸🇬 VIP(SG, Singapore 3)
-      - 🇺🇸 VIP(US, Boardman 2) 2
       - 🇺🇸 VIP(US, Boardman 1)
-      - 🇯🇵 VIP(JP, Tokyo) 2
+      - 🇺🇸 VIP(US, Boardman)
+      - 🇯🇵 VIP(JP, Tokyo)
       - 🇯🇵 VIP(JP, Tokyo 1)
-      - 🇯🇵 VIP(JP, Tokyo 4)
       - 🇸🇬 VIP(SG, Singapore)
+      - 🇯🇵 VIP(JP, Tokyo 2)
+      - 🇺🇸 VIP(US, Boardman 2)
       - 🇰🇷 VIP(KR, Incheon)
-      - 🇰🇷 VIP(KR, Incheon 1)
-      - 🇯🇵 VIP(JP, Tokyo) 3
-      - 🇰🇷 VIP(KR, Incheon) 2
       - 🇯🇵 VIP(JP, Tokyo 1) 2
+      - 🇯🇵 VIP(JP, Tokyo 3)
       - 🇸🇬 VIP(SG, Singapore 1)
-      - 🇸🇬 VIP(SG, Singapore 3) 2
+      - 🇰🇷 VIP(KR, Incheon 1)
+      - 🇯🇵 VIP(JP, Tokyo 2) 2
+      - 🇰🇷 VIP(KR, Incheon 2)
       - 🇸🇬 VIP(SG, Singapore) 2
       - 🇸🇬 VIP(SG, Singapore 1) 2
+      - 🇸🇬 VIP(SG, Singapore 3)
+      - 🇸🇬 VIP(SG, Singapore 1) 3
+      - 🇸🇬 VIP(SG, Singapore) 3
       - 🇺🇸 VIP(US, Boardman 3) 2
-      - 🇺🇸 VIP(US, Boardman)
       - 🇺🇸 VIP(US, Boardman) 2
-      - 🇯🇵 VIP(JP, Tokyo 1) 3
+      - 🇰🇷 VIP(KR, Asia/Seoul)
+      - 🇰🇷 VIP(KR, Asia/Seoul 1)
       - 🇺🇸 VIP(US, Boardman 1) 2
       - 🇰🇷 VIP(KR, Incheon 1) 2
-      - 🇯🇵 VIP(JP, Tokyo) 4
-      - 🇯🇵 VIP(JP, Tokyo) 5
-      - 🇰🇷 VIP(KR, Asia/Seoul)
+      - 🇯🇵 VIP(JP, Tokyo) 2
+      - 🇺🇸 VIP(US, Boardman) 3
+      - 🇰🇷 VIP(KR, Asia/Seoul) 2
       - 🇰🇷 VIP(KR, Incheon 4)
-      - 🇯🇵 VIP(JP, Tokyo) 6
-      - 🇺🇸 VIP(US, Columbus 1)-gcm
-      - 🇮🇳 VIP(IN, Mumbai)-gcm
-      - 🇮🇳 VIP(IN, Mumbai 1)-gcm
-      - 🇦🇺 VIP(AU, Sydney 1)-gcm
-      - 🇺🇸 VIP(US, Columbus 3)-gcm
-      - 🇦🇺 VIP(AU, Sydney)-gcm
-      - 🇮🇳 VIP(IN, Mumbai 2)-gcm
-      - 🇦🇺 VIP(AU, Sydney 2)-gcm
-      - 🇮🇳 VIP(IN, Mumbai)-gcm 2
-      - 🇦🇺 VIP(AU, Sydney)-gcm 2
-      - 🇺🇸 VIP(US, Columbus 3)-gcm 2
-      - 🇮🇳 VIP(IN, Mumbai 3)-gcm
+      - 🇯🇵 VIP(JP, Tokyo) 3
       - 🇺🇸 VIP(US, Columbus)-gcm
-      - 🇺🇸 VIP(US, Columbus)-gcm 2
+      - 🇦🇺 VIP(AU, Sydney 1)-gcm
+      - 🇦🇺 VIP(AU, Sydney 2)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 1)-gcm
+      - 🇺🇸 VIP(US, Columbus 1)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 3)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 2)-gcm
       - 🇦🇺 VIP(AU, Sydney 1)-gcm 2
-      - 🇦🇺 VIP(AU, Sydney)-gcm 3
+      - 🇦🇺 VIP(AU, Sydney 2)-gcm 2
+      - 🇮🇳 VIP(IN, Mumbai)-gcm
+      - 🇦🇺 VIP(AU, Sydney)-gcm
+      - 🇺🇸 VIP(US, Columbus 3)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 3)-gcm 2
+      - 🇺🇸 VIP(US, Columbus)-gcm 2
+      - 🇺🇸 VIP(US, Columbus)-gcm 3
       - 🇦🇺 VIP(AU, Sydney 1)-gcm 3
-      - 🇦🇺 VIP(AU, Sydney)-gcm 4
+      - 🇦🇺 VIP(AU, Sydney)-gcm 2
       - 🇦🇺 VIP(AU, Sydney 3)-gcm
-      - 🇮🇳 VIP(IN, Mumbai)-gcm 3
+      - 🇮🇳 VIP(IN, Mumbai)-gcm 2
       - 🇮🇳 VIP(IN, Mumbai 1)-gcm 2
-      - 🇦🇺 VIP(AU, Sydney 3)-gcm 2
       - 🇦🇺 VIP(AU, Sydney 1)-gcm 4
-      - 🇦🇺 VIP(AU, Sydney 1)-gcm 5
   - name: 📢 谷歌FCM
     type: select
     proxies:
@@ -444,62 +409,57 @@ proxy-groups:
       - 🎯 全球直连
       - ♻️ 自动选择
       - 🇺🇸 VIP(US, Boardman 3)
-      - 🇺🇸 VIP(US, Boardman 2)
-      - 🇯🇵 VIP(JP, Tokyo)
-      - 🇰🇷 VIP(KR, Asia/Seoul 1)
-      - 🇰🇷 VIP(KR, Asia/Seoul 2)
-      - 🇸🇬 VIP(SG, Singapore 2)
-      - 🇸🇬 VIP(SG, Singapore 3)
-      - 🇺🇸 VIP(US, Boardman 2) 2
       - 🇺🇸 VIP(US, Boardman 1)
-      - 🇯🇵 VIP(JP, Tokyo) 2
+      - 🇺🇸 VIP(US, Boardman)
+      - 🇯🇵 VIP(JP, Tokyo)
       - 🇯🇵 VIP(JP, Tokyo 1)
-      - 🇯🇵 VIP(JP, Tokyo 4)
       - 🇸🇬 VIP(SG, Singapore)
+      - 🇯🇵 VIP(JP, Tokyo 2)
+      - 🇺🇸 VIP(US, Boardman 2)
       - 🇰🇷 VIP(KR, Incheon)
-      - 🇰🇷 VIP(KR, Incheon 1)
-      - 🇯🇵 VIP(JP, Tokyo) 3
-      - 🇰🇷 VIP(KR, Incheon) 2
       - 🇯🇵 VIP(JP, Tokyo 1) 2
+      - 🇯🇵 VIP(JP, Tokyo 3)
       - 🇸🇬 VIP(SG, Singapore 1)
-      - 🇸🇬 VIP(SG, Singapore 3) 2
+      - 🇰🇷 VIP(KR, Incheon 1)
+      - 🇯🇵 VIP(JP, Tokyo 2) 2
+      - 🇰🇷 VIP(KR, Incheon 2)
       - 🇸🇬 VIP(SG, Singapore) 2
       - 🇸🇬 VIP(SG, Singapore 1) 2
+      - 🇸🇬 VIP(SG, Singapore 3)
+      - 🇸🇬 VIP(SG, Singapore 1) 3
+      - 🇸🇬 VIP(SG, Singapore) 3
       - 🇺🇸 VIP(US, Boardman 3) 2
-      - 🇺🇸 VIP(US, Boardman)
       - 🇺🇸 VIP(US, Boardman) 2
-      - 🇯🇵 VIP(JP, Tokyo 1) 3
+      - 🇰🇷 VIP(KR, Asia/Seoul)
+      - 🇰🇷 VIP(KR, Asia/Seoul 1)
       - 🇺🇸 VIP(US, Boardman 1) 2
       - 🇰🇷 VIP(KR, Incheon 1) 2
-      - 🇯🇵 VIP(JP, Tokyo) 4
-      - 🇯🇵 VIP(JP, Tokyo) 5
-      - 🇰🇷 VIP(KR, Asia/Seoul)
+      - 🇯🇵 VIP(JP, Tokyo) 2
+      - 🇺🇸 VIP(US, Boardman) 3
+      - 🇰🇷 VIP(KR, Asia/Seoul) 2
       - 🇰🇷 VIP(KR, Incheon 4)
-      - 🇯🇵 VIP(JP, Tokyo) 6
-      - 🇺🇸 VIP(US, Columbus 1)-gcm
-      - 🇮🇳 VIP(IN, Mumbai)-gcm
-      - 🇮🇳 VIP(IN, Mumbai 1)-gcm
-      - 🇦🇺 VIP(AU, Sydney 1)-gcm
-      - 🇺🇸 VIP(US, Columbus 3)-gcm
-      - 🇦🇺 VIP(AU, Sydney)-gcm
-      - 🇮🇳 VIP(IN, Mumbai 2)-gcm
-      - 🇦🇺 VIP(AU, Sydney 2)-gcm
-      - 🇮🇳 VIP(IN, Mumbai)-gcm 2
-      - 🇦🇺 VIP(AU, Sydney)-gcm 2
-      - 🇺🇸 VIP(US, Columbus 3)-gcm 2
-      - 🇮🇳 VIP(IN, Mumbai 3)-gcm
+      - 🇯🇵 VIP(JP, Tokyo) 3
       - 🇺🇸 VIP(US, Columbus)-gcm
-      - 🇺🇸 VIP(US, Columbus)-gcm 2
+      - 🇦🇺 VIP(AU, Sydney 1)-gcm
+      - 🇦🇺 VIP(AU, Sydney 2)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 1)-gcm
+      - 🇺🇸 VIP(US, Columbus 1)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 3)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 2)-gcm
       - 🇦🇺 VIP(AU, Sydney 1)-gcm 2
-      - 🇦🇺 VIP(AU, Sydney)-gcm 3
+      - 🇦🇺 VIP(AU, Sydney 2)-gcm 2
+      - 🇮🇳 VIP(IN, Mumbai)-gcm
+      - 🇦🇺 VIP(AU, Sydney)-gcm
+      - 🇺🇸 VIP(US, Columbus 3)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 3)-gcm 2
+      - 🇺🇸 VIP(US, Columbus)-gcm 2
+      - 🇺🇸 VIP(US, Columbus)-gcm 3
       - 🇦🇺 VIP(AU, Sydney 1)-gcm 3
-      - 🇦🇺 VIP(AU, Sydney)-gcm 4
+      - 🇦🇺 VIP(AU, Sydney)-gcm 2
       - 🇦🇺 VIP(AU, Sydney 3)-gcm
-      - 🇮🇳 VIP(IN, Mumbai)-gcm 3
+      - 🇮🇳 VIP(IN, Mumbai)-gcm 2
       - 🇮🇳 VIP(IN, Mumbai 1)-gcm 2
-      - 🇦🇺 VIP(AU, Sydney 3)-gcm 2
       - 🇦🇺 VIP(AU, Sydney 1)-gcm 4
-      - 🇦🇺 VIP(AU, Sydney 1)-gcm 5
   - name: 🎯 全球直连
     type: select
     proxies:
@@ -523,62 +483,57 @@ proxy-groups:
       - 🎯 全球直连
       - ♻️ 自动选择
       - 🇺🇸 VIP(US, Boardman 3)
-      - 🇺🇸 VIP(US, Boardman 2)
-      - 🇯🇵 VIP(JP, Tokyo)
-      - 🇰🇷 VIP(KR, Asia/Seoul 1)
-      - 🇰🇷 VIP(KR, Asia/Seoul 2)
-      - 🇸🇬 VIP(SG, Singapore 2)
-      - 🇸🇬 VIP(SG, Singapore 3)
-      - 🇺🇸 VIP(US, Boardman 2) 2
       - 🇺🇸 VIP(US, Boardman 1)
-      - 🇯🇵 VIP(JP, Tokyo) 2
+      - 🇺🇸 VIP(US, Boardman)
+      - 🇯🇵 VIP(JP, Tokyo)
       - 🇯🇵 VIP(JP, Tokyo 1)
-      - 🇯🇵 VIP(JP, Tokyo 4)
       - 🇸🇬 VIP(SG, Singapore)
+      - 🇯🇵 VIP(JP, Tokyo 2)
+      - 🇺🇸 VIP(US, Boardman 2)
       - 🇰🇷 VIP(KR, Incheon)
-      - 🇰🇷 VIP(KR, Incheon 1)
-      - 🇯🇵 VIP(JP, Tokyo) 3
-      - 🇰🇷 VIP(KR, Incheon) 2
       - 🇯🇵 VIP(JP, Tokyo 1) 2
+      - 🇯🇵 VIP(JP, Tokyo 3)
       - 🇸🇬 VIP(SG, Singapore 1)
-      - 🇸🇬 VIP(SG, Singapore 3) 2
+      - 🇰🇷 VIP(KR, Incheon 1)
+      - 🇯🇵 VIP(JP, Tokyo 2) 2
+      - 🇰🇷 VIP(KR, Incheon 2)
       - 🇸🇬 VIP(SG, Singapore) 2
       - 🇸🇬 VIP(SG, Singapore 1) 2
+      - 🇸🇬 VIP(SG, Singapore 3)
+      - 🇸🇬 VIP(SG, Singapore 1) 3
+      - 🇸🇬 VIP(SG, Singapore) 3
       - 🇺🇸 VIP(US, Boardman 3) 2
-      - 🇺🇸 VIP(US, Boardman)
       - 🇺🇸 VIP(US, Boardman) 2
-      - 🇯🇵 VIP(JP, Tokyo 1) 3
+      - 🇰🇷 VIP(KR, Asia/Seoul)
+      - 🇰🇷 VIP(KR, Asia/Seoul 1)
       - 🇺🇸 VIP(US, Boardman 1) 2
       - 🇰🇷 VIP(KR, Incheon 1) 2
-      - 🇯🇵 VIP(JP, Tokyo) 4
-      - 🇯🇵 VIP(JP, Tokyo) 5
-      - 🇰🇷 VIP(KR, Asia/Seoul)
+      - 🇯🇵 VIP(JP, Tokyo) 2
+      - 🇺🇸 VIP(US, Boardman) 3
+      - 🇰🇷 VIP(KR, Asia/Seoul) 2
       - 🇰🇷 VIP(KR, Incheon 4)
-      - 🇯🇵 VIP(JP, Tokyo) 6
-      - 🇺🇸 VIP(US, Columbus 1)-gcm
-      - 🇮🇳 VIP(IN, Mumbai)-gcm
-      - 🇮🇳 VIP(IN, Mumbai 1)-gcm
-      - 🇦🇺 VIP(AU, Sydney 1)-gcm
-      - 🇺🇸 VIP(US, Columbus 3)-gcm
-      - 🇦🇺 VIP(AU, Sydney)-gcm
-      - 🇮🇳 VIP(IN, Mumbai 2)-gcm
-      - 🇦🇺 VIP(AU, Sydney 2)-gcm
-      - 🇮🇳 VIP(IN, Mumbai)-gcm 2
-      - 🇦🇺 VIP(AU, Sydney)-gcm 2
-      - 🇺🇸 VIP(US, Columbus 3)-gcm 2
-      - 🇮🇳 VIP(IN, Mumbai 3)-gcm
+      - 🇯🇵 VIP(JP, Tokyo) 3
       - 🇺🇸 VIP(US, Columbus)-gcm
-      - 🇺🇸 VIP(US, Columbus)-gcm 2
+      - 🇦🇺 VIP(AU, Sydney 1)-gcm
+      - 🇦🇺 VIP(AU, Sydney 2)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 1)-gcm
+      - 🇺🇸 VIP(US, Columbus 1)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 3)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 2)-gcm
       - 🇦🇺 VIP(AU, Sydney 1)-gcm 2
-      - 🇦🇺 VIP(AU, Sydney)-gcm 3
+      - 🇦🇺 VIP(AU, Sydney 2)-gcm 2
+      - 🇮🇳 VIP(IN, Mumbai)-gcm
+      - 🇦🇺 VIP(AU, Sydney)-gcm
+      - 🇺🇸 VIP(US, Columbus 3)-gcm
+      - 🇮🇳 VIP(IN, Mumbai 3)-gcm 2
+      - 🇺🇸 VIP(US, Columbus)-gcm 2
+      - 🇺🇸 VIP(US, Columbus)-gcm 3
       - 🇦🇺 VIP(AU, Sydney 1)-gcm 3
-      - 🇦🇺 VIP(AU, Sydney)-gcm 4
+      - 🇦🇺 VIP(AU, Sydney)-gcm 2
       - 🇦🇺 VIP(AU, Sydney 3)-gcm
-      - 🇮🇳 VIP(IN, Mumbai)-gcm 3
+      - 🇮🇳 VIP(IN, Mumbai)-gcm 2
       - 🇮🇳 VIP(IN, Mumbai 1)-gcm 2
-      - 🇦🇺 VIP(AU, Sydney 3)-gcm 2
       - 🇦🇺 VIP(AU, Sydney 1)-gcm 4
-      - 🇦🇺 VIP(AU, Sydney 1)-gcm 5
 rules:
   - DOMAIN-SUFFIX,acl4.ssr,🎯 全球直连
   - DOMAIN-SUFFIX,ip6-localhost,🎯 全球直连
