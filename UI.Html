@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/wsqstar/ResHosting@0.031/build/js/Sakura.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+    <meta name="theme-color" content="#ffecf5">
+    <title> 𝐓𝐆频道@𝐢𝐎𝐒𝐀𝐖𝐉 </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        body {
+            background-color: #ffecf5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.8) 0%, transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(255,230,240,0.7) 0%, transparent 30%);
+            -webkit-tap-highlight-color: transparent;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .container {
+            max-width: min(1000px, 95vw);
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 12px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+            padding: clamp(15px, 3vw, 30px);
+            backdrop-filter: blur(5px);
+            position: relative;
+            border: 1px solid rgba(255, 182, 193, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed rgba(255, 105, 180, 0.3);
+            position: relative;
+        }
+        
+        header::after {
+            content: "✧･ﾟ: *✧･ﾟ:* *:･ﾟ✧*:･ﾟ✧";
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            right: 0;
+            color: #ff69b4;
+            font-size: clamp(10px, 2.5vw, 12px);
+            letter-spacing: 2px;
+        }
+        
+        h1 {
+            color: #ff69b4;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            font-size: clamp(1.8em, 6vw, 2.2em);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::before, h1::after {
+            content: "☆";
+            color: #ffb6c1;
+            margin: 0 clamp(5px, 2vw, 10px);
+        }
+        
+        .description {
+            color: #888;
+            font-size: clamp(14px, 3.5vw, 16px);
+            margin-top: 5px;
+        }
+        
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 5px auto 10px;
+            border: 4px solid #ffb6c1;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
+            background-image: url('http://oss.v2dj.com/pic/2025/07/18/17528094565169.jpeg');
+            background-size: cover;
+            background-position: center;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .avatar:hover {
+            transform: rotate(10deg) scale(1.1);
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.6);
+        }
+        
+        /* 新增的特殊链接区域样式 */
+        .special-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px auto;
+            max-width: 90%;
+        }
+        
+        .special-link {
+            position: relative;
+            padding: 8px 15px;
+            background: linear-gradient(135deg, rgba(255,182,193,0.3), rgba(255,105,180,0.3));
+            border-radius: 20px;
+            text-decoration: none;
+            color: #ff69b4;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 105, 180, 0.3);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .special-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+            background: linear-gradient(135deg, rgba(255,182,193,0.5), rgba(255,105,180,0.5));
+        }
+        
+        .special-link::before {
+            content: "✦";
+            margin-right: 5px;
+            font-size: 12px;
+        }
+        
+        .special-link:nth-child(2n)::before {
+            content: "✧";
+        }
+        
+        .bookmarks {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
+            gap: 15px;
+        }
+        
+        .bookmark {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 182, 193, 0.3);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .bookmark::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ffb6c1, #ff69b4, #ffb6c1);
+        }
+        
+        .bookmark:hover, .bookmark:focus {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.2);
+            background-color: white;
+        }
+        
+        .bookmark a {
+            text-decoration: none;
+            color: #555;
+            display: block;
+            outline: none;
+            width: 100%;
+            padding: 8px 0;
+            margin: 5px 0;
+        }
+        
+        .bookmark-description {
+            color: #333;
+            font-size: 25px;
+            margin-bottom: 8px;
+            line-height: 1.5;
+            font-weight: bold;
+        }
+        
+        .bookmark-title {
+            font-weight: bold;
+            font-size: clamp(16px, 4vw, 18px);
+            color: #ff69b4;
+            position: relative;
+            padding-left: 25px;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        
+        .bookmark-title::before {
+            content: "❀";
+            position: absolute;
+            left: 5px;
+            color: #ffb6c1;
+        }
+        
+        .bookmark-links {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        
+        /* 新增的链接行样式 */
+        .link-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            flex-grow: 1;
+        }
+        
+        .link-item {
+            flex: 1;
+            text-align: center;
+            margin: 0 3px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .link-item a {
+            display: block;
+            padding: 12px 8px;
+            background-color: rgba(255, 182, 193, 0.2);
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1.3;
+            height: 100%;
+            min-height: 50px;
+        }
+        
+        .link-item a:hover {
+            background-color: rgba(255, 105, 180, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        /* 跑马灯广告位 - 修改为单个链接 */
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            background: linear-gradient(90deg, rgba(255,182,193,0.3), rgba(255,105,180,0.3));
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 10px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .marquee {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 20s linear infinite;
+            padding-left: 100%;
+        }
+        
+        .marquee-content {
+            display: inline-block;
+            margin-right: 50px;
+            color: #ff69b4;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .marquee-link {
+            color: #ff69b4;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0 20px;
+        }
+        
+        .marquee-link:hover {
+            color: #ff1493;
+            text-decoration: underline;
+        }
+        
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px dashed rgba(255, 105, 180, 0.3);
+            color: #888;
+            font-size: clamp(12px, 3vw, 14px);
+            position: relative;
+        }
+        
+        footer::before {
+            content: "~";
+            color: #ffb6c1;
+            letter-spacing: 5px;
+        }
+        
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 182, 193, 0.3);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .theme-toggle i {
+            font-size: 20px;
+            color: #ff69b4;
+        }
+
+        /* 音乐播放器样式 */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 182, 193, 0.3);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .music-player:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .music-player i {
+            font-size: 20px;
+            color: #ff69b4;
+        }
+        
+        /* 金光闪闪动画样式 */
+        #golden-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(255,215,0,0.3), rgba(255,165,0,0.2));
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0;
+            animation: goldenPulse 8s infinite;
+        }
+        
+        .golden-star {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, rgba(255,255,255,0.9), rgba(255,215,0,0.8));
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px rgba(255,215,0,0.8);
+            animation: twinkle 3s infinite alternate;
+        }
+        
+        @keyframes goldenPulse {
+            0% { opacity: 0.1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 0.1; }
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0.3; transform: scale(0.8); }
+        }
+        
+        @media (hover: none) {
+            .bookmark:hover {
+                transform: none;
+            }
+            
+            .bookmark:active {
+                transform: scale(0.98);
+            }
+            
+            .theme-toggle:hover {
+                transform: none;
+            }
+            
+            .avatar:hover {
+                transform: none;
+            }
+            
+            .special-link:hover {
+                transform: none;
+            }
+
+            .music-player:hover {
+                transform: none;
+            }
+            
+            .link-item a:hover {
+                transform: none;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            body {
+                padding: 10px;
+            }
+            
+            .avatar {
+                width: 80px;
+                height: 80px;
+                margin: 0 auto 8px;
+            }
+            
+            .bookmarks {
+                gap: 10px;
+            }
+            
+            .bookmark {
+                padding: 12px;
+            }
+            
+            .bookmark-description {
+                font-size: 20px;
+            }
+            
+            .bookmark-title {
+                font-size: clamp(15px, 4vw, 16px);
+            }
+            
+            .theme-toggle {
+                width: 35px;
+                height: 35px;
+                top: 15px;
+                right: 15px;
+            }
+
+            .music-player {
+                width: 35px;
+                height: 35px;
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .special-links {
+                gap: 8px;
+            }
+            
+            .special-link {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .link-item a {
+                font-size: 14px;
+                padding: 10px 6px;
+                min-height: 45px;
+            }
+            
+            .marquee-content {
+                font-size: 14px;
+            }
+        }
+        
+        body.dark-mode {
+            background-color: #1a0a0f;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .container {
+            background-color: rgba(30, 15, 20, 0.9);
+            color: #e0e0e0;
+            border-color: rgba(255, 105, 180, 0.2);
+        }
+        
+        body.dark-mode .bookmark {
+            background-color: rgba(40, 20, 30, 0.8);
+            border-color: rgba(255, 105, 180, 0.2);
+        }
+        
+        body.dark-mode .bookmark:hover, 
+        body.dark-mode .bookmark:focus {
+            background-color: rgba(50, 25, 35, 0.9);
+        }
+        
+        body.dark-mode .bookmark a {
+            color: #d0d0d0;
+        }
+        
+        body.dark-mode .bookmark-description {
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .bookmark-title {
+            color: #ff69b4;
+        }
+        
+        body.dark-mode .theme-toggle {
+            background-color: rgba(40, 20, 30, 0.8);
+            border-color: rgba(255, 105, 180, 0.2);
+        }
+        
+        body.dark-mode .avatar {
+            border-color: #ff69b4;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+        }
+        
+        body.dark-mode .special-link {
+            background: linear-gradient(135deg, rgba(150,50,100,0.3), rgba(200,80,120,0.3));
+            color: #ff8fab;
+            border-color: rgba(255, 105, 180, 0.2);
+        }
+        
+        body.dark-mode .special-link:hover {
+            background: linear-gradient(135deg, rgba(150,50,100,0.5), rgba(200,80,120,0.5));
+        }
+
+        body.dark-mode .music-player {
+            background-color: rgba(40, 20, 30, 0.8);
+            border-color: rgba(255, 105, 180, 0.2);
+        }
+        
+        body.dark-mode .link-item a {
+            background-color: rgba(150, 50, 100, 0.2);
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .link-item a:hover {
+            background-color: rgba(200, 80, 120, 0.3);
+        }
+        
+        body.dark-mode .marquee-container {
+            background: linear-gradient(90deg, rgba(150,50,100,0.3), rgba(200,80,120,0.3));
+        }
+        
+        body.dark-mode .marquee-content {
+            color: #ff8fab;
+        }
+        
+        body.dark-mode .marquee-link {
+            color: #ff8fab;
+        }
+        
+        body.dark-mode .marquee-link:hover {
+            color: #ff69b4;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- 金光闪闪动画层 -->
+    <div id="golden-overlay"></div>
+    
+    <!-- 音乐播放器 -->
+    <audio id="bgMusic" loop>
+        <source src="https://mpimg.cn/view.php/d15be74b6f2923a82dce0bf16e1f818c.mp3" type="audio/mpeg">
+    </audio>
+    
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <div class="music-player" id="musicToggle">
+        <i class="fas fa-music"></i>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>𝐓𝐆频道@𝐢𝐎𝐒𝐀𝐖𝐉</h1>
+            <div class="avatar"></div>
+            
+            <!-- 新增的特殊链接区域 -->
+            <div class="special-links">
+                <a href="https://t.me/iOSAWJ" class="special-link">TG频道</a>
+                <a href="https://t.me/iOSAWJL" class="special-link">TG交流</a>
+                <a href="https://pg.xxjiajia.com/" class="special-link">共享小火箭</a>
+                <a href="https://d1.mk/TG@iOSAWJ2" class="special-link">节点订阅</a>
+                <a href="https://raw.githubusercontent.com/iosDG001/_/refs/heads/main/IPTV" class="special-link">IPTV订阅</a>
+                <a href="https://raw.githubusercontent.com/iosDG001/_/refs/heads/main/TVbox" class="special-link">TVbox接口</a>
+                <a href="https://raw.githubusercontent.com/iosDG001/_/refs/heads/main/UZ" class="special-link">UZ影视订阅</a>
+            </div>
+        </header>
+        
+        <!-- 修改后的跑马灯广告位 - 单个链接 -->
+        <div class="marquee-container">
+            <div class="marquee">
+                <span class="marquee-content">
+                    <a href="https://kelayun.notepin.co" class="marquee-link"> 欢迎加入𝐓𝐆频道@𝐢𝐎𝐒𝐀𝐖𝐉  </a>
+                </span>
+            </div>
+        </div>
+        
+        <div class="bookmarks">
+            <!-- 影视仓空壳专区 -->
+            <div class="bookmark">
+                <div class="bookmark-description">影视仓空壳专区</div>
+                <div class="bookmark-links">
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://streamshare.wireway.ch/download/dhpo6wqq">安卓端</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://streamshare.wireway.ch/download/sbv5fvw4">TV端</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- OK影视空壳专区 okjack-->
+            <div class="bookmark">
+                <div class="bookmark-description">OK影视空壳专区okjack</div>
+                <div class="bookmark-links">
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/FongMi/Release/blob/okjack/apk/release/leanback-armeabi_v7a.apk">TV端-v7a</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/FongMi/Release/blob/okjack/apk/release/leanback-arm64_v8a.apk">TV端-v8a</a>
+                        </div>
+                    </div>
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/FongMi/Release/blob/okjack/apk/release/mobile-armeabi_v7a.apk">安卓端-v7a</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/FongMi/Release/blob/okjack/apk/release/mobile-arm64_v8a.apk">安卓端-v8a</a>
+                        </div>
+                    </div>
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/FongMi/Release/blob/okjack/apk/release/海信专版.apk">海信专用</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/FongMi/Release/blob/okjack/apk/release/电视版-X5离线.apk">X5离线</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 蜂蜜影视空壳专区Fongmi -->
+            <div class="bookmark">
+                <div class="bookmark-description">蜂蜜影视空壳专区Fongmi</div>
+                <div class="bookmark-links">
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/FongMi/Release/blob/fongmi/apk/release/leanback-armeabi_v7a.apk">TV端-v7a</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/github.com/FongMi/Release/blob/fongmi/apk/release/leanback-arm64_v8a.apk">TV端-v8a</a>
+                        </div>
+                    </div>
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/FongMi/Release/blob/fongmi/apk/release/mobile-armeabi_v7a.apk">安卓端-v7a</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/FongMi/Release/blob/fongmi/apk/release/mobile-arm64_v8a.apk">安卓端-v8a</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 影视PRO空壳专区 -->
+            <div class="bookmark">
+                <div class="bookmark-description">影视PRO空壳专区</div>
+                <div class="bookmark-links">
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://streamshare.wireway.ch/download/c4l80qsz">安卓端</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://streamshare.wireway.ch/download/ru3relsn">TV端</a>
+                        </div>
+                    </div>
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://streamshare.wireway.ch/download/xrg9wxlh">模拟器专版</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 酷9原版空壳专区 -->
+            <div class="bookmark">
+                <div class="bookmark-description">酷9原版空壳专区</div>
+                <div class="bookmark-links">
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://streamshare.wireway.ch/download/ybyzclnf">TV端</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://streamshare.wireway.ch/download/olty7z6s">TV端lite</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 酷9魔改空壳专区 -->
+            <div class="bookmark">
+                <div class="bookmark-description">酷9魔改空壳专区</div>
+                <div class="bookmark-links">
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://streamshare.wireway.ch/download/7w8mfwym">半透明版</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://streamshare.wireway.ch/download/di40m31m">布局版</a>
+                        </div>
+                    </div>
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://streamshare.wireway.ch/download/yt3cvbh0">美化版lite</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://streamshare.wireway.ch/download/p86l5t0a">清爽版</a>
+                        </div>
+                    </div>
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://streamshare.wireway.ch/download/jm30yng5">清爽版lite</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://streamshare.wireway.ch/download/k6i3e2j9">赛车版</a>
+                        </div>
+                    </div>
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://streamshare.wireway.ch/download/ukgumc4t">首发版</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="bookmarks">
+            <!-- DIYP影音空壳专区 -->
+            <div class="bookmark">
+                <div class="bookmark-description">DIYP影音空壳专区</div>
+                <div class="bookmark-links">
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://streamshare.wireway.ch/download/g6xmkr37">TV经典版</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://streamshare.wireway.ch/download/13lz0t0w">TV最终版</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="bookmarks">
+            <!-- 派大星空壳专区 -->
+            <div class="bookmark">
+                <div class="bookmark-description">派大星空壳专区</div>
+                <div class="bookmark-links">
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://streamshare.wireway.ch/download/8vr0a8lo">TV端1.0.5</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://streamshare.wireway.ch/download/to3j9w01">TV端1.0.6</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- UZ影视空壳专区 -->
+            <div class="bookmark">
+                <div class="bookmark-description">UZ影视空壳专区</div>
+                <div class="bookmark-links">
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://streamshare.wireway.ch/download/zg9z7hq9">苹果端</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://streamshare.wireway.ch/download/1iewmue8">安卓端</a>
+                        </div>
+                    </div>
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://streamshare.wireway.ch/download/y5af8psn">电视端</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://streamshare.wireway.ch/download/5upxguqe">Mac端</a>
+                        </div>
+                    </div>
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://streamshare.wireway.ch/download/x5xa2cvl">Win端</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://streamshare.wireway.ch/download/rle4gdl8">X86专用</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 小猫影视空壳专区 -->
+            <div class="bookmark">
+                <div class="bookmark-description">小猫影视空壳专区</div>
+                <div class="bookmark-links">
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/waifu-project/movie/releases/download/release-v2.5.9-1/catmovie-universal.apk">安卓端</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/waifu-project/movie/releases/download/release-v2.5.9-1/catmovie.ipa">苹果端</a>
+                        </div>
+                    </div>
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/waifu-project/movie/releases/download/release-v2.5.9-1/catmovie-mac.zip">Mac端</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/waifu-project/movie/releases/download/release-v2.5.9-1/catmovie-windows.zip">Win端</a>
+                        </div>
+                    </div>
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/waifu-project/movie/releases/download/release-v2.5.9-1/catmovie-linux-x86_64.tar.gz">Linux端</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://d1y.github.io/kitty">打开获取接口</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 蛋播星球专区(内置源) -->
+            <div class="bookmark">
+                <div class="bookmark-description">蛋播星球专区(内置源)</div>
+                <div class="bookmark-links">
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://testflight.apple.com/join/U1uy34cq">苹果端</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://streamshare.wireway.ch/download/kyvbchy8">安卓端</a>
+                        </div>
+                    </div>
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://streamshare.wireway.ch/download/4016c1lw">Win端</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://streamshare.wireway.ch/download/4s93ir77">Mac-M芯片</a>
+                        </div>
+                    </div>
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://streamshare.wireway.ch/download/gu0s6j49">Mac-M芯片</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 自娱播放器空壳专区 -->
+            <div class="bookmark">
+                <div class="bookmark-description">自娱播放器空壳专区</div>
+                <div class="bookmark-links">
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://apps.apple.com/cn/app/%E8%87%AA%E5%A8%B1%E6%92%AD%E6%94%BE%E5%99%A8/id6747301490">苹果专属</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<!-- 魔力云播空壳专区 -->
+            <div class="bookmark">
+                <div class="bookmark-description">魔力云播空壳专区</div>
+                <div class="bookmark-links">
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://testflight.apple.com/join/ywzcMKS3">苹果专属</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<!-- MiraPlay空壳专区 -->
+            <div class="bookmark">
+                <div class="bookmark-description">MiraPlay空壳专区</div>
+                <div class="bookmark-links">
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://apps.apple.com/us/app/miraplay/id6749287494?l=zh-Hans-CN">苹果专属</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<!-- surfboard专区 -->
+            <div class="bookmark">
+                <div class="bookmark-description">surfboard专区</div>
+                <div class="bookmark-links">
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/getsurfboard/surfboard/releases/download/mobile-2.25.3/mobile-universal-release.apk">电视TV专属</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<!-- ClashBox专区 -->
+            <div class="bookmark">
+                <div class="bookmark-description">ClashBox专区</div>
+                <div class="bookmark-links">
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/xiaobaigroup/ClashBox/releases/download/1.5.1/ClashNEXT-LTS-1.5.1.hap">华为鸿蒙专属</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FIClash专区-->
+            <div class="bookmark">
+                <div class="bookmark-description">FIClash专区</div>
+                <div class="bookmark-links">
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://dl.p6p.net/FlClash/v0.8.90/FlClash-0.8.90-android-arm64-v8a.apk">安卓端v8a</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://dl.p6p.net/FlClash/v0.8.90/FlClash-0.8.90-android-armeabi-v7a.apk">安卓端v7a</a>
+                        </div>
+                    </div>
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://dl.p6p.net/FlClash/v0.8.90/FlClash-0.8.90-linux-amd64.AppImage">Linux端mage</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://dl.p6p.net/FlClash/v0.8.90/FlClash-0.8.90-linux-amd64.deb">Linux端deb</a>
+                        </div>
+                   </div>
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://dl.p6p.net/FlClash/v0.8.90/FlClash-0.8.90-linux-amd64.rpm">Linux端rpm</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://dl.p6p.net/FlClash/v0.8.90/FlClash-0.8.90-macos-amd64.dmg">Mac端lntel</a>
+                        </div>
+                    </div>
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://dl.p6p.net/FlClash/v0.8.90/FlClash-0.8.90-macos-arm64.dmg">Mac端arm</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://dl.p6p.net/FlClash/v0.8.90/FlClash-0.8.90-windows-amd64-setup.exe">Win端</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ClashMeta专区 -->
+            <div class="bookmark">
+                <div class="bookmark-description">ClashMeta专区</div>
+                <div class="bookmark-links">
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/MetaCubeX/ClashMetaForAndroid/releases/download/v2.11.15/cmfa-2.11.15-meta-universal-release.apk">电视端</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/MetaCubeX/ClashMetaForAndroid/releases/download/v2.11.15/cmfa-2.11.15-meta-armeabi-v7a-release.apk">安卓端v7a</a>
+                        </div>
+                    </div>
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/MetaCubeX/ClashMetaForAndroid/releases/download/v2.11.15/cmfa-2.11.15-meta-arm64-v8a-release.apk">安卓端v8a</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/MetaCubeX/ClashMetaForAndroid/releases/download/v2.11.15/cmfa-2.11.15-meta-x86-release.apk">X86</a>
+                        </div>
+                    </div>
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/MetaCubeX/ClashMetaForAndroid/releases/download/v2.11.15/cmfa-2.11.15-meta-x86_64-release.apk">X86-64位</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ClashMi专区 -->
+            <div class="bookmark">
+                <div class="bookmark-description">ClashMi专区</div>
+                <div class="bookmark-links">
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://apps.apple.com/us/app/clash-mi/id6744321968?l=zh-Hans-CN">苹果端</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://dot.clashmi.app/client.html?tag=macos-stable">Mac端</a>
+                        </div>
+                    </div>
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://dot.clashmi.app/client.html?tag=android-stable">安卓端</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://dot.clashmi.app/client.html?tag=linux-deb-stable">Linux端</a>
+                        </div>
+                    </div>
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://dot.clashmi.app/client.html?tag=windows-installer-stable">Win端</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Karing专区 -->
+            <div class="bookmark">
+                <div class="bookmark-description">Karing专区</div>
+                <div class="bookmark-links">
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://apps.apple.com/us/app/karing/id6472431552?l=zh-Hans-CN">苹果端</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://dot.karing.app/client.html?tag=android-stable">安卓端</a>
+                        </div>
+                    </div>
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://dot.karing.app/client.html?tag=macos-stable">Mac端</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://dot.karing.app/client.html?tag=linux-deb-stable">Linux端</a>
+                        </div>
+                    </div>
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://dot.karing.app/client.html?tag=windows-installer-stable">Win端</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clash-party专区 -->
+            <div class="bookmark">
+                <div class="bookmark-description">Clash-party专区</div>
+                <div class="bookmark-links">
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/mihomo-party-org/mihomo-party/releases/download/v1.7.7/mihomo-party-windows-1.7.7-ia32-setup.exe">Win10/11-32位</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/mihomo-party-org/mihomo-party/releases/download/v1.7.7/mihomo-party-windows-1.7.7-x64-setup.exe">Win10/11-64位</a>
+                        </div>
+                    </div>
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/mihomo-party-org/mihomo-party/releases/download/v1.7.7/mihomo-party-win7-1.7.7-ia32-setup.exe">Win7/8-32位</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/mihomo-party-org/mihomo-party/releases/download/v1.7.7/mihomo-party-win7-1.7.7-x64-setup.exe">Win7/8-64位</a>
+                        </div>
+                    </div>
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/mihomo-party-org/mihomo-party/releases/download/v1.7.7/mihomo-party-macos-1.7.7-x64.pkg">Mac-lntel-11+</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/mihomo-party-org/mihomo-party/releases/download/v1.7.7/mihomo-party-macos-1.7.7-arm64.pkg">Mac-AppleSilicon-11+</a>
+                        </div>
+                    </div>
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/mihomo-party-org/mihomo-party/releases/download/v1.7.7/mihomo-party-catalina-1.7.7-x64.pkg">Mac-lntel-10.15+</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/mihomo-party-org/mihomo-party/releases/download/v1.7.7/mihomo-party-catalina-1.7.7-arm64.pkg">Mac-AppleSilicon-10.15+</a>
+                        </div>
+                    </div>
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/mihomo-party-org/mihomo-party/releases/download/v1.7.7/mihomo-party-linux-1.7.7-amd64.deb">Linux-DEB-64位</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/mihomo-party-org/mihomo-party/releases/download/v1.7.7/mihomo-party-linux-1.7.7-arm64.deb">Linux-ARM64</a>
+                        </div>
+                    </div>
+                    <div class="link-row">
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/mihomo-party-org/mihomo-party/releases/download/v1.7.7/mihomo-party-linux-1.7.7-x86_64.rpm">Linux-RPM-64位</a>
+                        </div>
+                        <div class="link-item">
+                            <a href="https://gh-proxy.com/https://github.com/mihomo-party-org/mihomo-party/releases/download/v1.7.7/mihomo-party-linux-1.7.7-aarch64.rpm">Linux-PRM-ARM64</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+        </footer>
+    </div>
+
+    <script>
+        // 百度统计代码
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?fff33d50cef8b9d386a8c31da4723d53";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+
+        // 金光闪闪动画
+        function createGoldenLight() {
+            const overlay = document.getElementById('golden-overlay');
+            
+            // 创建闪烁的星星
+            for (let i = 0; i < 30; i++) {
+                const star = document.createElement('div');
+                star.className = 'golden-star';
+                star.style.width = Math.random() * 10 + 5 + 'px';
+                star.style.height = star.style.width;
+                star.style.top = Math.random() * 100 + '%';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = Math.random() * 3 + 2 + 's';
+                overlay.appendChild(star);
+            }
+            
+            // 创建流动的金光
+            for (let i = 0; i < 5; i++) {
+                const light = document.createElement('div');
+                light.style.position = 'absolute';
+                light.style.width = '200px';
+                light.style.height = '200px';
+                light.style.background = 'radial-gradient(circle, rgba(255,215,0,0.5), transparent 70%)';
+                light.style.borderRadius = '50%';
+                light.style.top = Math.random() * 100 + '%';
+                light.style.left = Math.random() * 100 + '%';
+                light.style.animation = `moveLight ${Math.random() * 20 + 10}s linear infinite`;
+                light.style.animationDelay = Math.random() * 5 + 's';
+                overlay.appendChild(light);
+                
+                // 添加动画关键帧
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes moveLight {
+                        0% { transform: translate(0, 0); opacity: 0.3; }
+                        25% { transform: translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px); opacity: 0.7; }
+                        50% { transform: translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px); opacity: 0.5; }
+                        75% { transform: translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px); opacity: 0.8; }
+                        100% { transform: translate(0, 0); opacity: 0.3; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+        
+        // 主题切换功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const icon = themeToggle.querySelector('i');
+            const musicToggle = document.getElementById('musicToggle');
+            const musicIcon = musicToggle.querySelector('i');
+            const bgMusic = document.getElementById('bgMusic');
+            
+            // 初始化金光动画
+            createGoldenLight();
+            
+            // 检查本地存储的主题偏好
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                icon.classList.replace('fa-moon', 'fa-sun');
+            }
+            
+            // 检查本地存储的音乐设置
+            const savedMusic = localStorage.getItem('music');
+            if (savedMusic === 'on') {
+                bgMusic.play().catch(e => console.log('自动播放被阻止:', e));
+                musicIcon.classList.replace('fa-music', 'fa-volume-up');
+            }
+            
+            // 切换主题
+            themeToggle.addEventListener('click', function() {
+                document.body.classList.toggle('dark-mode');
+                
+                if (document.body.classList.contains('dark-mode')) {
+                    icon.classList.replace('fa-moon', 'fa-sun');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    icon.classList.replace('fa-sun', 'fa-moon');
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+            
+            // 切换音乐
+            musicToggle.addEventListener('click', function() {
+                if (bgMusic.paused) {
+                    bgMusic.play();
+                    musicIcon.classList.replace('fa-music', 'fa-volume-up');
+                    localStorage.setItem('music', 'on');
+                } else {
+                    bgMusic.pause();
+                    musicIcon.classList.replace('fa-volume-up', 'fa-music');
+                    localStorage.setItem('music', 'off');
+                }
+            });
+            
+            // 尝试自动播放音乐（需要用户交互后才能工作）
+            document.addEventListener('click', function firstInteraction() {
+                // 只在音乐未播放且设置为开启时尝试播放
+                if (bgMusic.paused && localStorage.getItem('music') === 'on') {
+                    bgMusic.play().catch(e => console.log('自动播放被阻止:', e));
+                }
+                document.removeEventListener('click', firstInteraction);
+            }, { once: true });
+            
+            // 监听系统主题变化
+            const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            
+            function handleSystemThemeChange(e) {
+                if (e.matches) {
+                    document.body.classList.add('dark-mode');
+                    icon.classList.replace('fa-moon', 'fa-sun');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.body.classList.remove('dark-mode');
+                    icon.classList.replace('fa-sun', 'fa-moon');
+                    localStorage.setItem('theme', 'light');
+                }
+            }
+            
+            // 如果没有手动设置过主题，则跟随系统
+            if (!savedTheme) {
+                darkModeMediaQuery.addListener(handleSystemThemeChange);
+                handleSystemThemeChange(darkModeMediaQuery);
+            }
+            
+            // 复制跑马灯内容以实现无缝循环
+            const marquee = document.querySelector('.marquee');
+            const marqueeContent = document.querySelector('.marquee-content');
+            const clone = marqueeContent.cloneNode(true);
+            marquee.appendChild(clone);
+        });
+    </script>
+</body>
+</html>
