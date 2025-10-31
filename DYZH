@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/wsqstar/ResHosting@0.031/build/js/Sakura.js"></script>
+
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="YSub Converter - 安全便捷的订阅链接转换工具">
+    <title>@iOSAWJ全能订阅转换 - 订阅链接转换</title>
+    <link rel="canonical" href="https://whatshub.top/ysub">
+    <style>
+        :root {
+            --primary-color: #ff6f6f;
+            --primary-gradient: linear-gradient(to right, #ff8a8a, #ff4b4b);
+            --primary-hover: linear-gradient(to right, #e86b6b, #ff1a1a);
+            --bg-gradient: linear-gradient(to right, #f2d1d0, #f2edbd);
+            --card-bg: #fcf5f5;
+            --text-primary: #782205;
+            --text-secondary: #b87046;
+            --border-color: #f5dbd0;
+            --input-bg: #fff9f5;
+            --shadow: 0 4px 15px rgba(0,0,0,0.2), 0 2px 6px rgba(0,0,0,0.15), 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .dark-mode {
+            --bg-gradient: linear-gradient(to right, #2a2a2a, #3a3a3a);
+            --card-bg: #181818;
+            --text-primary: #a3a07f;
+            --text-secondary: #b87046;
+            --border-color: #363531;
+            --input-bg: #222222;
+            --shadow: 0 4px 15px rgba(0,0,0,0.4), 0 2px 6px rgba(0,0,0,0.3), 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .marquee-container {
+            overflow: hidden;
+            background: var(--primary-gradient);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 10px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .marquee {
+            white-space: nowrap;
+            display: flex;
+            animation: marquee 15s linear infinite;
+        }
+
+        .marquee a {
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 0 20px;
+        }
+
+        .marquee a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 32px;
+            font-weight: 900;
+            text-align: center;
+            width: 100%;
+            padding: 10px 0;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .theme-toggle {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        textarea, select, input[type="text"] {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: var(--input-bg);
+            color: var(--text-primary);
+            font-size: 15px;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        textarea:focus, select:focus, input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(255, 111, 111, 0.2);
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .btn {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .result-container {
+            margin-top: 25px;
+            padding: 20px;
+            background: var(--input-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            word-break: break-all;
+        }
+
+        .result-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .result-link:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        .footer a {
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .info-box {
+            background: rgba(255, 111, 111, 0.1);
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .theme-toggle {
+                align-self: flex-end;
+                margin-top: 10px;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(255, 111, 111, 0.15);
+            color: var(--primary-color);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 跑马灯 -->
+        <div class="marquee-container">
+            <div class="marquee">
+                <a href="https://t.me/iOSAWJ" target="_blank">🎉欢迎加入𝐓𝐆频道@𝐢𝐎𝐒𝐀𝐖𝐉 </a>
+            </div>
+        </div>
+
+        <header>
+            <h1> 𝐓𝐆频道@𝐢𝐎𝐒𝐀𝐖𝐉订阅转换</h1>
+            <button class="theme-toggle" id="theme-toggle">
+                <span id="theme-icon">🌙</span> <span id="theme-text">暗色模式</span>
+            </button>
+        </header>
+
+        <div class="card">
+            <div class="input-group">
+                <label for="sub-filepath">订阅链接或本地路径</label>
+                <textarea placeholder="请输入订阅链接，多个链接请用换行分隔..." id="sub-filepath" rows="4"></textarea>
+            </div>
+
+            <div class="input-group">
+                <label for="sub-backend">后端选择</label>
+                <select id="sub-backend">
+                    <option value="http://localhost:25500/sub?target=">localhost:25500</option>
+                    <option value="https://sub.id9.cc/sub?target=">sub.id9.cc <span class="tag">支持singbox</span></option>
+                    <option value="https://url.v1.mk/sub?target=">url.v1.mk <span class="tag">支持vless,hy2,singbox</span></option>
+                    <option value="https://a.y1z.org/sub?target=">a.y1z.org <span class="tag">支持vless,hy2,singbox</span></option>
+                    <option value="https://sub.xeton.dev/sub?target=">sub.xeton.dev <span class="tag">支持singbox</span></option>
+                    <option value="https://yun-api.subcloud.xyz/sub?target=">yun-api.subcloud.xyz <span class="tag">支持singbox</span></option>
+                    <option value="https://api.dler.io/sub?target=">api.dler.io <span class="tag">支持singbox</span></option>
+                    <option value="https://sub.datapipe.top/sub?target=">sub.datapipe.top <span class="tag">支持vless,hy2</span></option>
+                    <option value="https://suc-store.usuc.cc/sub?target=">suc-store.usuc.cc <span class="tag">支持vless,hy2</span></option>
+                    <option value="https://www.nameless13.com/sub?target=">www.nameless13.com</option>
+                    <option value="https://pub-api-1.bianyuan.xyz/sub?target=">pub-api-1.bianyuan.xyz</option>
+                    <option value="https://api.sublink.dev/sub?target=">api.sublink.dev</option>
+                    <option value="https://api.nexconvert.com/sub?target=">api.nexconvert.com</option>
+                    <option value="https://api.wcc.best/sub?target=">api.wcc.best</option>
+                    <option value="https://subscribe.cctv.rip/sub?target=">subscribe.cctv.rip</option>
+                    <option value="https://suc.ssltd.xyz/sub?target=">suc.ssltd.xyz</option>
+                    <option value="https://api.subcsub.com/sub?target=">api.subcsub.com</option>
+                    <option value="custom">自定义后端</option>
+                </select>
+            </div>
+
+            <div class="input-group hidden" id="custom-backend-group">
+                <label for="custom-backend">自定义后端地址</label>
+                <input type="text" placeholder="例如：https://api.example.com/sub?target=" id="custom-backend">
+            </div>
+
+            <div class="input-group">
+                <label for="sub-config">分流规则</label>
+                <select id="sub-config">
+                    <option value="">无(仅节点列表)</option>
+                    <option value="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online.ini">ACL4SSR</option>
+                    <option value="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_AdblockPlus.ini">ACL4SSR_AdblockPlus</option>
+                    <option value="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini.ini">ACL4SSR_Mini</option>
+                    <option value="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_AdblockPlus.ini">ACL4SSR_Mini_AdblockPlus</option>
+                    <option value="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full.ini">ACL4SSR_Full</option>
+                    <option value="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_AdblockPlus.ini">ACL4SSR_Full_AdblockPlus</option>
+                    <option value="https://raw.githubusercontent.com/deezertidal/private/main/ini/y.ini">YFAMILY</option>
+                    <option value="https://raw.githubusercontent.com/deezertidal/private/main/ini/ylite.ini">YFAMILY简易分组</option>
+                    <option value="https://raw.githubusercontent.com/deezertidal/private/main/ini/y-adb.ini">YFAMILY去广告</option>
+                    <option value="https://raw.githubusercontent.com/deezertidal/private/main/ini/ylite-adb.ini">YFAMILY简易分组&amp;去广告</option>
+                    <option value="https://subweb.s3.fr-par.scw.cloud/RemoteConfig/customized/nexitally.ini">Nexitally</option>
+                    <option value="https://raw.githubusercontent.com/SleepyHeeead/subconverter-config/master/remote-config/customized/maying.ini">Maying</option>
+                    <option value="https://subweb.s3.fr-par.scw.cloud/RemoteConfig/customized/ytoo.ini">YTOO</option>
+                    <option value="https://raw.githubusercontent.com/SleepyHeeead/subconverter-config/master/remote-config/customized/socloud.ini">SoCloud</option>
+                    <option value="https://raw.githubusercontent.com/SleepyHeeead/subconverter-config/master/remote-config/customized/ark.ini">ARK</option>
+                    <option value="https://subweb.s3.fr-par.scw.cloud/RemoteConfig/customized/flower.ini">FlowerCloud</option>
+                    <option value="custom">自定义规则</option>
+                </select>
+            </div>
+
+            <div class="input-group hidden" id="custom-config-group">
+                <label for="custom-config">自定义规则地址</label>
+                <input type="text" placeholder="例如：https://example.com/rule.ini" id="custom-config">
+            </div>
+
+            <div class="input-group">
+                <label for="sub-options">类型选择</label>
+                <select id="sub-options">
+                    <option value="clash">Clash</option>
+                    <option value="singbox">Singbox</option>
+                    <option value="quanx">QuanX</option>
+                    <option value="loon">Loon</option>
+                    <option value="surge&amp;ver=4">Surge</option>
+                    <option value="clashr">ClashR</option>
+                    <option value="ss">SS (SIP002)</option>
+                    <option value="ssr">SSR</option>
+                    <option value="surfboard">Surfboard</option>
+                    <option value="trojan">Trojan</option>
+                    <option value="v2ray">V2Ray</option>
+                    <option value="mixed">Mixed</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="sub-params">其他参数</label>
+                <input type="text" placeholder="例如：&emoji=true&exclude=Hong Kong|Japan&filename=sub.yaml&udp=true" id="sub-params">
+            </div>
+
+            <div class="info-box">
+                <strong>使用提示：</strong> 其他参数可以添加如：emoji=true（开启表情符号）、filename=sub.yaml（指定文件名）、udp=true（开启UDP）、tfo=true（开启TCP Fast Open）等。
+            </div>
+
+            <div class="btn-container">
+                <button class="btn" id="sub-generate">
+                    <span>生成链接</span>
+                </button>
+            </div>
+
+            <div class="result-container hidden" id="result-container">
+                <a id="sub-link" class="result-link" target="_blank"></a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <!-- 已移除版权信息 -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 元素引用
+            const elements = {
+                subFilepath: document.getElementById("sub-filepath"),
+                subLink: document.getElementById("sub-link"),
+                subGenerate: document.getElementById("sub-generate"),
+                subOptions: document.getElementById("sub-options"),
+                subConfig: document.getElementById("sub-config"),
+                customConfig: document.getElementById("custom-config"),
+                subBackend: document.getElementById("sub-backend"),
+                customBackend: document.getElementById("custom-backend"),
+                subParams: document.getElementById("sub-params"),
+                customConfigGroup: document.getElementById("custom-config-group"),
+                customBackendGroup: document.getElementById("custom-backend-group"),
+                resultContainer: document.getElementById("result-container"),
+                themeToggle: document.getElementById("theme-toggle"),
+                themeIcon: document.getElementById("theme-icon"),
+                themeText: document.getElementById("theme-text")
+            };
+
+            // 支持singbox的后端列表
+            const singboxSupportedBackends = [
+                "http://localhost:25500/sub?target=",
+                "https://sub.id9.cc/sub?target=",
+                "https://sub.xeton.dev/sub?target=",
+                "https://api.dler.io/sub?target=",
+                "https://url.v1.mk/sub?target=",
+                "https://a.y1z.org/sub?target=",
+                "https://yun-api.subcloud.xyz/sub?target=",
+                "custom"
+            ];
+
+            // 初始化
+            function init() {
+                // 从localStorage加载保存的设置
+                elements.subFilepath.value = localStorage.getItem("sub-filepath") || "";
+                elements.subOptions.value = localStorage.getItem("sub-options") || "clash";
+                elements.subConfig.value = localStorage.getItem("sub-config") || "";
+                elements.customConfig.value = localStorage.getItem("custom-config") || "";
+                elements.subBackend.value = localStorage.getItem("sub-backend") || "http://localhost:25500/sub?target=";
+                elements.customBackend.value = localStorage.getItem("custom-backend") || "";
+                elements.subParams.value = localStorage.getItem("sub-params") || "";
+
+                // 检查暗色模式
+                if (localStorage.getItem("dark-mode") === "enabled") {
+                    document.body.classList.add("dark-mode");
+                    elements.themeIcon.textContent = "☀️";
+                    elements.themeText.textContent = "亮色模式";
+                } else {
+                    document.body.classList.remove("dark-mode");
+                    elements.themeIcon.textContent = "🌙";
+                    elements.themeText.textContent = "暗色模式";
+                }
+
+                updateCustomConfigVisibility();
+                updateCustomBackendVisibility();
+                updateBackendOptions();
+                updateOptionsBasedOnBackend();
+                
+                // 添加事件监听器
+                setupEventListeners();
+            }
+
+            // 设置事件监听器
+            function setupEventListeners() {
+                // 主题切换
+                elements.themeToggle.addEventListener("click", toggleDarkMode);
+                
+                // 配置变化
+                elements.subConfig.addEventListener("change", function() {
+                    localStorage.setItem("sub-config", elements.subConfig.value);
+                    updateCustomConfigVisibility();
+                });
+                
+                elements.customConfig.addEventListener("input", debounce(function() {
+                    localStorage.setItem("custom-config", elements.customConfig.value);
+                }, 300));
+                
+                elements.subBackend.addEventListener("change", function() {
+                    localStorage.setItem("sub-backend", elements.subBackend.value);
+                    updateCustomBackendVisibility();
+                    updateOptionsBasedOnBackend();
+                });
+                
+                elements.customBackend.addEventListener("input", debounce(function() {
+                    localStorage.setItem("custom-backend", elements.customBackend.value);
+                }, 300));
+                
+                elements.subOptions.addEventListener("change", function() {
+                    localStorage.setItem("sub-options", elements.subOptions.value);
+                    updateBackendOptions();
+                });
+                
+                elements.subFilepath.addEventListener("input", debounce(function() {
+                    localStorage.setItem("sub-filepath", elements.subFilepath.value);
+                }, 300));
+                
+                elements.subParams.addEventListener("input", debounce(function() {
+                    localStorage.setItem("sub-params", elements.subParams.value);
+                }, 300));
+                
+                // 生成订阅链接
+                elements.subGenerate.addEventListener("click", generateSubscription);
+            }
+
+            // 更新自定义配置可见性
+            function updateCustomConfigVisibility() {
+                if (elements.subConfig.value === "custom") {
+                    elements.customConfigGroup.classList.remove("hidden");
+                } else {
+                    elements.customConfigGroup.classList.add("hidden");
+                }
+            }
+
+            // 更新自定义后端可见性
+            function updateCustomBackendVisibility() {
+                if (elements.subBackend.value === "custom") {
+                    elements.customBackendGroup.classList.remove("hidden");
+                } else {
+                    elements.customBackendGroup.classList.add("hidden");
+                }
+            }
+
+            // 更新后端选项
+            function updateBackendOptions() {
+                const isSingboxSelected = elements.subOptions.value === "singbox";
+                const options = elements.subBackend.options;
+                
+                for (let i = 0; i < options.length; i++) {
+                    if (isSingboxSelected) {
+                        options[i].disabled = !singboxSupportedBackends.includes(options[i].value) && 
+                                            options[i].value !== "custom";
+                    } else {
+                        options[i].disabled = false;
+                    }
+                }
+
+                if (isSingboxSelected && 
+                    !singboxSupportedBackends.includes(elements.subBackend.value) && 
+                    elements.subBackend.value !== "custom") {
+                    elements.subBackend.value = singboxSupportedBackends[0];
+                    localStorage.setItem("sub-backend", elements.subBackend.value);
+                }
+            }
+
+            // 根据后端更新选项
+            function updateOptionsBasedOnBackend() {
+                const selectedBackend = elements.subBackend.value;
+                const isSingboxBackend = singboxSupportedBackends.includes(selectedBackend);
+                const singboxOption = elements.subOptions.querySelector("option[value='singbox']");
+
+                if (isSingboxBackend) {
+                    singboxOption.disabled = false;
+                } else {
+                    singboxOption.disabled = true;
+                    if (elements.subOptions.value === "singbox") {
+                        elements.subOptions.value = "clash";
+                        localStorage.setItem("sub-options", "clash");
+                    }
+                }
+            }
+
+            // 防抖函数
+            function debounce(func, wait) {
+                let timeout;
+                return function (...args) {
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => func.apply(this, args), wait);
+                };
+            }
+
+            // 切换暗色模式
+            function toggleDarkMode() {
+                if (document.body.classList.contains("dark-mode")) {
+                    document.body.classList.remove("dark-mode");
+                    localStorage.setItem("dark-mode", "disabled");
+                    elements.themeIcon.textContent = "🌙";
+                    elements.themeText.textContent = "暗色模式";
+                } else {
+                    document.body.classList.add("dark-mode");
+                    localStorage.setItem("dark-mode", "enabled");
+                    elements.themeIcon.textContent = "☀️";
+                    elements.themeText.textContent = "亮色模式";
+                }
+            }
+
+            // 生成订阅链接
+            function generateSubscription() {
+                let backendUrl = elements.subBackend.value;
+                if (backendUrl === "custom") {
+                    backendUrl = elements.customBackend.value;
+                    if (!backendUrl) {
+                        alert("请输入自定义后端地址");
+                        return;
+                    }
+                }
+
+                const subLinks = elements.subFilepath.value.split('\n').filter(link => link.trim() !== '');
+                if (subLinks.length === 0) {
+                    alert("请输入订阅链接");
+                    return;
+                }
+
+                const target = elements.subOptions.value;
+                let configUrl = elements.subConfig.value;
+                if (configUrl === "custom") {
+                    configUrl = elements.customConfig.value;
+                }
+
+                let params = elements.subParams.value;
+                if (configUrl) {
+                    params += `&config=${encodeURIComponent(configUrl)}`;
+                }
+
+                // 对每个订阅链接生成转换后的链接
+                const convertedLinks = subLinks.map(link => {
+                    return backendUrl + target + '&url=' + encodeURIComponent(link) + params;
+                });
+
+                elements.subLink.href = convertedLinks[0];
+                elements.subLink.textContent = convertedLinks[0];
+                elements.resultContainer.classList.remove("hidden");
+            }
+
+            // 初始化应用
+            init();
+        });
+    </script>
+</body>
+</html>
