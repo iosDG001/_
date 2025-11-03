@@ -6,7 +6,7 @@
 𒊹𒊹𒊹𒊹𒊹𒊹𒊹𒊹𒊹𒊹𒊹𒊹𒊹𒊹𒊹𒊹𒊹𒊹𒊹𒊹𒊹
 
 [rewrite_local] 
-(^https?:\/\/dida365\.com\/api\/v2\/user\/(?:status|profile) url script-response-body https://raw.githubusercontent.com/iosDG001/_/refs/heads/main/ddqd.js
+^https?:\/\/dida365\.com\/api\/v2\/user\/(?:status|profile) url script-response-body https://raw.githubusercontent.com/iosDG001/_/refs/heads/main/ddqd.js
 
 [MITM]
 hostname = dida365.com
