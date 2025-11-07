@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全平台代理工具集合</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #2980b9;
+            --light-color: #f8f9fa;
+            --dark-color: #1a2530;
+            --text-color: #333;
+            --border-radius: 10px;
+            --box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2.5rem 0;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+        }
+        
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+            letter-spacing: -0.5px;
+        }
+        
+        .header p {
+            font-size: 1.3rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #777;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            transition: var(--transition);
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .card {
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #eaeaea;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.12);
+        }
+        
+        .card-header {
+            padding: 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .card-header h3 {
+            font-size: 1.3rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .card-badge {
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+        }
+        
+        .card-footer {
+            padding: 1rem 1.5rem;
+            background: #f8f9fa;
+            border-top: 1px solid #eaeaea;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .platform-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .platform-list li {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .platform-list li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .platform-list a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .platform-list a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+        
+        .platform-list .price {
+            color: #e74c3c;
+            font-weight: 600;
+            margin-left: auto;
+            font-size: 0.9rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--secondary-color);
+            color: var(--secondary-color);
+        }
+        
+        .btn-outline:hover {
+            background: var(--secondary-color);
+            color: white;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .feature-content h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .feature-content p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: #666;
+            font-size: 1rem;
+            border-top: 1px solid #eaeaea;
+            margin-top: 3rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .footer a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        .protocol-tag {
+            display: inline-block;
+            background: #f0f7ff;
+            color: var(--secondary-color);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+            border: 1px solid #d1e8ff;
+        }
+        
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            border: 2px solid #eaeaea;
+            font-size: 1rem;
+            transition: var(--transition);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.2);
+        }
+        
+        .search-box i {
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+        }
+        
+        .search-results {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+            text-align: center;
+        }
+        
+        .highlight {
+            background-color: #fff9c4;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        @media (max-width: 992px) {
+            .card-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .stats {
+                flex-wrap: wrap;
+            }
+            
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .section-icon {
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>全平台代理工具集合</h1>
+            <p>精心整理各平台优质代理工具，提供全面、安全、高效的网络连接解决方案</p>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">80+</span>
+                    <span class="stat-label">客户端工具</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">12</span>
+                    <span class="stat-label">平台支持</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">15+</span>
+                    <span class="stat-label">代理协议</span>
+                </div>
+            </div>
+        </header>
+        
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="搜索代理工具或平台...">
+            <i class="fas fa-search"></i>
+            <div class="search-results" id="search-results"></div>
+        </div>
+        
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <div>
+                    <h2 class="section-title">移动端代理工具</h2>
+                    <p class="section-subtitle">iOS与Android平台精选代理工具，覆盖各种使用场景</p>
+                </div>
+            </div>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fab fa-apple"></i> iOS</h3>
+                        <span class="card-badge">全区可用</span>
+                    </div>
+                    <div class="card-body">
+                        <ul class="platform-list">
+                            <li><a href="https://apps.apple.com/cn/app/outline-app/id1356177741">Outline <span class="price">免费</span></a></li>
+                            <li><a href="https://apps.apple.com/us/app/id1442620678?l=zh-cn">Surge iOS 5 <span class="price">$49.99</span></a></li>
+                            <li><a href="https://apps.apple.com/us/app/quantumult-x/id1443988620?l=zh-cn&platform=iphone">Quantumult X <span class="price">$7.99</span></a></li>
+                            <li><a href="https://apps.apple.com/us/app/shadowrocket/id932747118?l=zh-cn">Shadowrocket <span class="price">$2.99</span></a></li>
+                            <li><a href="https://apps.apple.com/us/app/loon/id1373567447?l=zh-cn">Loon <span class="price">$5.99</span></a></li>
+                            <li><a href="https://apps.apple.com/us/app/loon-lite/id6444029612?l=zh-cn">Loon Lite <span class="price">$0.99</span></a></li>
+                            <li><a href="https://apps.apple.com/us/app/stash-proxy-utility/id1596063349?l=zh-cn">Stash <span class="price">$3.99</span></a></li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span>12个工具</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fab fa-android"></i> Android</h3>
+                        <span class="card-badge">热门</span>
+                    </div>
+                    <div class="card-body">
+                        <ul class="platform-list">
+                            <li><a href="https://github.com/getsurfboard/surfboard/releases">Surfboard <span class="protocol-tag">SS/VMess/Trojan</span></a></li>
+                            <li><a href="https://play.google.com/store/apps/details?id=com.getsurfboard">Surfboard Google Play</a></li>
+                            <li><a href="https://github.com/SagerNet/sing-box/releases">sing-box</a></li>
+                            <li><a href="https://play.google.com/store/apps/details?id=io.nekohasekai.sagernet">SagerNet Google Play</a></li>
+                            <li><a href="https://github.com/MatsuriDayo/Matsuri/releases">Matsuri(茉莉)</a></li>
+                            <li><a href="https://github.com/XTLS/AnXray/releases">AnXray</a></li>
+                            <li><a href="https://github.com/2dust/v2rayNG/releases/tag/1.10.26">v2rayNG 1.10.26</a></li>
+                            <li><a href="https://github.com/shadowsocks/shadowsocks-android/releases">Shadowsocks 影梭</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span>15个工具</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-tv"></i> Android TV</h3>
+                        <span class="card-badge">兼容版</span>
+                    </div>
+                    <div class="card-body">
+                        <ul class="platform-list">
+                            <li><a href="https://github.com/SagerNet/sing-box/releases/latest">Sing-Box索尼电视兼容版</a></li>
+                            <li><a href="https://t.me/feiyangdigital/529168">Clash索尼电视兼容版</a></li>
+                            <li><a href="https://github.com/2dust/v2rayNG/releases/download/1.7.16/v2rayNG_1.7.16.apk">v2rayNG索尼电视兼容版</a></li>
+                            <li><a href="https://github.com/shadowsocks/shadowsocks-android/releases">Shadowsocks TV版</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span>6个工具</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-desktop"></i>
+                </div>
+                <div>
+                    <h2 class="section-title">桌面端代理工具</h2>
+                    <p class="section-subtitle">Windows、macOS和Linux平台专业代理工具</p>
+                </div>
+            </div>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fab fa-windows"></i> Windows</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="platform-list">
+                            <li><a href="https://github.com/netchx/Netch/releases">Netch <span class="protocol-tag">SS/SSR/VMess</span></a></li>
+                            <li><a href="https://github.com/TheMRLL/winxray/releases">WinXray</a></li>
+                            <li><a href="https://github.com/MatsuriDayo/nekoray/releases">NekoRay</a></li>
+                            <li><a href="https://github.com/2dust/v2rayN/releases/tag/7.9.3">v2rayN 7.9.3</a></li>
+                            <li><a href="https://github.com/shadowsocks/shadowsocks-windows/releases">Shadowsocks</a></li>
+                            <li><a href="https://github.com/Fndroid/clash_for_windows_pkg/releases">Clash for Windows</a></li>
+                            <li><a href="https://github.com/ender-zhao/Clash-for-Windows_Chinese/releases">Clash for Windows 汉化版</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span>10个工具</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fab fa-apple"></i> macOS</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="platform-list">
+                            <li><a href="https://nssurge.com/buy_now">Surge Mac 5 <span class="price">$49.99+</span></a></li>
+                            <li><a href="https://apps.apple.com/us/app/quantumult-x/id1443988620?l=zh-cn&platform=mac">Quantumult X <span class="price">$7.99</span></a></li>
+                            <li><a href="https://stash.ws/macos/pricing/">Stash for macOS</a></li>
+                            <li><a href="https://github.com/Cenmrev/V2RayX/releases">V2RayX</a></li>
+                            <li><a href="https://github.com/yanue/V2rayU/releases">V2rayU</a></li>
+                            <li><a href="https://github.com/yichengchen/clashX/releases">ClashX</a></li>
+                            <li><a href="https://github.com/Fndroid/clash_for_windows_pkg/releases">Clash for Windows</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span>8个工具</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fab fa-linux"></i> Linux</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="platform-list">
+                            <li><a href="https://github.com/Qv2ray/Qv2ray/releases">Qv2ray</a></li>
+                            <li><a href="https://github.com/shadowsocks/shadowsocks-qt5/releases">Shadowsocks-Qt5</a></li>
+                            <li><a href="https://github.com/shadowsocks/shadowsocks-libev">Shadowsocks-libev</a></li>
+                            <li><a href="https://github.com/trojan-gfw/trojan">Trojan</a></li>
+                            <li><a href="https://github.com/v2ray/v2ray-core">V2Ray Core</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span>7个工具</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-network-wired"></i>
+                </div>
+                <div>
+                    <h2 class="section-title">路由器与系统工具</h2>
+                    <p class="section-subtitle">路由器刷机工具、系统代理和网络增强工具</p>
+                </div>
+            </div>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-wifi"></i> 路由器</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="platform-list">
+                            <li><a href="https://github.com/AUK9527/Are-u-ok">iStore-OS插件仓库</a></li>
+                            <li><a href="https://koolclash.js.org">Koolshare OpenWrt/LED</a></li>
+                            <li><a href="https://github.com/hq450/fancyss">fancyss</a></li>
+                            <li><a href="https://github.com/shadowsocks/openwrt-shadowsocks">OpenWRT-Shadowsocks</a></li>
+                            <li><a href="https://www.right.com.cn/forum/thread-161324-1-1.html">Padavan</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span>8个工具</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-tools"></i> 系统工具</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="platform-list">
+                            <li><a href="https://github.com/FelisCatus/SwitchyOmega/releases">SwitchyOmega <span class="protocol-tag">浏览器代理</span></a></li>
+                            <li><a href="https://github.com/bitbeans/SimpleDnsCrypt/releases">Simple DNSCrypt</a></li>
+                            <li><a href="https://github.com/klzgrad/naiveproxy/releases">NaiveProxy</a></li>
+                            <li><a href="https://github.com/eycorsican/leaf">Leaf</a></li>
+                            <li><a href="https://github.com/EAimTY/tuic">TUIC</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span>6个工具</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-code-branch"></i> 内核与库</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="platform-list">
+                            <li><a href="https://github.com/Dreamacro/clash/releases">Clash 内核</a></li>
+                            <li><a href="https://github.com/Dreamacro/clash/releases/tag/premium">Clash Premium 内核</a></li>
+                            <li><a href="https://github.com/v2ray/v2ray-core/releases">V2Ray 核心</a></li>
+                            <li><a href="https://github.com/v2fly/v2ray-core/releases">V2Fly 核心</a></li>
+                            <li><a href="https://github.com/shadowsocks/shadowsocks-rust/releases">Shadowsocks-Rust</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span>5个工具</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <footer class="footer">
+            <p>© 2025 全平台代理工具集合 | 精心整理，持续更新</p>
+            <p>官方TG频道: <a href="https://t.me/iOSAWJ">@iOSAWJ</a> | 反馈与建议: <a href="https://t.me/iOSAWJL">TG交流</a></p>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fas fa-rss"></i></a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 搜索功能
+            const searchInput = document.getElementById('search-input');
+            const searchResults = document.getElementById('search-results');
+            const cards = document.querySelectorAll('.card');
+            const platformLists = document.querySelectorAll('.platform-list');
+            
+            // 存储所有工具数据
+            const toolsData = [];
+            cards.forEach(card => {
+                const platform = card.querySelector('.card-header h3').textContent.trim();
+                const items = card.querySelectorAll('.platform-list li');
+                
+                items.forEach(item => {
+                    const link = item.querySelector('a');
+                    const name = link.textContent.replace(/\s*\$\d+\.\d+/, '').replace(/\s*免费/, '').trim(); // 移除价格信息
+                    const url = link.href;
+                    const price = item.querySelector('.price') ? item.querySelector('.price').textContent : '免费';
+                    
+                    toolsData.push({
+                        name: name,
+                        platform: platform,
+                        url: url,
+                        price: price,
+                        element: item
+                    });
+                });
+            });
+            
+            // 搜索功能实现
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase().trim();
+                let resultsCount = 0;
+                
+                if (searchTerm.length === 0) {
+                    // 显示所有卡片和项目
+                    cards.forEach(card => {
+                        card.style.display = '';
+                        card.querySelectorAll('.platform-list li').forEach(item => {
+                            item.style.display = '';
+                        });
+                    });
+                    searchResults.textContent = '';
+                    return;
+                }
+                
+                // 首先隐藏所有卡片
+                cards.forEach(card => {
+                    card.style.display = 'none';
+                });
+                
+                // 搜索匹配的工具
+                toolsData.forEach(tool => {
+                    const toolName = tool.name.toLowerCase();
+                    const platform = tool.platform.toLowerCase();
+                    
+                    if (toolName.includes(searchTerm) || platform.includes(searchTerm)) {
+                        // 显示包含匹配项的卡片
+                        const card = tool.element.closest('.card');
+                        card.style.display = '';
+                        
+                        // 高亮匹配的文本
+                        const link = tool.element.querySelector('a');
+                        const originalText = link.innerHTML;
+                        
+                        // 移除之前的高亮
+                        link.innerHTML = originalText.replace(/<span class="highlight">(.*?)<\/span>/g, '$1');
+                        
+                        // 添加新的高亮
+                        if (toolName.includes(searchTerm)) {
+                            const regex = new RegExp(`(${searchTerm})`, 'gi');
+                            link.innerHTML = link.innerHTML.replace(regex, '<span class="highlight">$1</span>');
+                        }
+                        
+                        // 显示匹配的项目
+                        tool.element.style.display = '';
+                        resultsCount++;
+                    } else {
+                        // 隐藏不匹配的项目
+                        tool.element.style.display = 'none';
+                    }
+                });
+                
+                // 更新搜索结果计数
+                if (resultsCount > 0) {
+                    searchResults.textContent = `找到 ${resultsCount} 个匹配的工具`;
+                } else {
+                    searchResults.textContent = `没有找到匹配的工具`;
+                }
+                
+                // 隐藏没有可见项目的卡片
+                cards.forEach(card => {
+                    const visibleItems = card.querySelectorAll('.platform-list li[style=""]').length + 
+                                        card.querySelectorAll('.platform-list li:not([style])').length;
+                    if (visibleItems === 0) {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+            
+            // SweetAlert 提示
+            Swal.fire({
+                html: `
+                <div style="text-align:center;padding:1rem">
+                    <h3 style="margin-bottom:1rem;color:#2c3e50">欢迎访问代理工具集合</h3>
+                    <p style="margin-bottom:1.5rem">本站官方TG频道：</p>
+                    <a href="https://t.me/iOSAWJ" target="_blank" style="display:inline-block;background:#3498db;color:white;padding:0.8rem 1.5rem;border-radius:8px;text-decoration:none;font-weight:500;margin-bottom:1rem">点击加入</a>
+                    <p style="font-size:0.9rem;color:#666;margin-top:1rem">本站提供80+代理工具，覆盖12个平台</p>
+                </div>
+                `,
+                showCloseButton: true,
+                confirmButtonText: '开始浏览',
+                background: '#f8f9fa',
+                customClass: {
+                    popup: 'sweet-popup'
+                }
+            });
+        });
+    </script>
+</body>
+</html>
