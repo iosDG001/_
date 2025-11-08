@@ -225,7 +225,7 @@
         }
         
         .section-header:hover {
-            background: var(--dark-color);
+            background: #253447;
         }
         
         .section-icon {
@@ -355,6 +355,7 @@
             background-color: #fff9c4;
             padding: 1px 3px;
             border-radius: 2px;
+            color: #333;
         }
         
         /* 桌面样式 */
@@ -393,7 +394,7 @@
 <body>
     <div class="container">
         <header class="header">
-            <h1>代理工具配置合集</h1>
+            <h1>iOS代理工具配置合集</h1>
             <p>全网精选配置文件，一键导入</p>
             
             <div class="stats">
@@ -612,54 +613,61 @@
                 });
             });
             
-            // 搜索功能实现
+            // 搜索功能实现 - 优化响应性能
+            let searchTimeout;
             searchInput.addEventListener('input', function() {
-                const searchTerm = this.value.toLowerCase().trim();
-                let resultsCount = 0;
-                
-                if (searchTerm.length === 0) {
-                    // 显示所有项目
-                    configsData.forEach(config => {
-                        config.element.style.display = '';
-                        const link = config.element.querySelector('a');
-                        link.textContent = originalConfigs[config.url]; // 恢复原始名称
-                    });
-                    searchResults.textContent = '';
-                    return;
-                }
-                
-                // 搜索匹配的配置
-                configsData.forEach(config => {
-                    const configName = config.name.toLowerCase();
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    const searchTerm = this.value.toLowerCase().trim();
+                    let resultsCount = 0;
                     
-                    if (configName.includes(searchTerm)) {
-                        // 显示包含匹配项的section
-                        const section = config.element.closest('.section');
-                        section.classList.remove('collapsed');
-                        
-                        // 高亮匹配的文本
-                        const link = config.element.querySelector('a');
-                        const originalText = originalConfigs[config.url];
-                        
-                        // 添加新的高亮
-                        const regex = new RegExp(`(${searchTerm})`, 'gi');
-                        link.innerHTML = originalText.replace(regex, '<span class="highlight">$1</span>');
-                        
-                        // 显示匹配的项目
-                        config.element.style.display = '';
-                        resultsCount++;
-                    } else {
-                        // 隐藏不匹配的项目
-                        config.element.style.display = 'none';
+                    if (searchTerm.length === 0) {
+                        // 显示所有项目
+                        configsData.forEach(config => {
+                            config.element.style.display = '';
+                            const link = config.element.querySelector('a');
+                            link.innerHTML = originalConfigs[config.url]; // 恢复原始名称
+                        });
+                        searchResults.textContent = '';
+                        return;
                     }
-                });
-                
-                // 更新搜索结果计数
-                if (resultsCount > 0) {
-                    searchResults.textContent = `找到 ${resultsCount} 个匹配的配置`;
-                } else {
-                    searchResults.textContent = `没有找到匹配的配置`;
-                }
+                    
+                    // 搜索匹配的配置
+                    configsData.forEach(config => {
+                        const configName = config.name.toLowerCase();
+                        
+                        if (configName.includes(searchTerm)) {
+                            // 显示包含匹配项的section
+                            const section = config.element.closest('.section');
+                            section.classList.remove('collapsed');
+                            
+                            // 高亮匹配的文本
+                            const link = config.element.querySelector('a');
+                            const originalText = originalConfigs[config.url];
+                            
+                            // 移除之前的高亮
+                            link.innerHTML = originalText.replace(/<span class="highlight">(.*?)<\/span>/g, '$1');
+                            
+                            // 添加新的高亮
+                            const regex = new RegExp(`(${searchTerm})`, 'gi');
+                            link.innerHTML = originalText.replace(regex, '<span class="highlight">$1</span>');
+                            
+                            // 显示匹配的项目
+                            config.element.style.display = '';
+                            resultsCount++;
+                        } else {
+                            // 隐藏不匹配的项目
+                            config.element.style.display = 'none';
+                        }
+                    });
+                    
+                    // 更新搜索结果计数
+                    if (resultsCount > 0) {
+                        searchResults.textContent = `找到 ${resultsCount} 个匹配的配置`;
+                    } else {
+                        searchResults.textContent = `没有找到匹配的配置`;
+                    }
+                }, 150); // 延迟150ms执行搜索，提高响应性能
             });
             
             // 配置导入提示
@@ -667,8 +675,9 @@
             configLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
-                    const configName = this.textContent;
                     const configUrl = this.href;
+                    // 使用原始配置名称而不是高亮后的名称
+                    const configName = originalConfigs[configUrl] || this.textContent;
                     
                     // 使用SweetAlert显示导入提示
                     const importAlert = `
