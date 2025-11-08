@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代理工具配置合集 | 全网精选配置</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #2980b9;
+            --light-color: #f8f9fa;
+            --dark-color: #1a2530;
+            --text-color: #333;
+            --border-radius: 10px;
+            --box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2.5rem 0;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+        }
+        
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+            letter-spacing: -0.5px;
+        }
+        
+        .header p {
+            font-size: 1.3rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #777;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            transition: var(--transition);
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .card {
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #eaeaea;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.12);
+        }
+        
+        .card-header {
+            padding: 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .card-header h3 {
+            font-size: 1.3rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .card-badge {
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+        }
+        
+        .card-footer {
+            padding: 1rem 1.5rem;
+            background: #f8f9fa;
+            border-top: 1px solid #eaeaea;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .config-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .config-list li {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .config-list li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .config-list a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .config-list a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+        
+        .config-list .type {
+            color: #e74c3c;
+            font-weight: 600;
+            margin-left: auto;
+            font-size: 0.9rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--secondary-color);
+            color: var(--secondary-color);
+        }
+        
+        .btn-outline:hover {
+            background: var(--secondary-color);
+            color: white;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .feature-content h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .feature-content p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: #666;
+            font-size: 1rem;
+            border-top: 1px solid #eaeaea;
+            margin-top: 3rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .footer a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        .type-tag {
+            display: inline-block;
+            background: #f0f7ff;
+            color: var(--secondary-color);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+            border: 1px solid #d1e8ff;
+        }
+        
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            border: 2px solid #eaeaea;
+            font-size: 1rem;
+            transition: var(--transition);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.2);
+        }
+        
+        .search-box i {
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+        }
+        
+        .search-results {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+            text-align: center;
+        }
+        
+        .highlight {
+            background-color: #fff9c4;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        @media (max-width: 992px) {
+            .card-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .stats {
+                flex-wrap: wrap;
+            }
+            
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .section-icon {
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>代理工具配置合集</h1>
+            <p>全网精选代理工具配置文件，一键导入，轻松使用</p>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">30+</span>
+                    <span class="stat-label">配置文件</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">5</span>
+                    <span class="stat-label">代理工具</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">15+</span>
+                    <span class="stat-label">配置作者</span>
+                </div>
+            </div>
+        </header>
+        
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="搜索配置名称或作者...">
+            <i class="fas fa-search"></i>
+            <div class="search-results" id="search-results"></div>
+        </div>
+        
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div>
+                    <h2 class="section-title">Quantumult X 配置</h2>
+                    <p class="section-subtitle">精选Quantumult X配置文件，功能全面，规则完善</p>
+                </div>
+            </div>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-cog"></i> 推荐配置</h3>
+                        <span class="card-badge">推荐</span>
+                    </div>
+                    <div class="card-body">
+                        <ul class="config-list">
+                            <li><a href="https://raw.githubusercontent.com/Centralmatrix3/Scripts/master/QuantumultX/matrix.conf">Matrix配置</a></li>
+                            <li><a href="https://raw.githubusercontent.com/As-Lucky/Lucky/main/Lucky-qx.conf">Lucky配置</a></li>
+                            <li><a href="https://raw.githubusercontent.com/Orz-3/QuantumultX/master/Orz-3.conf">小白配置</a></li>
+                            <li><a href="https://raw.githubusercontent.com/ddgksf2013/Profile/master/QuantumultX.conf">墨鱼配置</a></li>
+                            <li><a href="https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/QuantumultX/Config/Quantumult_X_Sample_Configuration_By_iKeLee.conf">可莉配置</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span>5个配置</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-users"></i> 懒人配置</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="config-list">
+                            <li><a href="https://github.com/fmz200/wool_scripts/raw/main/QuantumultX/config/QuanX.conf">张军配置</a></li>
+                            <li><a href="https://raw.githubusercontent.com/w37fhy/QuantumultX/master/w37fhy_diy.conf">大飞配置</a></li>
+                            <li><a href="https://raw.githubusercontent.com/Sonmbs/quantumult_X/main/coconut.conf">懒人配置</a></li>
+                            <li><a href="https://raw.githubusercontent.com/limbopro/Profiles4limbo/main/full.conf">毒奶配置</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span>4个配置</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-globe"></i> 特殊配置</h3>
+                        <span class="card-badge">精选</span>
+                    </div>
+                    <div class="card-body">
+                        <ul class="config-list">
+                            <li><a href="https://qxnav.com/rules/QuantumultX/qixin.conf">奇心配置</a></li>
+                            <li><a href="https://raw.githubusercontent.com/zwf234/rules/master/QuantumultX/qixin.conf">奇心大陆配置</a></li>
+                            <li><a href="https://raw.githubusercontent.com/zwf234/rules/master/QuantumultX/overseas.conf">奇心回国配置</a></li>
+                            <li><a href="https://raw.githubusercontent.com/DivineEngine/Profiles/master/Quantumult/Outbound.conf">神机出国配置</a></li>
+                            <li><a href="https://raw.githubusercontent.com/DivineEngine/Profiles/master/Quantumult/Inbound.conf">神机回国配置</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span>5个配置</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-wind"></i>
+                </div>
+                <div>
+                    <h2 class="section-title">Loon 配置</h2>
+                    <p class="section-subtitle">精选Loon配置文件，简洁高效，功能强大</p>
+                </div>
+            </div>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-cogs"></i> 常用配置</h3>
+                        <span class="card-badge">推荐</span>
+                    </div>
+                    <div class="card-body">
+                        <ul class="config-list">
+                            <li><a href="https://raw.githubusercontent.com/erdongchanyo/Rules/main/Surge/Surge_EDC-Lzay.conf">耳东橙配置</a></li>
+                            <li><a href="https://raw.githubusercontent.com/Tartarus2014/Surge-Script/master/Surge_Basic.conf">TartaUS配置</a></li>
+                            <li><a href="https://raw.githubusercontent.com/As-Lucky/Lucky/main/Lucky-Surge.conf">Lucky自用配置</a></li>
+                            <li><a href="https://gist.githubusercontent.com/Zeaphyou/864aebea248ca1bb8000e0e5623b65f3/raw/c36413c715f43f22772d3c2353358e1ff936b2e6/Surge.conf">老刘最小配置</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span>4个配置</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-star"></i> 高级配置</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="config-list">
+                            <li><a href="https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Outbound.conf">神机配置</a></li>
+                            <li><a href="https://raw.githubusercontent.com/Rabbit-Spec/Surge/Master/Conf/Spec/Surge.conf">深巷有猫配置</a></li>
+                            <li><a href="https://raw.githubusercontent.com/As-Lucky/Lucky/main/Lucky-Surge.conf">Lucky配置</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span>3个配置</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div>
+                    <h2 class="section-title">Surge 配置</h2>
+                    <p class="section-subtitle">精选Surge配置文件，专业稳定，功能丰富</p>
+                </div>
+            </div>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-crown"></i> 精选配置</h3>
+                        <span class="card-badge">热门</span>
+                    </div>
+                    <div class="card-body">
+                        <ul class="config-list">
+                            <li><a href="https://www.nsloon.com/openloon/import?sub=https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Config/Loon_Sample_Configuration_By_iKeLee.conf">可莉配置</a></li>
+                            <li><a href="https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/QuantumultX/Config/Quantumult_X_Sample_Configuration_By_iKeLee.conf">TartaUS配置</a></li>
+                            <li><a href="https://raw.githubusercontent.com/erdongchanyo/Rules/main/Loon/Loon_EDC-Lazy.conf">耳东橙配置</a></li>
+                            <li><a href="https://raw.githubusercontent.com/As-Lucky/Lucky/main/Lucky-Loon.conf">Lucky配置</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span>4个配置</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <div>
+                    <h2 class="section-title">Shadowrocket 配置</h2>
+                    <p class="section-subtitle">精选Shadowrocket配置文件，简单易用，性能出色</p>
+                </div>
+            </div>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-fire"></i> 小火箭配置</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="config-list">
+                            <li><a href="https://raw.githubusercontent.com/As-Lucky/Lucky/main/Lucky-Shadowrocket.conf">Lucky配置</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span>1个配置</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-code-branch"></i>
+                </div>
+                <div>
+                    <h2 class="section-title">Clash 配置</h2>
+                    <p class="section-subtitle">精选Clash配置文件，兼容性强，配置灵活</p>
+                </div>
+            </div>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-toolbox"></i> ClashVerge配置</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="config-list">
+                            <li><a href="https://raw.githubusercontent.com/As-Lucky/Lucky/main/Lucky-ClashVerge.yaml">Lucky配置</a></li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <span>1个配置</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="feature-grid">
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="feature-content">
+                    <h4>安全可靠</h4>
+                    <p>所有配置均来自可信来源，确保安全无篡改</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-sync-alt"></i>
+                </div>
+                <div class="feature-content">
+                    <h4>持续更新</h4>
+                    <p>定期检查并更新配置文件，保持最新功能</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-download"></i>
+                </div>
+                <div class="feature-content">
+                    <h4>一键导入</h4>
+                    <p>点击链接即可在对应工具中一键导入配置</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <div class="feature-content">
+                    <h4>使用指南</h4>
+                    <p>提供详细的配置导入教程和常见问题解答</p>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            <p>© 2025 代理工具配置合集 | 精心整理，持续更新</p>
+            <p>官方TG频道: <a href="https://t.me/iOSAWJ">@iOSAWJ</a> | 反馈与建议: <a href="https://t.me/iOSAWJL">TG交流</a></p>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fas fa-rss"></i></a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 搜索功能
+            const searchInput = document.getElementById('search-input');
+            const searchResults = document.getElementById('search-results');
+            const cards = document.querySelectorAll('.card');
+            const configLists = document.querySelectorAll('.config-list');
+            
+            // 存储所有配置数据
+            const configsData = [];
+            cards.forEach(card => {
+                const platform = card.querySelector('.card-header h3').textContent.trim();
+                const items = card.querySelectorAll('.config-list li');
+                
+                items.forEach(item => {
+                    const link = item.querySelector('a');
+                    const name = link.textContent;
+                    const url = link.href;
+                    
+                    configsData.push({
+                        name: name,
+                        platform: platform,
+                        url: url,
+                        element: item
+                    });
+                });
+            });
+            
+            // 搜索功能实现
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase().trim();
+                let resultsCount = 0;
+                
+                if (searchTerm.length === 0) {
+                    // 显示所有卡片和项目
+                    cards.forEach(card => {
+                        card.style.display = '';
+                        card.querySelectorAll('.config-list li').forEach(item => {
+                            item.style.display = '';
+                        });
+                    });
+                    searchResults.textContent = '';
+                    return;
+                }
+                
+                // 首先隐藏所有卡片
+                cards.forEach(card => {
+                    card.style.display = 'none';
+                });
+                
+                // 搜索匹配的配置
+                configsData.forEach(config => {
+                    const configName = config.name.toLowerCase();
+                    const platform = config.platform.toLowerCase();
+                    
+                    if (configName.includes(searchTerm) || platform.includes(searchTerm)) {
+                        // 显示包含匹配项的卡片
+                        const card = config.element.closest('.card');
+                        card.style.display = '';
+                        
+                        // 高亮匹配的文本
+                        const link = config.element.querySelector('a');
+                        const originalText = link.innerHTML;
+                        
+                        // 移除之前的高亮
+                        link.innerHTML = originalText.replace(/<span class="highlight">(.*?)<\/span>/g, '$1');
+                        
+                        // 添加新的高亮
+                        if (configName.includes(searchTerm)) {
+                            const regex = new RegExp(`(${searchTerm})`, 'gi');
+                            link.innerHTML = link.innerHTML.replace(regex, '<span class="highlight">$1</span>');
+                        }
+                        
+                        // 显示匹配的项目
+                        config.element.style.display = '';
+                        resultsCount++;
+                    } else {
+                        // 隐藏不匹配的项目
+                        config.element.style.display = 'none';
+                    }
+                });
+                
+                // 更新搜索结果计数
+                if (resultsCount > 0) {
+                    searchResults.textContent = `找到 ${resultsCount} 个匹配的配置`;
+                } else {
+                    searchResults.textContent = `没有找到匹配的配置`;
+                }
+                
+                // 隐藏没有可见项目的卡片
+                cards.forEach(card => {
+                    const visibleItems = card.querySelectorAll('.config-list li[style=""]').length + 
+                                        card.querySelectorAll('.config-list li:not([style])').length;
+                    if (visibleItems === 0) {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+            
+            // 配置导入提示
+            const configLinks = document.querySelectorAll('.config-list a');
+            configLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const configName = this.textContent;
+                    const configUrl = this.href;
+                    
+                    // 使用SweetAlert显示导入提示
+                    const importAlert = `
+                    <div style="text-align:center;padding:1rem">
+                        <h3 style="margin-bottom:1rem;color:#2c3e50">${configName}</h3>
+                        <p style="margin-bottom:1.5rem">点击下方按钮复制配置链接，然后在您的代理工具中导入</p>
+                        <div style="background:#f8f9fa;padding:1rem;border-radius:8px;margin-bottom:1.5rem;word-break:break-all">
+                            ${configUrl}
+                        </div>
+                        <button id="copy-btn" style="display:inline-block;background:#3498db;color:white;padding:0.8rem 1.5rem;border-radius:8px;text-decoration:none;font-weight:500;border:none;cursor:pointer;margin-right:1rem">复制链接</button>
+                        <a href="${configUrl}" target="_blank" style="display:inline-block;background:#2c3e50;color:white;padding:0.8rem 1.5rem;border-radius:8px;text-decoration:none;font-weight:500">直接打开</a>
+                    </div>
+                    `;
+                    
+                    const swalInstance = Swal.fire({
+                        html: importAlert,
+                        showCloseButton: true,
+                        showConfirmButton: false,
+                        width: 600,
+                        background: '#f8f9fa',
+                        didOpen: () => {
+                            document.getElementById('copy-btn').addEventListener('click', function() {
+                                navigator.clipboard.writeText(configUrl).then(() => {
+                                    Swal.showValidationMessage('链接已复制到剪贴板！');
+                                });
+                            });
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>
