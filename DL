@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>代理工具配置合集</title>
+    <title>全平台代理工具集合</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
@@ -180,30 +180,6 @@
             text-align: center;
         }
         
-        .controls {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .controls button {
-            background: var(--secondary-color);
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            transition: var(--transition);
-            font-weight: 500;
-            font-size: 0.8rem;
-        }
-        
-        .controls button:hover {
-            background: var(--accent-color);
-            transform: translateY(-1px);
-        }
-        
         .section {
             background: white;
             border-radius: var(--border-radius);
@@ -225,7 +201,7 @@
         }
         
         .section-header:hover {
-            background: var(--dark-color);
+            background: #253447;
         }
         
         .section-icon {
@@ -269,25 +245,25 @@
             transform: rotate(-90deg);
         }
         
-        .config-list {
+        .tool-list {
             list-style: none;
             padding: 0;
             margin: 0;
         }
         
-        .config-list li {
+        .tool-list li {
             margin-bottom: 0.5rem;
             padding-bottom: 0.5rem;
             border-bottom: 1px solid #eaeaea;
         }
         
-        .config-list li:last-child {
+        .tool-list li:last-child {
             margin-bottom: 0;
             padding-bottom: 0;
             border-bottom: none;
         }
         
-        .config-list a {
+        .tool-list a {
             color: var(--secondary-color);
             text-decoration: none;
             display: flex;
@@ -299,9 +275,27 @@
             font-size: 0.85rem;
         }
         
-        .config-list a:hover {
+        .tool-list a:hover {
             color: var(--accent-color);
             text-decoration: underline;
+        }
+        
+        .tool-list .price {
+            color: #e74c3c;
+            font-weight: 600;
+            margin-left: auto;
+            font-size: 0.8rem;
+        }
+        
+        .protocol-tag {
+            display: inline-block;
+            background: #f0f7ff;
+            color: var(--secondary-color);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            margin-left: 0.5rem;
+            border: 1px solid #d1e8ff;
         }
         
         .footer {
@@ -357,6 +351,30 @@
             border-radius: 2px;
         }
         
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .controls button {
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            font-size: 0.8rem;
+        }
+        
+        .controls button:hover {
+            background: var(--accent-color);
+            transform: translateY(-1px);
+        }
+        
         /* 桌面样式 */
         @media (min-width: 768px) {
             .container {
@@ -393,37 +411,37 @@
 <body>
     <div class="container">
         <header class="header">
-            <h1>代理工具配置合集</h1>
-            <p>全网精选配置文件，一键导入</p>
+            <h1>全平台代理工具集合</h1>
+            <p>精心整理各平台优质代理工具，提供全面、安全、高效的网络连接解决方案</p>
             
             <div class="stats">
                 <div class="stat-item">
-                    <span class="stat-number">30+</span>
-                    <span class="stat-label">配置</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">5</span>
+                    <span class="stat-number">80+</span>
                     <span class="stat-label">工具</span>
                 </div>
                 <div class="stat-item">
+                    <span class="stat-number">12</span>
+                    <span class="stat-label">平台</span>
+                </div>
+                <div class="stat-item">
                     <span class="stat-number">15+</span>
-                    <span class="stat-label">作者</span>
+                    <span class="stat-label">协议</span>
                 </div>
             </div>
         </header>
         
         <div class="tg-channel">
             <h3><i class="fab fa-telegram"></i> 官方频道</h3>
-            <p>获取最新配置和工具更新</p>
+            <p>获取最新工具和更新</p>
             <a href="https://t.me/iOSAWJ" target="_blank" class="btn">加入频道</a>
         </div>
         
         <div class="intro-text">
-            <p>点击分类标题可展开查看具体配置，点击配置名称可复制链接</p>
+            <p>点击分类标题可展开查看具体工具，点击工具名称可访问下载页面</p>
         </div>
         
         <div class="search-box">
-            <input type="text" id="search-input" placeholder="搜索配置名称...">
+            <input type="text" id="search-input" placeholder="搜索工具名称...">
             <i class="fas fa-search"></i>
             <div class="search-results" id="search-results"></div>
         </div>
@@ -433,120 +451,185 @@
             <button id="collapse-all">折叠所有</button>
         </div>
         
-        <section class="section collapsed" id="quantumult-section">
+        <!-- iOS 分类 -->
+        <section class="section collapsed" id="ios-section">
             <div class="section-header">
                 <div class="section-icon">
-                    <i class="fas fa-bolt"></i>
+                    <i class="fab fa-apple"></i>
                 </div>
-                <h2 class="section-title">Quantumult X</h2>
+                <h2 class="section-title">iOS 代理工具</h2>
                 <div class="collapse-icon">
                     <i class="fas fa-chevron-down"></i>
                 </div>
             </div>
             
             <div class="section-content">
-                <ul class="config-list">
-                    <li><a href="https://raw.githubusercontent.com/Centralmatrix3/Scripts/master/QuantumultX/matrix.conf">Matrix配置</a></li>
-                    <li><a href="https://raw.githubusercontent.com/As-Lucky/Lucky/main/Lucky-qx.conf">Lucky配置</a></li>
-                    <li><a href="https://raw.githubusercontent.com/Orz-3/QuantumultX/master/Orz-3.conf">小白配置</a></li>
-                    <li><a href="https://github.com/ddgksf2013/Profile/raw/master/QuantumultX.conf">墨鱼配置</a></li>
-                    <li><a href="https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/QuantumultX/Config/Quantumult_X_Sample_Configuration_By_iKeLee.conf">可莉配置</a></li>
-                    <li><a href="https://github.com/fmz200/wool_scripts/raw/main/QuantumultX/config/QuanX.conf">张军配置</a></li>
-                    <li><a href="https://raw.githubusercontent.com/w37fhy/QuantumultX/master/w37fhy_diy.conf">大飞配置</a></li>
-                    <li><a href="https://raw.githubusercontent.com/Sonmbs/quantumult_X/main/coconut.conf">懒人配置</a></li>
-                    <li><a href="https://raw.githubusercontent.com/limbopro/Profiles4limbo/main/full.conf">毒奶配置</a></li>
-                    <li><a href="https://qxnav.com/rules/QuantumultX/qixin.conf">奇心配置</a></li>
-                    <li><a href="https://raw.githubusercontent.com/zwf234/rules/master/QuantumultX/qixin.conf">奇心大陆配置</a></li>
-                    <li><a href="https://raw.githubusercontent.com/zwf234/rules/master/QuantumultX/overseas.conf">奇心回国配置</a></li>
-                    <li><a href="https://raw.githubusercontent.com/DivineEngine/Profiles/master/Quantumult/Outbound.conf">神机出国配置</a></li>
-                    <li><a href="https://raw.githubusercontent.com/DivineEngine/Profiles/master/Quantumult/Inbound.conf">神机回国配置</a></li>
+                <ul class="tool-list">
+                    <li><a href="https://apps.apple.com/cn/app/outline-app/id1356177741">Outline <span class="price">免费</span></a></li>
+                    <li><a href="https://apps.apple.com/us/app/id1442620678?l=zh-cn">Surge iOS 5 <span class="price">$49.99</span></a></li>
+                    <li><a href="https://apps.apple.com/us/app/quantumult-x/id1443988620?l=zh-cn&platform=iphone">Quantumult X <span class="price">$7.99</span></a></li>
+                    <li><a href="https://apps.apple.com/us/app/shadowrocket/id932747118?l=zh-cn">Shadowrocket <span class="price">$2.99</span></a></li>
+                    <li><a href="https://apps.apple.com/us/app/loon/id1373567447?l=zh-cn">Loon <span class="price">$5.99</span></a></li>
+                    <li><a href="https://apps.apple.com/us/app/loon-lite/id6444029612?l=zh-cn">Loon Lite <span class="price">$0.99</span></a></li>
+                    <li><a href="https://apps.apple.com/us/app/stash-proxy-utility/id1596063349?l=zh-cn">Stash <span class="price">$3.99</span></a></li>
                 </ul>
             </div>
         </section>
         
-        <section class="section collapsed" id="loon-section">
+        <!-- Android 分类 -->
+        <section class="section collapsed" id="android-section">
             <div class="section-header">
                 <div class="section-icon">
-                    <i class="fas fa-wind"></i>
+                    <i class="fab fa-android"></i>
                 </div>
-                <h2 class="section-title">Loon</h2>
+                <h2 class="section-title">Android 代理工具</h2>
                 <div class="collapse-icon">
                     <i class="fas fa-chevron-down"></i>
                 </div>
             </div>
             
             <div class="section-content">
-                <ul class="config-list">
-                    <li><a href="https://raw.githubusercontent.com/erdongchanyo/Rules/main/Surge/Surge_EDC-Lzay.conf">耳东橙配置</a></li>
-                    <li><a href="https://raw.githubusercontent.com/Tartarus2014/Surge-Script/master/Surge_Basic.conf">TartaUS配置</a></li>
-                    <li><a href="https://raw.githubusercontent.com/As-Lucky/Lucky/main/Lucky-Surge.conf">Lucky自用配置</a></li>
-                    <li><a href="https://gist.githubusercontent.com/Zeaphyou/864aebea248ca1bb8000e0e5623b65f3/raw/c36413c715f43f22772d3c2353358e1ff936b2e6/Surge.conf">老刘最小配置</a></li>
-                    <li><a href="https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Outbound.conf">神机配置</a></li>
-                    <li><a href="https://raw.githubusercontent.com/Rabbit-Spec/Surge/Master/Conf/Spec/Surge.conf">深巷有猫配置</a></li>
-                    <li><a href="https://raw.githubusercontent.com/As-Lucky/Lucky/main/Lucky-Surge.conf">Lucky配置</a></li>
+                <ul class="tool-list">
+                    <li><a href="https://github.com/getsurfboard/surfboard/releases">Surfboard <span class="protocol-tag">SS/VMess/Trojan</span></a></li>
+                    <li><a href="https://play.google.com/store/apps/details?id=com.getsurfboard">Surfboard Google Play</a></li>
+                    <li><a href="https://github.com/SagerNet/sing-box/releases">sing-box</a></li>
+                    <li><a href="https://play.google.com/store/apps/details?id=io.nekohasekai.sagernet">SagerNet Google Play</a></li>
+                    <li><a href="https://github.com/MatsuriDayo/Matsuri/releases">Matsuri(茉莉)</a></li>
+                    <li><a href="https://github.com/XTLS/AnXray/releases">AnXray</a></li>
+                    <li><a href="https://github.com/2dust/v2rayNG/releases/tag/1.10.26">v2rayNG 1.10.26</a></li>
+                    <li><a href="https://github.com/shadowsocks/shadowsocks-android/releases">Shadowsocks 影梭</a></li>
                 </ul>
             </div>
         </section>
         
-        <section class="section collapsed" id="surge-section">
+        <!-- Android TV 分类 -->
+        <section class="section collapsed" id="android-tv-section">
             <div class="section-header">
                 <div class="section-icon">
-                    <i class="fas fa-shield-alt"></i>
+                    <i class="fas fa-tv"></i>
                 </div>
-                <h2 class="section-title">Surge</h2>
+                <h2 class="section-title">Android TV 代理工具</h2>
                 <div class="collapse-icon">
                     <i class="fas fa-chevron-down"></i>
                 </div>
             </div>
             
             <div class="section-content">
-                <ul class="config-list">
-                    <li><a href="https://www.nsloon.com/openloon/import?sub=https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/Loon/Config/Loon_Sample_Configuration_By_iKeLee.conf">可莉配置</a></li>
-                    <li><a href="https://gitlab.com/lodepuly/vpn_tool/-/raw/master/Tool/QuantumultX/Config/Quantumult_X_Sample_Configuration_By_iKeLee.conf">TartaUS配置</a></li>
-                    <li><a href="https://raw.githubusercontent.com/erdongchanyo/Rules/main/Loon/Loon_EDC-Lazy.conf">耳东橙配置</a></li>
-                    <li><a href="https://raw.githubusercontent.com/As-Lucky/Lucky/main/Lucky-Loon.conf">Lucky配置</a></li>
+                <ul class="tool-list">
+                    <li><a href="https://github.com/SagerNet/sing-box/releases/latest">Sing-Box索尼电视兼容版</a></li>
+                    <li><a href="https://t.me/feiyangdigital/529168">Clash索尼电视兼容版</a></li>
+                    <li><a href="https://github.com/2dust/v2rayNG/releases/download/1.7.16/v2rayNG_1.7.16.apk">v2rayNG索尼电视兼容版</a></li>
+                    <li><a href="https://github.com/shadowsocks/shadowsocks-android/releases">Shadowsocks TV版</a></li>
                 </ul>
             </div>
         </section>
         
-        <section class="section collapsed" id="shadowrocket-section">
+        <!-- Windows 分类 -->
+        <section class="section collapsed" id="windows-section">
             <div class="section-header">
                 <div class="section-icon">
-                    <i class="fas fa-rocket"></i>
+                    <i class="fab fa-windows"></i>
                 </div>
-                <h2 class="section-title">Shadowrocket</h2>
+                <h2 class="section-title">Windows 代理工具</h2>
                 <div class="collapse-icon">
                     <i class="fas fa-chevron-down"></i>
                 </div>
             </div>
             
             <div class="section-content">
-                <ul class="config-list">
-                    <li><a href="https://raw.githubusercontent.com/As-Lucky/Lucky/main/Lucky-Shadowrocket.conf">Lucky配置</a></li>
+                <ul class="tool-list">
+                    <li><a href="https://github.com/netchx/Netch/releases">Netch <span class="protocol-tag">SS/SSR/VMess</span></a></li>
+                    <li><a href="https://github.com/TheMRLL/winxray/releases">WinXray</a></li>
+                    <li><a href="https://github.com/MatsuriDayo/nekoray/releases">NekoRay</a></li>
+                    <li><a href="https://github.com/2dust/v2rayN/releases/tag/7.9.3">v2rayN 7.9.3</a></li>
+                    <li><a href="https://github.com/shadowsocks/shadowsocks-windows/releases">Shadowsocks</a></li>
+                    <li><a href="https://github.com/Fndroid/clash_for_windows_pkg/releases">Clash for Windows</a></li>
+                    <li><a href="https://github.com/ender-zhao/Clash-for-Windows_Chinese/releases">Clash for Windows 汉化版</a></li>
                 </ul>
             </div>
         </section>
         
-        <section class="section collapsed" id="clash-section">
+        <!-- macOS 分类 -->
+        <section class="section collapsed" id="macos-section">
             <div class="section-header">
                 <div class="section-icon">
-                    <i class="fas fa-code-branch"></i>
+                    <i class="fab fa-apple"></i>
                 </div>
-                <h2 class="section-title">Clash</h2>
+                <h2 class="section-title">macOS 代理工具</h2>
                 <div class="collapse-icon">
                     <i class="fas fa-chevron-down"></i>
                 </div>
             </div>
             
             <div class="section-content">
-                <ul class="config-list">
-                    <li><a href="https://raw.githubusercontent.com/As-Lucky/Lucky/main/Lucky-ClashVerge.yaml">Lucky配置</a></li>
+                <ul class="tool-list">
+                    <li><a href="https://nssurge.com/buy_now">Surge Mac 5 <span class="price">$49.99+</span></a></li>
+                    <li><a href="https://apps.apple.com/us/app/quantumult-x/id1443988620?l=zh-cn&platform=mac">Quantumult X <span class="price">$7.99</span></a></li>
+                    <li><a href="https://stash.ws/macos/pricing/">Stash for macOS</a></li>
+                    <li><a href="https://github.com/Cenmrev/V2RayX/releases">V2RayX</a></li>
+                    <li><a href="https://github.com/yanue/V2rayU/releases">V2rayU</a></li>
+                    <li><a href="https://github.com/yichengchen/clashX/releases">ClashX</a></li>
+                    <li><a href="https://github.com/Fndroid/clash_for_windows_pkg/releases">Clash for Windows</a></li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Linux 分类 -->
+        <section class="section collapsed" id="linux-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fab fa-linux"></i>
+                </div>
+                <h2 class="section-title">Linux 代理工具</h2>
+                <div class="collapse-icon">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            
+            <div class="section-content">
+                <ul class="tool-list">
+                    <li><a href="https://github.com/Qv2ray/Qv2ray/releases">Qv2ray</a></li>
+                    <li><a href="https://github.com/shadowsocks/shadowsocks-qt5/releases">Shadowsocks-Qt5</a></li>
+                    <li><a href="https://github.com/shadowsocks/shadowsocks-libev">Shadowsocks-libev</a></li>
+                    <li><a href="https://github.com/trojan-gfw/trojan">Trojan</a></li>
+                    <li><a href="https://github.com/v2ray/v2ray-core">V2Ray Core</a></li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- 路由器与系统工具分类 -->
+        <section class="section collapsed" id="router-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-network-wired"></i>
+                </div>
+                <h2 class="section-title">路由器与系统工具</h2>
+                <div class="collapse-icon">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            
+            <div class="section-content">
+                <ul class="tool-list">
+                    <li><a href="https://github.com/AUK9527/Are-u-ok">iStore-OS插件仓库</a></li>
+                    <li><a href="https://koolclash.js.org">Koolshare OpenWrt/LED</a></li>
+                    <li><a href="https://github.com/hq450/fancyss">fancyss</a></li>
+                    <li><a href="https://github.com/shadowsocks/openwrt-shadowsocks">OpenWRT-Shadowsocks</a></li>
+                    <li><a href="https://www.right.com.cn/forum/thread-161324-1-1.html">Padavan</a></li>
+                    <li><a href="https://github.com/FelisCatus/SwitchyOmega/releases">SwitchyOmega <span class="protocol-tag">浏览器代理</span></a></li>
+                    <li><a href="https://github.com/bitbeans/SimpleDnsCrypt/releases">Simple DNSCrypt</a></li>
+                    <li><a href="https://github.com/klzgrad/naiveproxy/releases">NaiveProxy</a></li>
+                    <li><a href="https://github.com/eycorsican/leaf">Leaf</a></li>
+                    <li><a href="https://github.com/EAimTY/tuic">TUIC</a></li>
+                    <li><a href="https://github.com/Dreamacro/clash/releases">Clash 内核</a></li>
+                    <li><a href="https://github.com/Dreamacro/clash/releases/tag/premium">Clash Premium 内核</a></li>
+                    <li><a href="https://github.com/v2ray/v2ray-core/releases">V2Ray 核心</a></li>
                 </ul>
             </div>
         </section>
         
         <footer class="footer">
-            <p>© 2025代理工具配置合集 | 精心整理，持续更新</p>
+            <p>© 2025 全平台代理工具集合 | 精心整理，持续更新</p>
             <p>官方TG频道: <a href="https://t.me/iOSAWJ">@iOSAWJ</a></p>
             
             <div class="social-links">
@@ -559,8 +642,8 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // 修复配置名称显示问题
-            const originalConfigs = {};
+            // 存储原始工具名称，用于搜索后恢复
+            const originalToolNames = {};
             
             // 折叠功能
             const sectionHeaders = document.querySelectorAll('.section-header');
@@ -589,11 +672,11 @@
             // 搜索功能
             const searchInput = document.getElementById('search-input');
             const searchResults = document.getElementById('search-results');
-            const configLists = document.querySelectorAll('.config-list');
+            const toolLists = document.querySelectorAll('.tool-list');
             
-            // 存储所有配置数据
-            const configsData = [];
-            configLists.forEach(list => {
+            // 存储所有工具数据
+            const toolsData = [];
+            toolLists.forEach(list => {
                 const items = list.querySelectorAll('li');
                 
                 items.forEach(item => {
@@ -602,9 +685,9 @@
                     const url = link.href;
                     
                     // 保存原始文本内容
-                    originalConfigs[url] = name;
+                    originalToolNames[url] = name;
                     
-                    configsData.push({
+                    toolsData.push({
                         name: name,
                         url: url,
                         element: item
@@ -619,85 +702,47 @@
                 
                 if (searchTerm.length === 0) {
                     // 显示所有项目
-                    configsData.forEach(config => {
-                        config.element.style.display = '';
-                        const link = config.element.querySelector('a');
-                        link.textContent = originalConfigs[config.url]; // 恢复原始名称
+                    toolsData.forEach(tool => {
+                        tool.element.style.display = '';
+                        const link = tool.element.querySelector('a');
+                        link.innerHTML = originalToolNames[tool.url]; // 恢复原始名称
                     });
                     searchResults.textContent = '';
                     return;
                 }
                 
-                // 搜索匹配的配置
-                configsData.forEach(config => {
-                    const configName = config.name.toLowerCase();
+                // 搜索匹配的工具
+                toolsData.forEach(tool => {
+                    const toolName = tool.name.toLowerCase();
                     
-                    if (configName.includes(searchTerm)) {
+                    if (toolName.includes(searchTerm)) {
                         // 显示包含匹配项的section
-                        const section = config.element.closest('.section');
+                        const section = tool.element.closest('.section');
                         section.classList.remove('collapsed');
                         
                         // 高亮匹配的文本
-                        const link = config.element.querySelector('a');
-                        const originalText = originalConfigs[config.url];
+                        const link = tool.element.querySelector('a');
+                        const originalText = originalToolNames[tool.url];
                         
                         // 添加新的高亮
                         const regex = new RegExp(`(${searchTerm})`, 'gi');
                         link.innerHTML = originalText.replace(regex, '<span class="highlight">$1</span>');
                         
                         // 显示匹配的项目
-                        config.element.style.display = '';
+                        tool.element.style.display = '';
                         resultsCount++;
                     } else {
                         // 隐藏不匹配的项目
-                        config.element.style.display = 'none';
+                        tool.element.style.display = 'none';
                     }
                 });
                 
                 // 更新搜索结果计数
                 if (resultsCount > 0) {
-                    searchResults.textContent = `找到 ${resultsCount} 个匹配的配置`;
+                    searchResults.textContent = `找到 ${resultsCount} 个匹配的工具`;
                 } else {
-                    searchResults.textContent = `没有找到匹配的配置`;
+                    searchResults.textContent = `没有找到匹配的工具`;
                 }
-            });
-            
-            // 配置导入提示
-            const configLinks = document.querySelectorAll('.config-list a');
-            configLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const configName = this.textContent;
-                    const configUrl = this.href;
-                    
-                    // 使用SweetAlert显示导入提示
-                    const importAlert = `
-                    <div style="text-align:center;padding:0.8rem">
-                        <h3 style="margin-bottom:0.8rem;color:#2c3e50">${configName}</h3>
-                        <p style="margin-bottom:1rem">点击下方按钮复制配置链接</p>
-                        <div style="background:#f8f9fa;padding:0.8rem;border-radius:6px;margin-bottom:1rem;word-break:break-all;font-size:0.8rem">
-                            ${configUrl}
-                        </div>
-                        <button id="copy-btn" style="display:inline-block;background:#3498db;color:white;padding:0.6rem 1.2rem;border-radius:6px;text-decoration:none;font-weight:500;border:none;cursor:pointer;margin-right:0.5rem;font-size:0.8rem">复制链接</button>
-                        <a href="${configUrl}" target="_blank" style="display:inline-block;background:#2c3e50;color:white;padding:0.6rem 1.2rem;border-radius:6px;text-decoration:none;font-weight:500;font-size:0.8rem">直接打开</a>
-                    </div>
-                    `;
-                    
-                    const swalInstance = Swal.fire({
-                        html: importAlert,
-                        showCloseButton: true,
-                        showConfirmButton: false,
-                        width: window.innerWidth > 768 ? 500 : '90%',
-                        background: '#f8f9fa',
-                        didOpen: () => {
-                            document.getElementById('copy-btn').addEventListener('click', function() {
-                                navigator.clipboard.writeText(configUrl).then(() => {
-                                    Swal.showValidationMessage('链接已复制到剪贴板！');
-                                });
-                            });
-                        }
-                    });
-                });
             });
             
             // 页面加载后显示TG频道提示
@@ -707,7 +752,7 @@
                     html: `
                     <div style="text-align:center;padding:0.8rem">
                         <h3 style="margin-bottom:0.8rem;color:#2c3e50">@iOSAWJ</h3>
-                        <p style="margin-bottom:1rem">获取最新配置和工具更新</p>
+                        <p style="margin-bottom:1rem">获取最新工具和更新</p>
                         <a href="https://t.me/iOSAWJ" target="_blank" style="display:inline-block;background:#0088cc;color:white;padding:0.6rem 1.2rem;border-radius:6px;text-decoration:none;font-weight:500;font-size:0.8rem">立即加入</a>
                     </div>
                     `,
