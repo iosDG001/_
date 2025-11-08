@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>代理工具配置合集</title>
+    <title>iOS代理工具配置合集</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
@@ -231,7 +231,6 @@
         .section-icon {
             width: 30px;
             height: 30px;
-            background: var(--secondary-color);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -239,6 +238,26 @@
             margin-right: 0.7rem;
             color: white;
             font-size: 0.9rem;
+        }
+        
+        .quantumult-icon {
+            background: linear-gradient(135deg, #FF7B54, #FFB26B);
+        }
+        
+        .loon-icon {
+            background: linear-gradient(135deg, #6BCB77, #4D96FF);
+        }
+        
+        .surge-icon {
+            background: linear-gradient(135deg, #FF6B6B, #FFD93D);
+        }
+        
+        .shadowrocket-icon {
+            background: linear-gradient(135deg, #845EC2, #D65DB1);
+        }
+        
+        .clash-icon {
+            background: linear-gradient(135deg, #00C9A7, #00D2FC);
         }
         
         .section-title {
@@ -394,7 +413,7 @@
 <body>
     <div class="container">
         <header class="header">
-            <h1>iOS代理工具配置合集</h1>
+            <h1>代理工具配置合集</h1>
             <p>全网精选配置文件，一键导入</p>
             
             <div class="stats">
@@ -436,7 +455,7 @@
         
         <section class="section collapsed" id="quantumult-section">
             <div class="section-header">
-                <div class="section-icon">
+                <div class="section-icon quantumult-icon">
                     <i class="fas fa-bolt"></i>
                 </div>
                 <h2 class="section-title">Quantumult X</h2>
@@ -467,8 +486,8 @@
         
         <section class="section collapsed" id="loon-section">
             <div class="section-header">
-                <div class="section-icon">
-                    <i class="fas fa-wind"></i>
+                <div class="section-icon loon-icon">
+                    <i class="fas fa-feather"></i>
                 </div>
                 <h2 class="section-title">Loon</h2>
                 <div class="collapse-icon">
@@ -491,7 +510,7 @@
         
         <section class="section collapsed" id="surge-section">
             <div class="section-header">
-                <div class="section-icon">
+                <div class="section-icon surge-icon">
                     <i class="fas fa-shield-alt"></i>
                 </div>
                 <h2 class="section-title">Surge</h2>
@@ -512,7 +531,7 @@
         
         <section class="section collapsed" id="shadowrocket-section">
             <div class="section-header">
-                <div class="section-icon">
+                <div class="section-icon shadowrocket-icon">
                     <i class="fas fa-rocket"></i>
                 </div>
                 <h2 class="section-title">Shadowrocket</h2>
@@ -530,8 +549,8 @@
         
         <section class="section collapsed" id="clash-section">
             <div class="section-header">
-                <div class="section-icon">
-                    <i class="fas fa-code-branch"></i>
+                <div class="section-icon clash-icon">
+                    <i class="fas fa-paw"></i>
                 </div>
                 <h2 class="section-title">Clash</h2>
                 <div class="collapse-icon">
