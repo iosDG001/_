@@ -275,7 +275,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="title">VMESS配置转换器</div>
+            <div class="title">VMESS协议提取</div>
             <a href="https://t.me/iOSAWJ" class="tg-button" target="_blank">
                 <i class="fab fa-telegram"></i> TG频道
             </a>
