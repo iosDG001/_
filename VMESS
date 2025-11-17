@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VMESS配置转换器</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        .description {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #7f8c8d;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        .result-container {
+            margin-top: 30px;
+            display: none;
+        }
+        
+        .result-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .extracted-info {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .info-item {
+            margin-bottom: 8px;
+            display: flex;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            min-width: 100px;
+            color: #7f8c8d;
+        }
+        
+        .vmess-link-container {
+            position: relative;
+            margin-top: 20px;
+        }
+        
+        .vmess-link {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 12px;
+            word-break: break-all;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .copy-btn {
+            background-color: #2ecc71;
+            width: auto;
+            padding: 8px 15px;
+            font-size: 14px;
+        }
+        
+        .copy-btn:hover {
+            background-color: #27ae60;
+        }
+        
+        .error {
+            color: #e74c3c;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #fdf2f2;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .example {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        .example-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .example-text {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>VMESS配置转换器</h1>
+        <p class="description">将各种格式的VMESS配置转换为标准的VMESS链接</p>
+        
+        <div class="input-group">
+            <label for="config-input">输入配置字符串:</label>
+            <textarea id="config-input" placeholder="粘贴您的VMESS配置字符串..."></textarea>
+        </div>
+        
+        <button id="convert-btn">转换配置</button>
+        
+        <div class="error" id="error-message"></div>
+        
+        <div class="result-container" id="result-container">
+            <h2 class="result-title">转换结果</h2>
+            
+            <div class="extracted-info">
+                <div class="result-title">提取的配置信息</div>
+                <div id="extracted-info"></div>
+            </div>
+            
+            <div class="vmess-link-container">
+                <div class="result-title">VMESS链接</div>
+                <div class="vmess-link" id="vmess-link"></div>
+                <button class="copy-btn" id="copy-btn">复制链接</button>
+            </div>
+        </div>
+        
+        <div class="example">
+            <div class="example-title">配置示例:</div>
+            <div class="example-text">
+                ["tls_out","ws_out","vmess_out"]}},{"tag":"tls_out","protocol":"tls","settings":{"insecure":true}},{"tag":"ws_out","protocol":"ws","settings":{"path":"\/","host":"example.com"}},{"tag":"vmess_out","protocol":"vmess","settings":{"uuid":"415d3a71-0875-43af-9af4-ba4473189858","port":443,"security":"auto","address":"example.com"}}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const convertBtn = document.getElementById('convert-btn');
+            const configInput = document.getElementById('config-input');
+            const resultContainer = document.getElementById('result-container');
+            const extractedInfo = document.getElementById('extracted-info');
+            const vmessLink = document.getElementById('vmess-link');
+            const copyBtn = document.getElementById('copy-btn');
+            const errorMessage = document.getElementById('error-message');
+            
+            convertBtn.addEventListener('click', convertConfig);
+            copyBtn.addEventListener('click', copyVmessLink);
+            
+            function convertConfig() {
+                // 隐藏错误信息
+                errorMessage.style.display = 'none';
+                
+                const configStr = configInput.value.trim();
+                
+                if (!configStr) {
+                    showError('请输入配置字符串');
+                    return;
+                }
+                
+                try {
+                    // 提取配置信息
+                    const configInfo = extractVmessInfo(configStr);
+                    
+                    // 显示提取的配置信息
+                    displayExtractedInfo(configInfo);
+                    
+                    // 检查必要字段
+                    if (!configInfo.uuid) {
+                        showError('未找到UUID');
+                        return;
+                    }
+                    
+                    if (!configInfo.address) {
+                        showError('未找到服务器地址');
+                        return;
+                    }
+                    
+                    // 创建vmess链接
+                    const vmessUrl = createVmessLink(configInfo);
+                    
+                    // 显示结果
+                    vmessLink.textContent = vmessUrl;
+                    resultContainer.style.display = 'block';
+                    
+                } catch (error) {
+                    showError('转换过程中发生错误: ' + error.message);
+                }
+            }
+            
+            function extractVmessInfo(configStr) {
+                const info = {};
+                
+                // 提取UUID
+                const uuidPattern = /"uuid"\s*:\s*"([a-f0-9-]+)"/i;
+                const uuidMatch = configStr.match(uuidPattern);
+                if (uuidMatch) {
+                    info.uuid = uuidMatch[1];
+                }
+                
+                // 提取地址
+                const addressPatterns = [
+                    /"address"\s*:\s*"([^"]+)"/i,
+                    /"server"\s*:\s*"([^"]+)"/i,
+                    /"host"\s*:\s*"([^"]+)"/i
+                ];
+                
+                for (const pattern of addressPatterns) {
+                    const match = configStr.match(pattern);
+                    if (match) {
+                        info.address = match[1];
+                        break;
+                    }
+                }
+                
+                // 提取端口
+                const portPattern = /"port"\s*:\s*(\d+)/;
+                const portMatch = configStr.match(portPattern);
+                if (portMatch) {
+                    info.port = portMatch[1];
+                }
+                
+                // 提取路径（去掉多余的转义字符）
+                const pathPattern = /"path"\s*:\s*"([^"]*)"/;
+                const pathMatch = configStr.match(pathPattern);
+                if (pathMatch) {
+                    let path = pathMatch[1];
+                    // 去掉多余的转义字符
+                    info.path = path.replace(/\\\//g, '/');
+                }
+                
+                // 提取host
+                const hostPattern = /"host"\s*:\s*"([^"]+)"/;
+                const hostMatch = configStr.match(hostPattern);
+                if (hostMatch) {
+                    info.host = hostMatch[1];
+                }
+                
+                return info;
+            }
+            
+            function createVmessLink(configInfo) {
+                // 构建标准vmess配置
+                const vmessConfig = {
+                    "v": "2",
+                    "ps": "Converted_Node",  // 节点名称
+                    "add": configInfo.address || '',
+                    "port": configInfo.port || '443',
+                    "id": configInfo.uuid || '',
+                    "aid": "0",
+                    "scy": "auto",
+                    "net": configInfo.path ? "ws" : "tcp",
+                    "type": "none",
+                    "host": configInfo.host || configInfo.address || '',
+                    "path": configInfo.path || '/',
+                    "tls": "tls",
+                    "sni": ""
+                };
+                
+                // 转换为JSON并编码
+                const configJson = JSON.stringify(vmessConfig);
+                const encodedConfig = btoa(configJson);
+                
+                return `vmess://${encodedConfig}`;
+            }
+            
+            function displayExtractedInfo(configInfo) {
+                let html = '';
+                
+                for (const [key, value] of Object.entries(configInfo)) {
+                    html += `
+                        <div class="info-item">
+                            <div class="info-label">${key}:</div>
+                            <div>${value}</div>
+                        </div>
+                    `;
+                }
+                
+                extractedInfo.innerHTML = html;
+            }
+            
+            function copyVmessLink() {
+                const text = vmessLink.textContent;
+                
+                navigator.clipboard.writeText(text).then(() => {
+                    // 临时改变按钮文本
+                    const originalText = copyBtn.textContent;
+                    copyBtn.textContent = '已复制!';
+                    
+                    setTimeout(() => {
+                        copyBtn.textContent = originalText;
+                    }, 2000);
+                }).catch(err => {
+                    console.error('复制失败: ', err);
+                    alert('复制失败，请手动复制链接');
+                });
+            }
+            
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorMessage.style.display = 'block';
+                resultContainer.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
