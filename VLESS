@@ -339,6 +339,11 @@
                         <i class="fas fa-sync-alt"></i> 转换配置
                     </button>
                     <div class="status-message" id="status-message"></div>
+
+                    <button class="copy-all-btn" onclick="copyAllNodes()">
+                        <i class="fas fa-copy"></i> 复制所有节点
+                    </button>
+
                 </div>
             </div>
             
@@ -357,9 +362,7 @@
                 </div>
                 <!-- 复制按钮移到section-content外部，确保折叠时仍然可见 -->
                 <div class="action-buttons">
-                    <button class="copy-all-btn" onclick="copyAllNodes()">
-                        <i class="fas fa-copy"></i> 复制所有节点
-                    </button>
+
                 </div>
             </div>
         </div>
