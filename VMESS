@@ -2,207 +2,319 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>VMESS配置转换器</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
-        
+
         body {
-            background-color: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
             padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        
+
         .container {
+            width: 100%;
             max-width: 800px;
-            margin: 0 auto;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        
-        h1 {
+
+        .header {
+            width: 100%;
+            height: 80px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+            background: rgba(255, 255, 255, 0.15);
+            position: relative;
+        }
+
+        .title {
+            flex: 1;
             text-align: center;
-            margin-bottom: 20px;
-            color: #2c3e50;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
-        
+
+        .tg-button {
+            background: linear-gradient(45deg, #0088cc, #00a2ff);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0, 136, 204, 0.3);
+        }
+
+        .tg-button:hover {
+            background: linear-gradient(45deg, #0077b5, #0088cc);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 136, 204, 0.4);
+        }
+
+        .main-content {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
         .description {
             text-align: center;
-            margin-bottom: 30px;
-            color: #7f8c8d;
-        }
-        
-        .input-group {
-            margin-bottom: 20px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #2c3e50;
-        }
-        
-        textarea {
-            width: 100%;
-            height: 150px;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 14px;
-            resize: vertical;
-            transition: border-color 0.3s;
-        }
-        
-        textarea:focus {
-            outline: none;
-            border-color: #3498db;
-        }
-        
-        button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 5px;
-            cursor: pointer;
+            color: rgba(255, 255, 255, 0.7);
             font-size: 16px;
-            font-weight: 600;
-            transition: background-color 0.3s;
-            width: 100%;
+            margin-bottom: 10px;
         }
-        
-        button:hover {
-            background-color: #2980b9;
-        }
-        
-        .result-container {
-            margin-top: 30px;
-            display: none;
-        }
-        
-        .result-title {
-            font-size: 18px;
-            margin-bottom: 15px;
-            color: #2c3e50;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-        
-        .extracted-info {
-            background-color: #f8f9fa;
-            border-radius: 5px;
-            padding: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .info-item {
-            margin-bottom: 8px;
+
+        .input-section {
             display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
-        
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .config-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            color: white;
+            padding: 18px;
+            font-family: monospace;
+            font-size: 14px;
+            resize: none;
+            min-height: 150px;
+            transition: all 0.3s;
+        }
+
+        .config-input:focus {
+            outline: none;
+            border-color: rgba(74, 144, 226, 0.5);
+            box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+        }
+
+        .convert-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(45deg, #4a90e2, #5aa7ec);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px 0;
+            box-shadow: 0 4px 10px rgba(74, 144, 226, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .convert-btn:hover {
+            background: linear-gradient(45deg, #3b82f6, #4a90e2);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(74, 144, 226, 0.4);
+        }
+
+        .result-container {
+            margin-top: 20px;
+            display: none;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .result-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #fff;
+            text-align: center;
+        }
+
+        .extracted-info {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .info-item {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
         .info-label {
             font-weight: 600;
-            min-width: 100px;
-            color: #7f8c8d;
+            min-width: 120px;
+            color: #4a90e2;
+            font-size: 14px;
         }
-        
+
+        .info-value {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            word-break: break-all;
+        }
+
         .vmess-link-container {
             position: relative;
             margin-top: 20px;
         }
-        
+
         .vmess-link {
-            background-color: #f8f9fa;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 18px;
             word-break: break-all;
             font-size: 14px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.9);
+            font-family: monospace;
+            line-height: 1.5;
         }
-        
+
         .copy-btn {
-            background-color: #2ecc71;
-            width: auto;
-            padding: 8px 15px;
-            font-size: 14px;
+            background: linear-gradient(45deg, #ff9800, #ffb74d);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            padding: 14px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(255, 152, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
         }
-        
+
         .copy-btn:hover {
-            background-color: #27ae60;
+            background: linear-gradient(45deg, #f57c00, #ff9800);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 152, 0, 0.4);
         }
-        
+
         .error {
-            color: #e74c3c;
-            margin-top: 10px;
-            padding: 10px;
-            background-color: #fdf2f2;
-            border-radius: 5px;
-            display: none;
-        }
-        
-        .example {
-            margin-top: 20px;
+            color: #ff6b6b;
+            margin-top: 15px;
             padding: 15px;
-            background-color: #f8f9fa;
-            border-radius: 5px;
-            font-size: 14px;
+            background: rgba(255, 107, 107, 0.1);
+            border-radius: 10px;
+            display: none;
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            text-align: center;
+            font-weight: 500;
         }
-        
+
+        .example {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
         .example-title {
             font-weight: 600;
-            margin-bottom: 10px;
-            color: #2c3e50;
+            margin-bottom: 12px;
+            color: #4a90e2;
+            font-size: 16px;
         }
-        
+
         .example-text {
-            color: #7f8c8d;
-            font-style: italic;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            font-family: monospace;
+            line-height: 1.5;
+            word-break: break-all;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>VMESS配置转换器</h1>
-        <p class="description">将各种格式的VMESS配置转换为标准的VMESS链接</p>
-        
-        <div class="input-group">
-            <label for="config-input">输入配置字符串:</label>
-            <textarea id="config-input" placeholder="粘贴您的VMESS配置字符串..."></textarea>
+        <div class="header">
+            <div class="title">VMESS配置转换器</div>
+            <a href="https://t.me/iOSAWJ" class="tg-button" target="_blank">
+                <i class="fab fa-telegram"></i> TG频道
+            </a>
         </div>
         
-        <button id="convert-btn">转换配置</button>
-        
-        <div class="error" id="error-message"></div>
-        
-        <div class="result-container" id="result-container">
-            <h2 class="result-title">转换结果</h2>
+        <div class="main-content">
+            <p class="description">将各种格式的VMESS配置转换为标准的VMESS链接</p>
             
-            <div class="extracted-info">
-                <div class="result-title">提取的配置信息</div>
-                <div id="extracted-info"></div>
+            <div class="input-section">
+                <div class="section-title">输入配置字符串:</div>
+                <textarea class="config-input" id="config-input" placeholder="粘贴您的VMESS配置字符串..."></textarea>
             </div>
             
-            <div class="vmess-link-container">
-                <div class="result-title">VMESS链接</div>
-                <div class="vmess-link" id="vmess-link"></div>
-                <button class="copy-btn" id="copy-btn">复制链接</button>
+            <button class="convert-btn" id="convert-btn">
+                <i class="fas fa-sync-alt"></i> 转换配置
+            </button>
+            
+         <button class="copy-btn" id="copy-btn">
+                        <i class="fas fa-copy"></i> 复制链接
+                    </button>
+
+           <div class="error" id="error-message"></div>
+            
+            <div class="result-container" id="result-container">
+                <h2 class="result-title">转换结果</h2>
+                
+                <div class="extracted-info">
+                    <div class="result-title">提取的配置信息</div>
+                    <div id="extracted-info"></div>
+                </div>
+                
+                <div class="vmess-link-container">
+                    <div class="result-title">VMESS链接</div>
+                    <div class="vmess-link" id="vmess-link"></div>
+           
+                </div>
             </div>
-        </div>
-        
-        <div class="example">
-            <div class="example-title">配置示例:</div>
-            <div class="example-text">
-                ["tls_out","ws_out","vmess_out"]}},{"tag":"tls_out","protocol":"tls","settings":{"insecure":true}},{"tag":"ws_out","protocol":"ws","settings":{"path":"\/","host":"example.com"}},{"tag":"vmess_out","protocol":"vmess","settings":{"uuid":"415d3a71-0875-43af-9af4-ba4473189858","port":443,"security":"auto","address":"example.com"}}
+
+                </div>
             </div>
         </div>
     </div>
@@ -344,7 +456,7 @@
                     html += `
                         <div class="info-item">
                             <div class="info-label">${key}:</div>
-                            <div>${value}</div>
+                            <div class="info-value">${value}</div>
                         </div>
                     `;
                 }
@@ -358,10 +470,10 @@
                 navigator.clipboard.writeText(text).then(() => {
                     // 临时改变按钮文本
                     const originalText = copyBtn.textContent;
-                    copyBtn.textContent = '已复制!';
+                    copyBtn.innerHTML = '<i class="fas fa-check"></i> 已复制!';
                     
                     setTimeout(() => {
-                        copyBtn.textContent = originalText;
+                        copyBtn.innerHTML = '<i class="fas fa-copy"></i> 复制链接';
                     }, 2000);
                 }).catch(err => {
                     console.error('复制失败: ', err);
