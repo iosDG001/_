@@ -428,7 +428,7 @@
                 // 构建标准vmess配置
                 const vmessConfig = {
                     "v": "2",
-                    "ps": "🇭🇰HongKong",  // 节点名称
+                    "ps": "HongKong",  // 节点名称
                     "add": configInfo.address || '',
                     "port": configInfo.port || '443',
                     "id": configInfo.uuid || '',
