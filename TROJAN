@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trojan配置转换器</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #7f8c8d;
+            font-size: 16px;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 16px;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 15px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 15px;
+            resize: vertical;
+            transition: all 0.3s;
+            background-color: #f8f9fa;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        button {
+            flex: 1;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 14px rgba(102, 126, 234, 0.3);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .secondary-btn {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+        }
+        
+        .result-container {
+            margin-top: 30px;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .result-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            border-bottom: 2px solid #f1f3f4;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .extracted-info {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .info-item {
+            margin-bottom: 12px;
+            display: flex;
+            padding: 5px 0;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            min-width: 120px;
+            color: #5a6c7d;
+        }
+        
+        .info-value {
+            flex: 1;
+            word-break: break-all;
+        }
+        
+        .trojan-link-container {
+            position: relative;
+            margin-top: 20px;
+        }
+        
+        .trojan-link {
+            background-color: #f8f9fa;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            padding: 15px;
+            word-break: break-all;
+            font-size: 14px;
+            margin-bottom: 15px;
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            width: auto;
+            padding: 12px 25px;
+            font-size: 15px;
+        }
+        
+        .error {
+            color: #e74c3c;
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #fdf2f2;
+            border-radius: 8px;
+            border-left: 4px solid #e74c3c;
+            display: none;
+            animation: shake 0.5s ease;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        .examples {
+            margin-top: 30px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 4px solid #4facfe;
+        }
+        
+        .examples-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .example-item {
+            margin-bottom: 15px;
+            padding: 12px;
+            background-color: white;
+            border-radius: 6px;
+            border: 1px solid #e1e8ed;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .example-item:hover {
+            background-color: #f0f7ff;
+            border-color: #4facfe;
+            transform: translateX(5px);
+        }
+        
+        .example-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #5a6c7d;
+        }
+        
+        .example-text {
+            color: #7f8c8d;
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .success-message {
+            color: #27ae60;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f0fff4;
+            border-radius: 6px;
+            border-left: 4px solid #27ae60;
+            display: none;
+            text-align: center;
+        }
+        
+        .icon {
+            font-size: 18px;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .buttons {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .info-item {
+                flex-direction: column;
+            }
+            
+            .info-label {
+                min-width: auto;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛡️ Trojan配置转换器</h1>
+        <p class="subtitle">将各种格式的Trojan配置转换为标准Trojan链接</p>
+        
+        <div class="input-group">
+            <label for="config-input">📝 输入Trojan配置字符串:</label>
+            <textarea id="config-input" placeholder="粘贴您的Trojan配置字符串..."></textarea>
+        </div>
+        
+        <div class="buttons">
+            <button id="convert-btn">
+                <span class="icon">🔄</span> 转换配置
+            </button>
+            <button id="clear-btn" class="secondary-btn">
+                <span class="icon">🗑️</span> 清空输入
+            </button>
+        </div>
+        
+        <div class="error" id="error-message"></div>
+        <div class="success-message" id="success-message"></div>
+        
+        <div class="result-container" id="result-container">
+            <h2 class="result-title">
+                <span class="icon">✅</span> 转换结果
+            </h2>
+            
+            <div class="extracted-info">
+                <h3 class="result-title">
+                    <span class="icon">🔍</span> 提取的配置信息
+                </h3>
+                <div id="extracted-info"></div>
+            </div>
+            
+            <div class="trojan-link-container">
+                <h3 class="result-title">
+                    <span class="icon">🔗</span> Trojan链接
+                </h3>
+                <div class="trojan-link" id="trojan-link"></div>
+                <button class="copy-btn" id="copy-btn">
+                    <span class="icon">📋</span> 复制链接
+                </button>
+            </div>
+        </div>
+        
+        <div class="examples">
+            <h3 class="examples-title">
+                <span class="icon">💡</span> 配置示例（点击使用）:
+            </h3>
+            
+            <div class="example-item" data-example="trojan, example.com, 443, password=my_password">
+                <div class="example-title">基础格式</div>
+                <div class="example-text">trojan, example.com, 443, password=my_password</div>
+            </div>
+            
+            <div class="example-item" data-example="Trojan = trojan, 1.2.3.4, 8443, password=secure_pass123">
+                <div class="example-title">带前缀格式</div>
+                <div class="example-text">Trojan = trojan, 1.2.3.4, 8443, password=secure_pass123</div>
+            </div>
+            
+            <div class="example-item" data-example="trojan，example.com，443，password=密码，sni=cdn.example.com，allowInsecure=0">
+                <div class="example-title">中文逗号+额外参数</div>
+                <div class="example-text">trojan，example.com，443，password=密码，sni=cdn.example.com，allowInsecure=0</div>
+            </div>
+            
+            <div class="example-item" data-example="trojan, my-trojan-server.com, 443, password=complex_P@ssw0rd!, sni=real.domain.com, allowInsecure=1">
+                <div class="example-title">完整参数版</div>
+                <div class="example-text">trojan, my-trojan-server.com, 443, password=complex_P@ssw0rd!, sni=real.domain.com, allowInsecure=1</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const convertBtn = document.getElementById('convert-btn');
+            const clearBtn = document.getElementById('clear-btn');
+            const configInput = document.getElementById('config-input');
+            const resultContainer = document.getElementById('result-container');
+            const extractedInfo = document.getElementById('extracted-info');
+            const trojanLink = document.getElementById('trojan-link');
+            const copyBtn = document.getElementById('copy-btn');
+            const errorMessage = document.getElementById('error-message');
+            const successMessage = document.getElementById('success-message');
+            const exampleItems = document.querySelectorAll('.example-item');
+            
+            // 事件监听
+            convertBtn.addEventListener('click', convertConfig);
+            clearBtn.addEventListener('click', clearInput);
+            copyBtn.addEventListener('click', copyTrojanLink);
+            
+            // 示例点击事件
+            exampleItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const exampleText = this.getAttribute('data-example');
+                    configInput.value = exampleText;
+                    showSuccess('示例已填充到输入框！');
+                });
+            });
+            
+            function convertConfig() {
+                // 隐藏消息
+                hideMessages();
+                
+                const configStr = configInput.value.trim();
+                
+                if (!configStr) {
+                    showError('请输入配置字符串');
+                    return;
+                }
+                
+                try {
+                    // 提取配置信息
+                    const configInfo = extractTrojanInfo(configStr);
+                    
+                    // 显示提取的配置信息
+                    displayExtractedInfo(configInfo);
+                    
+                    // 检查必要字段
+                    if (!configInfo.protocol || configInfo.protocol.toLowerCase() !== 'trojan') {
+                        showError('协议错误！必须为 "trojan"');
+                        return;
+                    }
+                    
+                    if (!configInfo.host) {
+                        showError('未找到服务器地址（域名/IP）');
+                        return;
+                    }
+                    
+                    if (!configInfo.port) {
+                        showError('未找到端口号');
+                        return;
+                    }
+                    
+                    if (!configInfo.password) {
+                        showError('未找到密码');
+                        return;
+                    }
+                    
+                    // 创建Trojan链接
+                    const trojanUrl = createTrojanLink(configInfo);
+                    
+                    // 显示结果
+                    trojanLink.textContent = trojanUrl;
+                    resultContainer.style.display = 'block';
+                    showSuccess('配置转换成功！');
+                    
+                } catch (error) {
+                    showError('转换失败: ' + error.message);
+                }
+            }
+            
+            function extractTrojanInfo(configStr) {
+                const info = {};
+                
+                // 输入清洗
+                let cleaned = configStr.trim();
+                
+                // 处理前缀（如 "Trojan = ", "trojan:"，不区分大小写）
+                const prefixPattern = /^trojan\s*[=:]\s*/i;
+                cleaned = cleaned.replace(prefixPattern, '');
+                
+                // 移除所有空白（包括全角空格）
+                cleaned = cleaned.replace(/[\s　]/g, '');
+                
+                // 统一分隔符为英文逗号（处理中文逗号）
+                cleaned = cleaned.replace(/[,，]/g, ',');
+                
+                // 参数分割
+                const parts = cleaned.split(',').filter(p => p);
+                
+                if (parts.length < 4) {
+                    throw new Error(
+                        '参数数量不足！需要至少包含4个核心部分：\n' +
+                        '协议, 域名/IP, 端口, password=密码'
+                    );
+                }
+                
+                // 提取核心参数
+                info.protocol = parts[0];
+                info.host = parts[1];
+                info.port = parts[2];
+                
+                // 提取密码
+                const passwordPart = parts[3];
+                if (!passwordPart.toLowerCase().startsWith('password=')) {
+                    throw new Error('密码格式错误！必须以 "password=" 开头');
+                }
+                info.password = passwordPart.split('=')[1];
+                
+                // 提取额外参数
+                info.extraParams = {};
+                for (let i = 4; i < parts.length; i++) {
+                    const part = parts[i];
+                    if (part.includes('=')) {
+                        const [key, value] = part.split('=', 2);
+                        info.extraParams[key.toLowerCase()] = value;
+                    }
+                }
+                
+                return info;
+            }
+            
+            function createTrojanLink(configInfo) {
+                // 默认参数
+                const defaultParams = {
+                    'allowInsecure': '1',
+                    'type': 'tcp'
+                };
+                
+                // 合并参数（用户参数覆盖默认参数）
+                const queryParams = {...defaultParams, ...configInfo.extraParams};
+                
+                // 构建查询字符串
+                const queryString = Object.entries(queryParams)
+                    .map(([key, value]) => `${key}=${value}`)
+                    .join('&');
+                
+                // 构建Trojan链接
+                return `trojan://${configInfo.password}@${configInfo.host}:${configInfo.port}/?${queryString}#Trojan节点`;
+            }
+            
+            function displayExtractedInfo(configInfo) {
+                let html = '';
+                
+                // 显示核心参数
+                const coreParams = [
+                    { label: '协议', value: configInfo.protocol },
+                    { label: '服务器', value: configInfo.host },
+                    { label: '端口', value: configInfo.port },
+                    { label: '密码', value: configInfo.password }
+                ];
+                
+                coreParams.forEach(param => {
+                    html += `
+                        <div class="info-item">
+                            <div class="info-label">${param.label}:</div>
+                            <div class="info-value">${param.value}</div>
+                        </div>
+                    `;
+                });
+                
+                // 显示额外参数
+                if (Object.keys(configInfo.extraParams).length > 0) {
+                    html += `<div class="info-item"><div class="info-label" style="margin-top:10px;">额外参数:</div></div>`;
+                    
+                    for (const [key, value] of Object.entries(configInfo.extraParams)) {
+                        html += `
+                            <div class="info-item">
+                                <div class="info-label" style="padding-left:20px;">${key}:</div>
+                                <div class="info-value">${value}</div>
+                            </div>
+                        `;
+                    }
+                }
+                
+                extractedInfo.innerHTML = html;
+            }
+            
+            function copyTrojanLink() {
+                const text = trojanLink.textContent;
+                
+                if (!text) {
+                    showError('没有可复制的内容');
+                    return;
+                }
+                
+                navigator.clipboard.writeText(text).then(() => {
+                    showSuccess('链接已复制到剪贴板！');
+                    
+                    // 临时改变按钮文本
+                    const originalText = copyBtn.innerHTML;
+                    copyBtn.innerHTML = '<span class="icon">✅</span> 已复制!';
+                    
+                    setTimeout(() => {
+                        copyBtn.innerHTML = originalText;
+                    }, 2000);
+                }).catch(err => {
+                    console.error('复制失败: ', err);
+                    showError('复制失败，请手动复制链接');
+                });
+            }
+            
+            function clearInput() {
+                configInput.value = '';
+                hideMessages();
+                resultContainer.style.display = 'none';
+                showSuccess('输入已清空！');
+            }
+            
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorMessage.style.display = 'block';
+                resultContainer.style.display = 'none';
+                successMessage.style.display = 'none';
+            }
+            
+            function showSuccess(message) {
+                successMessage.textContent = message;
+                successMessage.style.display = 'block';
+                errorMessage.style.display = 'none';
+            }
+            
+            function hideMessages() {
+                errorMessage.style.display = 'none';
+                successMessage.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
