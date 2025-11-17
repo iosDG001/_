@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>节点提取工具</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header {
+            width: 100%;
+            height: 70px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            padding: 0 25px;
+            background: rgba(255, 255, 255, 0.15);
+            position: relative;
+        }
+
+        .title {
+            flex: 1;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .tg-button {
+            background: linear-gradient(45deg, #0088cc, #00a2ff);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0, 136, 204, 0.3);
+        }
+
+        .tg-button:hover {
+            background: linear-gradient(45deg, #0077b5, #0088cc);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 136, 204, 0.4);
+        }
+
+        .main-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            min-height: 500px;
+        }
+
+        @media (min-width: 768px) {
+            .main-content {
+                flex-direction: row;
+            }
+        }
+
+        .input-section, .output-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .section-title:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .toggle-icon {
+            transition: transform 0.3s;
+            font-size: 14px;
+        }
+
+        .section-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s;
+            overflow: hidden;
+        }
+
+        .collapsed .section-content {
+            flex: 0;
+            opacity: 0;
+            height: 0;
+        }
+
+        .config-input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: white;
+            padding: 15px;
+            font-family: monospace;
+            font-size: 13px;
+            resize: none;
+            min-height: 180px;
+            transition: all 0.3s;
+            line-height: 1.4;
+        }
+
+        .config-input:focus {
+            outline: none;
+            border-color: rgba(74, 144, 226, 0.5);
+            box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+        }
+
+        .convert-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(45deg, #4a90e2, #5aa7ec);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 12px 0;
+            box-shadow: 0 4px 10px rgba(74, 144, 226, 0.3);
+        }
+
+        .convert-btn:hover {
+            background: linear-gradient(45deg, #3b82f6, #4a90e2);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(74, 144, 226, 0.4);
+        }
+
+        .nodes-container {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            overflow-y: auto;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: all 0.3s;
+        }
+
+        .collapsed .nodes-container {
+            min-height: 0;
+            height: 0;
+            padding: 0;
+            border: none;
+        }
+
+        .node-item {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .node-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .node-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .node-tag {
+            font-weight: bold;
+            color: #4a90e2;
+            font-size: 14px;
+        }
+
+        .node-type {
+            background: rgba(74, 144, 226, 0.3);
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 11px;
+        }
+
+        .node-details {
+            font-size: 13px;
+            color: #ccc;
+        }
+
+        .node-link {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            padding: 10px;
+            margin-top: 8px;
+            font-size: 11px;
+            word-break: break-all;
+            display: none;
+        }
+
+        .status-message {
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            margin: 12px 0;
+            display: none;
+            font-size: 14px;
+        }
+
+        .status-success {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid rgba(76, 175, 80, 0.5);
+        }
+
+        .status-error {
+            background: rgba(244, 67, 54, 0.2);
+            border: 1px solid rgba(244, 67, 54, 0.5);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .copy-all-btn {
+            flex: 1;
+            padding: 12px;
+            background: linear-gradient(45deg, #ff9800, #ffb74d);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(255, 152, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .copy-all-btn:hover {
+            background: linear-gradient(45deg, #f57c00, #ff9800);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 152, 0, 0.4);
+        }
+
+        .empty-state {
+            text-align: center;
+            color: #888;
+            padding: 30px 15px;
+            font-size: 14px;
+        }
+
+        .node-count {
+            background: rgba(74, 144, 226, 0.3);
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="title"> 节点提取工具 </div>
+            <a href="https://t.me/iOSAWJ" class="tg-button" target="_blank">
+                <i class="fab fa-telegram"></i> TG频道
+            </a>
+        </div>
+        
+        <div class="main-content">
+            <div class="input-section">
+                <div class="section-title" onclick="toggleSection(this)">
+                    <span>输入Configs配置</span>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <div class="section-content">
+                    <textarea class="config-input" id="config-input" placeholder="粘贴完整的Sing-box配置..."></textarea>
+                    <button class="convert-btn" onclick="convertConfig()">
+                        <i class="fas fa-sync-alt"></i> 转换配置
+                    </button>
+                    <div class="status-message" id="status-message"></div>
+                </div>
+            </div>
+            
+            <div class="output-section">
+                <div class="section-title" onclick="toggleSection(this)">
+                    <span>生成的节点 <span class="node-count" id="node-count">0</span></span>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <div class="section-content">
+                    <div class="nodes-container" id="nodes-container">
+                        <div class="empty-state">
+                            <i class="fas fa-cloud-download-alt" style="font-size: 36px; margin-bottom: 10px;"></i>
+                            <p>转换后的节点将在这里显示</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 复制按钮移到section-content外部，确保折叠时仍然可见 -->
+                <div class="action-buttons">
+                    <button class="copy-all-btn" onclick="copyAllNodes()">
+                        <i class="fas fa-copy"></i> 复制所有节点
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(element) {
+            const section = element.parentElement;
+            const icon = element.querySelector('.toggle-icon');
+            
+            section.classList.toggle('collapsed');
+            icon.style.transform = section.classList.contains('collapsed') ? 'rotate(-90deg)' : 'rotate(0)';
+        }
+
+        function convertConfig() {
+            const input = document.getElementById('config-input').value.trim();
+            const status = document.getElementById('status-message');
+            const nodesContainer = document.getElementById('nodes-container');
+            const nodeCount = document.getElementById('node-count');
+            
+            if (!input) {
+                showStatus('请输入配置', 'error');
+                return;
+            }
+            
+            try {
+                const config = JSON.parse(input);
+                const nodes = extractNodes(config);
+                
+                if (nodes.length === 0) {
+                    showStatus('未找到可用的代理节点', 'error');
+                    return;
+                }
+                
+                displayNodes(nodes);
+                nodeCount.textContent = nodes.length;
+                showStatus(`成功提取 ${nodes.length} 个节点`, 'success');
+                
+            } catch (error) {
+                showStatus(`配置解析失败: ${error.message}`, 'error');
+                console.error('解析错误:', error);
+            }
+        }
+
+        function extractNodes(config) {
+            const nodes = [];
+            const proxyTypes = ['vless', 'vmess', 'trojan', 'shadowsocks'];
+            
+            if (!config.outbounds) {
+                throw new Error('配置中未找到outbounds字段');
+            }
+            
+            config.outbounds.forEach(node => {
+                if (proxyTypes.includes(node.type)) {
+                    try {
+                        const link = convertNodeToLink(node);
+                        if (link) {
+                            nodes.push({
+                                tag: node.tag,
+                                type: node.type,
+                                server: node.server,
+                                port: node.server_port,
+                                link: link
+                            });
+                        }
+                    } catch (e) {
+                        console.warn(`节点 ${node.tag} 转换失败:`, e.message);
+                    }
+                }
+            });
+            
+            return nodes;
+        }
+
+        function convertNodeToLink(node) {
+            switch(node.type) {
+                case 'vless':
+                    return convertVlessNode(node);
+                case 'vmess':
+                    return convertVmessNode(node);
+                case 'trojan':
+                    return convertTrojanNode(node);
+                case 'shadowsocks':
+                    return convertSSNode(node);
+                default:
+                    throw new Error(`不支持的协议类型: ${node.type}`);
+            }
+        }
+
+        function convertVlessNode(node) {
+            const required = ['uuid', 'server', 'server_port'];
+            const missing = required.filter(field => !node[field]);
+            if (missing.length > 0) {
+                throw new Error(`缺少必要参数: ${missing.join(', ')}`);
+            }
+
+            const uuid = node.uuid;
+            const server = node.server;
+            const port = node.server_port;
+            const flow = node.flow || 'xtls-rprx-vision';
+            const tls = node.tls || {};
+            const reality = tls.reality || {};
+            const utls = tls.utls || {};
+
+            const fingerprint = utls.fingerprint || 'chrome';
+            const publicKey = reality.public_key || '';
+            const shortId = reality.short_id || '';
+            const sni = tls.server_name || server;
+
+            let link = `vless://${uuid}@${server}:${port}/?type=tcp&flow=${flow}&encryption=none&security=reality&sni=${sni}&fp=${fingerprint}`;
+            
+            if (publicKey) link += `&pbk=${publicKey}`;
+            if (shortId) link += `&sid=${shortId}`;
+            
+            return link + `#${node.tag || 'VLESS节点'}`;
+        }
+
+        function convertVmessNode(node) {
+            const uuid = node.uuid || node.id;
+            const server = node.server;
+            const port = node.server_port;
+            
+            if (!uuid || !server || !port) {
+                throw new Error('缺少必要参数');
+            }
+
+            const vmessConfig = {
+                v: "2",
+                ps: node.tag || "VMess节点",
+                add: server,
+                port: port.toString(),
+                id: uuid,
+                aid: (node.alterId || 0).toString(),
+                scy: node.security || "auto",
+                net: node.transport || "tcp",
+                type: node.header_type || "none",
+                host: node.server_name || "",
+                path: node.path || "",
+                tls: node.tls ? "tls" : "",
+                sni: node.tls?.server_name || ""
+            };
+
+            return "vmess://" + btoa(JSON.stringify(vmessConfig));
+        }
+
+        function convertTrojanNode(node) {
+            const password = node.password;
+            const server = node.server;
+            const port = node.server_port;
+            
+            if (!password || !server || !port) {
+                throw new Error('缺少必要参数');
+            }
+
+            const tls = node.tls || {};
+            const utls = tls.utls || {};
+            const fingerprint = utls.fingerprint || 'chrome';
+            const sni = tls.server_name || server;
+
+            return `trojan://${password}@${server}:${port}/?sni=${sni}&fp=${fingerprint}#${node.tag || 'Trojan节点'}`;
+        }
+
+        function convertSSNode(node) {
+            const method = node.method;
+            const password = node.password;
+            const server = node.server;
+            const port = node.server_port;
+            
+            if (!method || !password || !server || !port) {
+                throw new Error('缺少必要参数');
+            }
+
+            const encodedPassword = btoa(`${method}:${password}`);
+            return `ss://${encodedPassword}@${server}:${port}#${node.tag || 'SS节点'}`;
+        }
+
+        function displayNodes(nodes) {
+            const container = document.getElementById('nodes-container');
+            container.innerHTML = '';
+            
+            if (nodes.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-cloud-download-alt" style="font-size: 36px; margin-bottom: 10px;"></i>
+                        <p>转换后的节点将在这里显示</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            nodes.forEach((node, index) => {
+                const nodeElement = document.createElement('div');
+                nodeElement.className = 'node-item';
+                nodeElement.innerHTML = `
+                    <div class="node-header">
+                        <span class="node-tag">${node.tag}</span>
+                        <span class="node-type">${node.type.toUpperCase()}</span>
+                    </div>
+                    <div class="node-details">
+                        ${node.server}:${node.port}
+                    </div>
+                    <div class="node-link" id="link-${index}">${node.link}</div>
+                `;
+                
+                nodeElement.addEventListener('click', () => {
+                    const linkElement = document.getElementById(`link-${index}`);
+                    linkElement.style.display = linkElement.style.display === 'block' ? 'none' : 'block';
+                    copyToClipboard(node.link);
+                    showStatus('节点链接已复制到剪贴板', 'success');
+                });
+                
+                container.appendChild(nodeElement);
+            });
+        }
+
+        function copyAllNodes() {
+            const nodes = document.querySelectorAll('.node-link');
+            const allLinks = Array.from(nodes).map(node => node.textContent).join('\n\n');
+            
+            if (allLinks) {
+                copyToClipboard(allLinks);
+                showStatus('所有节点链接已复制到剪贴板', 'success');
+            } else {
+                showStatus('没有可复制的节点', 'error');
+            }
+        }
+
+        function copyToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+        }
+
+        function showStatus(message, type) {
+            const status = document.getElementById('status-message');
+            status.textContent = message;
+            status.className = 'status-message';
+            status.classList.add(`status-${type}`);
+            status.style.display = 'block';
+            
+            setTimeout(() => {
+                status.style.display = 'none';
+            }, 3000);
+        }
+
+        // 自动填充示例配置
+        document.addEventListener('DOMContentLoaded', function() {
+            const exampleConfig = {
+                "outbounds": [
+                    {
+                        "type": "vless",
+                        "tag": "示例节点",
+                        "server": "example.com",
+                        "server_port": 443,
+                        "uuid": "908a3c3a-5ff4-46b2-920d-b38c53b6255f",
+                        "flow": "xtls-rprx-vision",
+                        "tls": {
+                            "enabled": true,
+                            "server_name": "example.com",
+                            "reality": {
+                                "enabled": true,
+                                "public_key": "示例公钥",
+                                "short_id": "示例ID"
+                            },
+                            "utls": {
+                                "enabled": true,
+                                "fingerprint": "chrome"
+                            }
+                        }
+                    }
+                ]
+            };
+            
+            document.getElementById('config-input').value = JSON.stringify(exampleConfig, null, 2);
+        });
+    </script>
+</body>
+</html>
