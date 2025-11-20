@@ -2,55 +2,49 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8"/>
-    <title>快连助手-免费共享Shadowrocket账号</title>
-    
-    <!-- 网站统计分析 -->
+    <title>快连助手-最新免费共享小火箭账号</title>
     <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
-    <script>
-        LA.init({id:"Jk8fTqR2sW9pLmNv",ck:"Jk8fTqR2sW9pLmNv",hashMode:true})
-    </script>
-    
-    <!-- Favicon设置 -->
-    <link rel="icon" type="image/svg+xml" href="/rocket.svg"/>
+    <script>LA.init({id:"3LXdORI4rEjfApDK",ck:"3LXdORI4rEjfApDK",hashMode:true})</script>
+    <!--Favicon设置-多尺寸支持-->
+    <link rel="icon" type="image/svg+xml" href="/logo.svg"/>
+    <!--<link rel="apple-touch-icon"sizes="180x180"href="/apple-touch-icon.png"><link rel="icon"type="image/png"sizes="32x32"href="/favicon-32x32.png"><link rel="icon"type="image/png"sizes="16x16"href="/favicon-16x16.png"><link rel="manifest"href="/site.webmanifest"><meta name="theme-color"content="#ffffff">-->
+    <!--iOS添加到主屏幕配置-->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="theme-color" content="#007AFF">
-    <meta name="apple-mobile-web-app-title" content="快连助手">
-    
-    <!-- PWA配置 -->
+    <meta name="theme-color" content="#f8f9fa">
+    <meta name="apple-mobile-web-app-title" content="快连助手共享ID">
+    <!--PWA manifest-->
     <link rel="manifest" href="/manifest.json">
-    
-    <!-- 视口设置 -->
+    <!--视口设置-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    
-    <!-- 关键资源预加载 -->
-    <link rel="preload" href="data:video/mp2t;base64,aW1wb3J0IHsgY3JlYXRlQXBwIH0gZnJvbSAndnVlJwppbXBvcnQgJy4vYXNzZXRzL2ZvbnRzL2ZvbnRzLmNzcycKaW1wb3J0ICcuL3N0eWxlLmNzcycKaW1wb3J0IEFwcCBmcm9tICcuL0FwcC52dWUnCmltcG9ydCAndmlydHVhbDp1bm8uY3NzJwpjcmVhdGVBcHAoQXBwKS5tb3VudCgnI2FwcCcp" as="script">
-    
-    <!-- SEO优化 -->
-    <meta name="description" content="专业提供最新免费Shadowrocket共享账号和美区Apple ID，每小时自动更新，确保账号100%可用。智能检测系统实时监控账号状态。"/>
-    <meta name="keywords" content="Shadowrocket账号,美区Apple ID,免费VPN账号,小火箭共享,苹果美区账号,翻墙工具"/>
+    <!--预加载关键资源-->
+    <link rel="preload" href="data:video/mp2t;base64,aW1wb3J0IHsgY3JlYXRlQXBwIH0gZnJvbSAndnVlJwovLyBpbXBvcnQgJy4vYXNzZXRzL2ZvbnRzL2ZvbnRzLmNzcycKaW1wb3J0ICcuL3N0eWxlLmNzcycKCmltcG9ydCBBcHAgZnJvbSAnLi9BcHAudnVlJwoKaW1wb3J0ICd2aXJ0dWFsOnVuby5jc3MnCgpjcmVhdGVBcHAoQXBwKS5tb3VudCgnI2FwcCcpCg==" as="script">
+    <!--基本SEO元标签-->
+    <meta name="description" content="提供最新免费共享的小火箭账号和美区Apple ID，24小时实时更新，确保账号可用性。自动更新系统保证所有账号实时可用。"/>
+    <meta name="keywords" content="小火箭账号,美区Apple ID,免费共享,Shadowrocket,苹果账号,共享账号,美区小火箭"/>
     <meta name="author" content="快连助手"/>
     <link rel="canonical" href="https://vpn.kuailian.pro"/>
-    
-    <!-- Open Graph社交分享 -->
-    <meta property="og:title" content="快连助手-免费Shadowrocket账号共享平台"/>
-    <meta property="og:description" content="专业提供最新免费Shadowrocket共享账号和美区Apple ID，每小时自动更新，确保账号100%可用。"/>
-    <meta property="og:image" content="/shadowrocket.webp"/>
+    <!--Open Graph标签(用于社交媒体、Discourse和Telegram预览)-->
+    <meta property="og:title" content="快连助手-最新免费共享小火箭账号_24h实时更新"/>
+    <meta property="og:description" content="提供最新免费共享的小火箭账号和美区Apple ID，24小时实时更新，确保账号可用性。自动更新系统保证所有账号实时可用。"/>
+    <meta property="og:image" content="/xhj.webp"/>
     <meta property="og:url" content="https://vpn.kuailian.pro"/>
     <meta property="og:type" content="website"/>
-    <meta property="og:site_name" content="快连助手"/>
+    <meta property="og:site_name" content="快连助手-最新免费共享小火箭账号"/>
     <meta property="og:locale" content="zh_CN"/>
-    
-    <!-- Twitter Card -->
+    <!--Discourse特别优化标签-->
+    <meta name="twitter:label1" content="更新频率"/>
+    <meta name="twitter:data1" content="每24小时"/>
+    <meta name="twitter:label2" content="账号类型"/>
+    <meta name="twitter:data2" content="小火箭共享账号"/>
+    <!--Twitter Card标签-->
     <meta name="twitter:card" content="summary_large_image"/>
-    <meta name="twitter:title" content="快连助手-免费Shadowrocket账号"/>
-    <meta name="twitter:description" content="专业提供最新免费Shadowrocket共享账号和美区Apple ID"/>
-    <meta name="twitter:image" content="/shadowrocket.webp"/>
+    <meta name="twitter:title" content="快连助手-最新免费共享小火箭账号"/>
+    <meta name="twitter:description" content="提供最新免费共享的小火箭账号和美区Apple ID，24小时实时更新，确保账号可用性。"/>
+    <meta name="twitter:image" content="/xhj.webp"/>
     <meta name="twitter:creator" content="@kuailian.pro"/>
-    
-    <!-- 应用资源 -->
-    <script type="module" crossorigin src="/assets/app-KL4MnPqX.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/style-D8RwTgHs.css">
+    <script type="module" crossorigin src="/assets/index-BU87UpOj.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-C7-BnpBs.css">
 </head>
 <body>
     <div id="app"></div>
