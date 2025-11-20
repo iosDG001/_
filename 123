@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8"/>
+    <title>快连助手-免费共享Shadowrocket账号</title>
+    
+    <!-- 网站统计分析 -->
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script>
+        LA.init({id:"Jk8fTqR2sW9pLmNv",ck:"Jk8fTqR2sW9pLmNv",hashMode:true})
+    </script>
+    
+    <!-- Favicon设置 -->
+    <link rel="icon" type="image/svg+xml" href="/rocket.svg"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#007AFF">
+    <meta name="apple-mobile-web-app-title" content="快连助手">
+    
+    <!-- PWA配置 -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- 视口设置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    
+    <!-- 关键资源预加载 -->
+    <link rel="preload" href="data:video/mp2t;base64,aW1wb3J0IHsgY3JlYXRlQXBwIH0gZnJvbSAndnVlJwppbXBvcnQgJy4vYXNzZXRzL2ZvbnRzL2ZvbnRzLmNzcycKaW1wb3J0ICcuL3N0eWxlLmNzcycKaW1wb3J0IEFwcCBmcm9tICcuL0FwcC52dWUnCmltcG9ydCAndmlydHVhbDp1bm8uY3NzJwpjcmVhdGVBcHAoQXBwKS5tb3VudCgnI2FwcCcp" as="script">
+    
+    <!-- SEO优化 -->
+    <meta name="description" content="专业提供最新免费Shadowrocket共享账号和美区Apple ID，每小时自动更新，确保账号100%可用。智能检测系统实时监控账号状态。"/>
+    <meta name="keywords" content="Shadowrocket账号,美区Apple ID,免费VPN账号,小火箭共享,苹果美区账号,翻墙工具"/>
+    <meta name="author" content="快连助手"/>
+    <link rel="canonical" href="https://vpn.kuailian.pro"/>
+    
+    <!-- Open Graph社交分享 -->
+    <meta property="og:title" content="快连助手-免费Shadowrocket账号共享平台"/>
+    <meta property="og:description" content="专业提供最新免费Shadowrocket共享账号和美区Apple ID，每小时自动更新，确保账号100%可用。"/>
+    <meta property="og:image" content="/shadowrocket.webp"/>
+    <meta property="og:url" content="https://vpn.kuailian.pro"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="快连助手"/>
+    <meta property="og:locale" content="zh_CN"/>
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content="快连助手-免费Shadowrocket账号"/>
+    <meta name="twitter:description" content="专业提供最新免费Shadowrocket共享账号和美区Apple ID"/>
+    <meta name="twitter:image" content="/shadowrocket.webp"/>
+    <meta name="twitter:creator" content="@kuailian.pro"/>
+    
+    <!-- 应用资源 -->
+    <script type="module" crossorigin src="/assets/app-KL4MnPqX.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/style-D8RwTgHs.css">
+</head>
+<body>
+    <div id="app"></div>
+</body>
+</html>
