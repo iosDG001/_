@@ -1,8 +1,14 @@
+/*        
+        ➪：养基宝
+
+        ★：解锁永久🆅🅸🅿
+
+𒊹𒊹𒊹𒊹𒊹𒊹𒊹𒊹𒊹𒊹𒊹𒊹𒊹𒊹𒊹𒊹𒊹𒊹𒊹𒊹𒊹
+
+[rewrite_local] 
 ^https?:\/\/.*yangjibao\.com\/(wxapi\/)?account url script-response-body https://raw.githubusercontent.com/iosDG001/_/refs/heads/main/YJB.js
 
-
 [mitm] 
-
 hostname= *.yangjibao.com
 
 ***********************************/
