@@ -1,6 +1,62 @@
 proxies:
   - name: 香港负载均衡1
     type: vmess
+    server: 38.147.188.225
+    port: 21057
+    cipher: auto
+    uuid: c90efcf1-bc0b-4dc6-8ea0-b201c3d08464
+    alterId: 0
+    tls: false
+    network: http
+    http-opts:
+      path:
+        - /
+      headers: {}
+    client-fingerprint: ''
+  - name: 香港负载均衡2
+    type: vmess
+    server: 103.224.80.26
+    port: 27296
+    cipher: auto
+    uuid: f2332946-df3d-445d-afaa-5eeae077b74c
+    alterId: 0
+    tls: false
+    network: http
+    http-opts:
+      path:
+        - /
+      headers: {}
+    client-fingerprint: ''
+  - name: 香港负载均衡3
+    type: vmess
+    server: 103.224.80.84
+    port: 10346
+    cipher: auto
+    uuid: a3fe496f-3d2c-4b75-a36f-01131660d2de
+    alterId: 0
+    tls: false
+    network: http
+    http-opts:
+      path:
+        - /
+      headers: {}
+    client-fingerprint: ''
+  - name: 香港负载均衡4
+    type: vmess
+    server: 103.224.80.37
+    port: 23656
+    cipher: auto
+    uuid: 1ceaecaa-ac4a-423d-a71a-065e0ebdf46e
+    alterId: 0
+    tls: false
+    network: http
+    http-opts:
+      path:
+        - /
+      headers: {}
+    client-fingerprint: ''
+  - name: 香港负载均衡5
+    type: vmess
     server: 43.247.134.54
     port: 55626
     cipher: auto
@@ -13,69 +69,15 @@ proxies:
         - /
       headers: {}
     client-fingerprint: ''
-  - name: 香港负载均衡2
-    type: vmess
-    server: 103.224.80.84
-    port: 45756
-    cipher: auto
-    uuid: 8c3682ff-5efc-410b-bd01-174da365e794
-    alterId: 0
-    tls: false
-    network: http
-    http-opts:
-      path:
-        - /
-      headers: {}
-    client-fingerprint: ''
-  - name: 香港负载均衡3
-    type: vmess
-    server: 103.224.80.42
-    port: 25181
-    cipher: auto
-    uuid: db842022-cad7-48f0-ba19-a7dd0c590c9a
-    alterId: 0
-    tls: false
-    network: http
-    http-opts:
-      path:
-        - /
-      headers: {}
-    client-fingerprint: ''
-  - name: 香港负载均衡4
-    type: vmess
-    server: 103.224.80.37
-    port: 16335
-    cipher: auto
-    uuid: c67ec980-6d5e-47c0-b8bd-f89d44f30364
-    alterId: 0
-    tls: false
-    network: http
-    http-opts:
-      path:
-        - /
-      headers: {}
-    client-fingerprint: ''
-  - name: 香港负载均衡5
-    type: vmess
-    server: 103.224.80.26
-    port: 27111
-    cipher: auto
-    uuid: b2ead9e4-656c-4711-a052-94dd963cc9bb
-    alterId: 0
-    tls: false
-    network: http
-    http-opts:
-      path:
-        - /
-      headers: {}
-    client-fingerprint: ''
   - sni: live.hwoss.cn
+    network: tcp
     type: trojan
     password: 3553ed78-fdf8-4574-83bc-ec98622d5202
     server: 44c80ad4.cute.sma-dk.huawei-oss.cn
     port: 16003
     name: 香港负载均衡6
   - sni: live.hwoss.cn
+    network: tcp
     type: trojan
     password: 3553ed78-fdf8-4574-83bc-ec98622d5202
     server: 44c80ad4.cute.sma-dk.huawei-oss.cn
@@ -137,6 +139,20 @@ proxies:
         - /
       headers: {}
     client-fingerprint: ''
+  - name: 美国 03
+    type: vmess
+    server: 154.40.57.187
+    port: 55765
+    cipher: auto
+    uuid: 9326bb9d-3d11-472e-ab59-f35da634552e
+    alterId: 0
+    tls: false
+    network: http
+    http-opts:
+      path:
+        - /
+      headers: {}
+    client-fingerprint: ''
   - name: 韩国 01
     type: vmess
     server: 45.94.68.25
@@ -165,40 +181,51 @@ proxies:
         - /
       headers: {}
     client-fingerprint: ''
-  - name: 英国 02
-    type: vmess
-    server: 185.212.62.47
-    port: 35546
-    cipher: auto
-    uuid: ae307cab-20ea-4e71-b51c-8fb8afc8278a
-    alterId: 0
-    tls: false
-    network: http
-    http-opts:
-      path:
-        - /
-      headers: {}
-    client-fingerprint: ''
+  - sni: live.hwoss.cn
+    network: tcp
+    type: trojan
+    password: 3553ed78-fdf8-4574-83bc-ec98622d5202
+    server: 44c80ad4.cute.sma-dk.huawei-oss.cn
+    port: 16001
+    name: "\U0001F1ED\U0001F1F0 香港 A1 [TR]"
+  - sni: live.hwoss.cn
+    network: tcp
+    type: trojan
+    password: 3553ed78-fdf8-4574-83bc-ec98622d5202
+    server: 44c80ad4.cute.sma-dk.huawei-oss.cn
+    port: 16004
+    name: "\U0001F1ED\U0001F1F0 香港 A4 [TR]"
   - sni: tka.cloud-services.top
+    network: tcp
     type: trojan
     password: 3553ed78-fdf8-4574-83bc-ec98622d5202
     server: f2c364d8.cute.sma-dk.huawei-oss.cn
     port: 50501
     name: "\U0001F1EF\U0001F1F5 日本 A1 [TR]"
   - sni: live.hwoss.cn
+    network: tcp
     type: trojan
     password: 3553ed78-fdf8-4574-83bc-ec98622d5202
     server: f2c364d8.cute.sma-dk.huawei-oss.cn
     port: 50502
     name: "\U0001F1EF\U0001F1F5 日本 A2 [TR]"
   - sni: live.hwoss.cn
+    network: tcp
     type: trojan
     password: 3553ed78-fdf8-4574-83bc-ec98622d5202
     server: f2c364d8.cute.sma-dk.huawei-oss.cn
     port: 50503
     name: "\U0001F1EF\U0001F1F5 日本 A3 [TR]"
+  - sni: jpa.cloud-services.top
+    network: tcp
+    type: trojan
+    password: 3553ed78-fdf8-4574-83bc-ec98622d5202
+    server: f2c364d8.cute.sma-dk.huawei-oss.cn
+    port: 50504
+    name: "\U0001F1EF\U0001F1F5 日本 A4 [TR]"
   - skip-cert-verify: true
     sni: live.hwoss.cn
+    network: tcp
     type: trojan
     password: 3553ed78-fdf8-4574-83bc-ec98622d5202
     server: 44c80ad4.cute.sma-dk.huawei-oss.cn
@@ -206,78 +233,76 @@ proxies:
     name: "\U0001F1F8\U0001F1EC 新加坡 A1 [TR]"
   - skip-cert-verify: true
     sni: sgb.cloud-services.top
+    network: tcp
     type: trojan
     password: 3553ed78-fdf8-4574-83bc-ec98622d5202
     server: 44c80ad4.cute.sma-dk.huawei-oss.cn
     port: 16012
     name: "\U0001F1F8\U0001F1EC 新加坡 A2 [TR]"
   - sni: live.hwoss.cn
+    network: tcp
     type: trojan
     password: 3553ed78-fdf8-4574-83bc-ec98622d5202
     server: 44c80ad4.cute.sma-dk.huawei-oss.cn
     port: 16013
     name: "\U0001F1F8\U0001F1EC 新加坡 A3 [TR]"
   - sni: live.hwoss.cn
+    network: tcp
     type: trojan
     password: 3553ed78-fdf8-4574-83bc-ec98622d5202
     server: 44c80ad4.cute.sma-dk.huawei-oss.cn
     port: 16021
     name: "\U0001F1F9\U0001F1FC 台湾 A1 [TR]"
   - sni: live.hwoss.cn
+    network: tcp
     type: trojan
     password: 3553ed78-fdf8-4574-83bc-ec98622d5202
     server: d40c3192.cute.sma-dk.huawei-oss.cn
     port: 15021
     name: "\U0001F1F9\U0001F1FC 台湾 "
-  - sni: twy-blue.cloud-services.top
-    type: trojan
-    password: 3553ed78-fdf8-4574-83bc-ec98622d5202
-    server: twy-blue.cloud-services.top
-    port: 443
-    name: "\U0001F1F9\U0001F1FC 台湾.Y | 原生 [TR]"
   - skip-cert-verify: true
     sni: live.hwoss.cn
+    network: tcp
     type: trojan
     password: 3553ed78-fdf8-4574-83bc-ec98622d5202
     server: f2c364d8.cute.sma-dk.huawei-oss.cn
     port: 50511
     name: "\U0001F1FA\U0001F1F8 美国 A1 [TR]"
   - sni: live.hwoss.cn
+    network: tcp
     type: trojan
     password: 3553ed78-fdf8-4574-83bc-ec98622d5202
     server: f2c364d8.cute.sma-dk.huawei-oss.cn
     port: 50512
     name: "\U0001F1FA\U0001F1F8 美国 A2 [TR]"
   - sni: live.hwoss.cn
+    network: tcp
     type: trojan
     password: 3553ed78-fdf8-4574-83bc-ec98622d5202
     server: f2c364d8.cute.sma-dk.huawei-oss.cn
     port: 50513
     name: "\U0001F1FA\U0001F1F8 美国 A3 [TR]"
   - sni: live.hwoss.cn
+    network: tcp
     type: trojan
     password: 3553ed78-fdf8-4574-83bc-ec98622d5202
     server: f2c364d8.cute.sma-dk.huawei-oss.cn
     port: 50521
     name: "\U0001F1F0\U0001F1F7 韩国 A1 [TR]"
   - sni: live.hwoss.cn
+    network: tcp
     type: trojan
     password: 3553ed78-fdf8-4574-83bc-ec98622d5202
     server: f2c364d8.cute.sma-dk.huawei-oss.cn
     port: 50543
     name: "\U0001F1F7\U0001F1FA 俄罗斯 A1"
   - sni: live.hwoss.cn
+    network: tcp
     type: trojan
     password: 3553ed78-fdf8-4574-83bc-ec98622d5202
     server: f2c364d8.cute.sma-dk.huawei-oss.cn
     port: 50542
     name: "\U0001F1F9\U0001F1F7 土耳其 A1"
-  - sni: live.hwoss.cn
-    type: trojan
-    password: 3553ed78-fdf8-4574-83bc-ec98622d5202
-    server: f2c364d8.cute.sma-dk.huawei-oss.cn
-    port: 50544
-    name: "\U0001F1E6\U0001F1EA 阿联酋 A1"
 proxy-groups:
   - name: 节点选择
     icon: >-
