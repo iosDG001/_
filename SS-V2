@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iOS火箭链接转换器</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: #0d1117; color: white; padding: 10px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { color: #58a6ff; margin-bottom: 10px; font-size: 16px; }
+        textarea { width: 100%; padding: 10px; border: 1px solid #30363d; border-radius: 5px; font-size: 12px; height: 150px; resize: vertical; background: #161b22; color: white; }
+        button { background: #238636; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 13px; margin: 5px 5px 5px 0; }
+        .result { background: #161b22; padding: 10px; border-radius: 5px; margin-top: 10px; font-size: 12px; }
+        .node { background: #21262d; padding: 8px; margin: 5px 0; border-radius: 3px; border-left: 3px solid #238636; }
+        .node-header { display: flex; justify-content: space-between; margin-bottom: 5px; }
+        .node-name { font-weight: bold; color: #58a6ff; }
+        .node-link { word-break: break-all; font-size: 11px; color: #8b949e; }
+        .status { font-size: 11px; color: #8b949e; margin-top: 5px; }
+        .debug { font-size: 10px; color: #666; margin-top: 3px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>iOS火箭链接转换器</h1>
+        
+        <div>输入链接（每行一个）:</div>
+        <textarea id="iosLinks" placeholder="粘贴iOS小火箭分享的链接...">vless://YXV0bzpmNmRkZGRhZi1kZmQ2LTQxMzQtOWRhZS0wM2I5M2IwM2QxNDdAMTgzLjI0MC4xODcuMTg3Ojg2NTQ?remarks=%E5%8F%B0%E6%B9%BE02
+vless://YXV0bzozZTdmNjdkZS02NDhlLTQ4NzEtYjUxYS1hMjI1MjE0ZDQxZWVANDcuMjM2LjE5Ny4xMzE6NDQz?remarks=%F0%9F%87%B8%F0%9F%87%AC%E6%96%B0%E5%8A%A0%E5%9D%A101&obfsParam=commerce.adobe.com&tls=1&peer=commerce.adobe.com&pbk=TRP10HqKUXEQ3O-cfsq93DycfBmbJe9KM36yvSa8Mmw
+vless://YXV0bzo1YzE4MzgwMi03NDdkLTRkMmYtYTZmMS1hZmYyZDVkNzg0MDFAOC4yMTkuMi4yMTE6NDQz?remarks=%F0%9F%87%B8%F0%9F%87%AC%E6%96%B0%E5%8A%A0%E5%9D%A102&obfsParam=commerce.adobe.com&tls=1&peer=commerce.adobe.com&pbk=DNdTBHyztOVJOBJQX91YXEhNkWbSAntqUoTFBHc6Clw&sid=6ba85179e30d4fc2</textarea>
+        
+        <div>
+            <button onclick="convertAll()">转换</button>
+            <button onclick="copyAllResults()">复制所有</button>
+            <button onclick="clearAll()">清空</button>
+        </div>
+        
+        <div class="result" id="resultBox">
+            <!-- 结果将在这里显示 -->
+        </div>
+        
+        <div class="status" id="status">就绪</div>
+    </div>
+
+    <script>
+        // 转换所有链接
+        function convertAll() {
+            const input = document.getElementById('iosLinks').value.trim();
+            if (!input) {
+                showStatus('请输入链接', 'error');
+                return;
+            }
+            
+            const lines = input.split('\n');
+            const resultBox = document.getElementById('resultBox');
+            resultBox.innerHTML = '';
+            
+            let convertedCount = 0;
+            
+            lines.forEach((line, index) => {
+                const trimmedLine = line.trim();
+                if (!trimmedLine || trimmedLine.startsWith('#')) return;
+                
+                try {
+                    const result = convertIOSLink(trimmedLine, index);
+                    if (result) {
+                        addNodeToResult(result, index);
+                        convertedCount++;
+                    }
+                } catch (e) {
+                    console.error('转换错误:', e);
+                    addNodeToResult({ 
+                        name: `错误节点${index+1}`, 
+                        link: `# 转换失败: ${e.message}`,
+                        debug: e.toString()
+                    }, index);
+                }
+            });
+            
+            showStatus(`已处理 ${convertedCount} 个节点`);
+            window.convertedLinks = Array.from(resultBox.querySelectorAll('.node-link')).map(el => el.textContent);
+        }
+        
+        // 转换单个iOS火箭链接
+        function convertIOSLink(link, index) {
+            if (!link.startsWith('vless://')) {
+                throw new Error('不是有效的VLESS链接');
+            }
+            
+            // 解析链接
+            const url = new URL(link);
+            const base64Part = url.hostname;
+            const params = new URLSearchParams(url.search);
+            
+            // 解码Base64
+            let decoded;
+            try {
+                // 处理Base64填充
+                let base64 = base64Part.replace(/-/g, '+').replace(/_/g, '/');
+                while (base64.length % 4) {
+                    base64 += '=';
+                }
+                decoded = atob(base64);
+            } catch (e) {
+                throw new Error('Base64解码失败');
+            }
+            
+            // 解析解码后的内容: auto:uuid@server:port
+            if (!decoded.startsWith('auto:')) {
+                throw new Error('不是有效的iOS火箭链接格式');
+            }
+            
+            const autoPart = decoded.substring(5);
+            const atIndex = autoPart.indexOf('@');
+            if (atIndex === -1) throw new Error('格式错误: 缺少@符号');
+            
+            const uuid = autoPart.substring(0, atIndex);
+            const serverPort = autoPart.substring(atIndex + 1);
+            const colonIndex = serverPort.lastIndexOf(':');
+            if (colonIndex === -1) throw new Error('格式错误: 缺少端口');
+            
+            const server = serverPort.substring(0, colonIndex);
+            const port = serverPort.substring(colonIndex + 1);
+            
+            // 获取参数
+            let remarks = params.get('remarks') || '节点' + (index + 1);
+            try {
+                remarks = decodeURIComponent(remarks);
+            } catch (e) {
+                // 保持原样
+            }
+            
+            // 收集所有重要参数
+            const obfs = params.get('obfs');
+            const tls = params.get('tls');
+            const xtls = params.get('xtls');
+            const pbk = params.get('pbk');
+            const sid = params.get('sid');
+            const peer = params.get('peer');
+            const obfsParam = params.get('obfsParam');
+            const path = params.get('path');
+            
+            // 调试信息
+            const debugInfo = `UUID: ${uuid}, 服务器: ${server}:${port}, TLS: ${tls}, PBK: ${pbk ? '有' : '无'}, SID: ${sid ? '有' : '无'}`;
+            
+            // 根据参数判断协议类型
+            let convertedLink;
+            
+            if (pbk && tls === '1') {
+                // Reality 协议 (有公钥和TLS)
+                convertedLink = buildRealityLink(uuid, server, port, params, remarks);
+            } else if (obfs === 'websocket' && tls === '1') {
+                // WebSocket + TLS
+                convertedLink = buildWebSocketLink(uuid, server, port, params, remarks);
+            } else if (tls === '1' && xtls === '2') {
+                // XTLS 协议
+                convertedLink = buildXTLSLink(uuid, server, port, params, remarks);
+            } else if (tls === '1') {
+                // 普通 TLS 协议
+                convertedLink = buildTLSLink(uuid, server, port, params, remarks);
+            } else {
+                // 无加密的普通VLESS
+                convertedLink = buildPlainLink(uuid, server, port, params, remarks);
+            }
+            
+            return {
+                name: remarks,
+                link: convertedLink,
+                debug: debugInfo
+            };
+        }
+        
+        // 构建 Reality 链接
+        function buildRealityLink(uuid, server, port, params, remarks) {
+            let link = `vless://${uuid}@${server}:${port}`;
+            const queryParams = [];
+            
+            // Reality 核心参数
+            queryParams.push(`security=reality`);
+            queryParams.push(`encryption=none`);
+            
+            // 公钥 (必须)
+            const pbk = params.get('pbk');
+            if (pbk) queryParams.push(`pbk=${pbk}`);
+            
+            // SID (可选)
+            const sid = params.get('sid');
+            if (sid) queryParams.push(`sid=${sid}`);
+            
+            // SNI/Peer
+            const peer = params.get('peer');
+            const obfsParam = params.get('obfsParam');
+            let sni = peer || obfsParam;
+            if (sni) queryParams.push(`sni=${encodeURIComponent(sni)}`);
+            
+            // 其他参数
+            queryParams.push(`headerType=none`);
+            queryParams.push(`fp=chrome`);
+            queryParams.push(`type=tcp`);
+            
+            // XTLS Flow (如果有xtls参数)
+            const xtls = params.get('xtls');
+            if (xtls === '2') {
+                queryParams.push(`flow=xtls-rprx-vision`);
+            }
+            
+            link += `?${queryParams.join('&')}`;
+            link += `#${encodeURIComponent(remarks)}`;
+            
+            return link;
+        }
+        
+        // 构建 WebSocket 链接
+        function buildWebSocketLink(uuid, server, port, params, remarks) {
+            let link = `vless://${uuid}@${server}:${port}`;
+            const queryParams = [];
+            
+            // WebSocket 参数
+            queryParams.push(`type=ws`);
+            queryParams.push(`security=tls`);
+            
+            // Host/SNI
+            const obfsParam = params.get('obfsParam');
+            const peer = params.get('peer');
+            let host = '';
+            
+            if (obfsParam) {
+                try {
+                    const decodedParam = decodeURIComponent(obfsParam);
+                    // 尝试解析JSON
+                    if (decodedParam.startsWith('{')) {
+                        const jsonMatch = decodedParam.match(/"Host"\s*:\s*"([^"]+)"/);
+                        if (jsonMatch) host = jsonMatch[1];
+                    } else {
+                        // 直接作为host
+                        host = decodedParam;
+                    }
+                } catch (e) {
+                    // 不是JSON格式
+                    host = obfsParam;
+                }
+            }
+            
+            if (!host && peer) {
+                host = peer;
+            }
+            
+            if (host) {
+                queryParams.push(`host=${encodeURIComponent(host)}`);
+                queryParams.push(`sni=${encodeURIComponent(host)}`);
+            }
+            
+            // Path
+            const path = params.get('path');
+            if (path) {
+                queryParams.push(`path=${encodeURIComponent(path)}`);
+            }
+            
+            link += `?${queryParams.join('&')}`;
+            link += `#${encodeURIComponent(remarks)}`;
+            
+            return link;
+        }
+        
+        // 构建 XTLS 链接
+        function buildXTLSLink(uuid, server, port, params, remarks) {
+            let link = `vless://${uuid}@${server}:${port}`;
+            const queryParams = [];
+            
+            // XTLS 参数
+            queryParams.push(`security=xtls`);
+            queryParams.push(`encryption=none`);
+            queryParams.push(`type=tcp`);
+            queryParams.push(`flow=xtls-rprx-vision`);
+            
+            // SNI/Peer
+            const peer = params.get('peer');
+            if (peer) queryParams.push(`sni=${encodeURIComponent(peer)}`);
+            
+            link += `?${queryParams.join('&')}`;
+            link += `#${encodeURIComponent(remarks)}`;
+            
+            return link;
+        }
+        
+        // 构建 TLS 链接
+        function buildTLSLink(uuid, server, port, params, remarks) {
+            let link = `vless://${uuid}@${server}:${port}`;
+            const queryParams = [];
+            
+            // TLS 参数
+            queryParams.push(`security=tls`);
+            queryParams.push(`encryption=none`);
+            queryParams.push(`type=tcp`);
+            
+            // SNI/Peer
+            const peer = params.get('peer');
+            const obfsParam = params.get('obfsParam');
+            let sni = peer || obfsParam;
+            if (sni) queryParams.push(`sni=${encodeURIComponent(sni)}`);
+            
+            link += `?${queryParams.join('&')}`;
+            link += `#${encodeURIComponent(remarks)}`;
+            
+            return link;
+        }
+        
+        // 构建普通链接 (无加密)
+        function buildPlainLink(uuid, server, port, params, remarks) {
+            let link = `vless://${uuid}@${server}:${port}`;
+            const queryParams = [];
+            
+            // 无加密参数
+            queryParams.push(`security=none`);
+            queryParams.push(`encryption=none`);
+            queryParams.push(`type=tcp`);
+            
+            link += `?${queryParams.join('&')}`;
+            link += `#${encodeURIComponent(remarks)}`;
+            
+            return link;
+        }
+        
+        // 添加节点到结果
+        function addNodeToResult(node, index) {
+            const resultBox = document.getElementById('resultBox');
+            
+            const nodeDiv = document.createElement('div');
+            nodeDiv.className = 'node';
+            
+            let debugHtml = '';
+            if (node.debug) {
+                debugHtml = `<div class="debug">${node.debug}</div>`;
+            }
+            
+            nodeDiv.innerHTML = `
+                <div class="node-header">
+                    <div class="node-name">${index + 1}. ${node.name}</div>
+                    <button onclick="copyThis('${encodeURIComponent(node.link)}')" style="font-size:10px;padding:3px 6px;">复制</button>
+                </div>
+                <div class="node-link">${node.link}</div>
+                ${debugHtml}
+            `;
+            
+            resultBox.appendChild(nodeDiv);
+        }
+        
+        // 复制单个
+        function copyThis(encodedLink) {
+            const link = decodeURIComponent(encodedLink);
+            navigator.clipboard.writeText(link).then(() => {
+                showStatus('已复制', 'success');
+            });
+        }
+        
+        // 复制所有结果
+        function copyAllResults() {
+            if (!window.convertedLinks || window.convertedLinks.length === 0) {
+                showStatus('没有转换结果', 'error');
+                return;
+            }
+            
+            const allLinks = window.convertedLinks.join('\n');
+            navigator.clipboard.writeText(allLinks).then(() => {
+                showStatus(`已复制 ${window.convertedLinks.length} 个链接`, 'success');
+            });
+        }
+        
+        // 清空所有
+        function clearAll() {
+            document.getElementById('iosLinks').value = '';
+            document.getElementById('resultBox').innerHTML = '';
+            showStatus('已清空');
+        }
+        
+        // 显示状态
+        function showStatus(message, type = 'info') {
+            const statusEl = document.getElementById('status');
+            statusEl.textContent = message;
+            
+            if (type === 'error') {
+                statusEl.style.color = '#f85149';
+            } else if (type === 'success') {
+                statusEl.style.color = '#3fb950';
+            } else {
+                statusEl.style.color = '#8b949e';
+            }
+        }
+        
+        // 页面加载时显示示例
+        window.onload = function() {
+            showStatus('粘贴iOS火箭链接，点击转换');
+        };
+    </script>
+</body>
+</html>
