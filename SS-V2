@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iOS火箭链接转换器</title>
+    <title>iOS火箭转V2</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
         body { background: #0d1117; color: white; padding: 10px; }
@@ -22,12 +22,10 @@
 </head>
 <body>
     <div class="container">
-        <h1>iOS火箭链接转换器</h1>
+        <h1>VLESS火箭~V2</h1>
         
         <div>输入链接（每行一个）:</div>
-        <textarea id="iosLinks" placeholder="粘贴iOS小火箭分享的链接...">vless://YXV0bzpmNmRkZGRhZi1kZmQ2LTQxMzQtOWRhZS0wM2I5M2IwM2QxNDdAMTgzLjI0MC4xODcuMTg3Ojg2NTQ?remarks=%E5%8F%B0%E6%B9%BE02
-vless://YXV0bzozZTdmNjdkZS02NDhlLTQ4NzEtYjUxYS1hMjI1MjE0ZDQxZWVANDcuMjM2LjE5Ny4xMzE6NDQz?remarks=%F0%9F%87%B8%F0%9F%87%AC%E6%96%B0%E5%8A%A0%E5%9D%A101&obfsParam=commerce.adobe.com&tls=1&peer=commerce.adobe.com&pbk=TRP10HqKUXEQ3O-cfsq93DycfBmbJe9KM36yvSa8Mmw
-vless://YXV0bzo1YzE4MzgwMi03NDdkLTRkMmYtYTZmMS1hZmYyZDVkNzg0MDFAOC4yMTkuMi4yMTE6NDQz?remarks=%F0%9F%87%B8%F0%9F%87%AC%E6%96%B0%E5%8A%A0%E5%9D%A102&obfsParam=commerce.adobe.com&tls=1&peer=commerce.adobe.com&pbk=DNdTBHyztOVJOBJQX91YXEhNkWbSAntqUoTFBHc6Clw&sid=6ba85179e30d4fc2</textarea>
+        <textarea id="iosLinks" placeholder="粘贴iOS小火箭分享的链接..."></textarea>
         
         <div>
             <button onclick="convertAll()">转换</button>
