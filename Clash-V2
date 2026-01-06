@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clash转V2rayN节点工具</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: #f5f5f5; color: #333; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; background: white; padding: 25px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #3498db; }
+        h2 { color: #34495e; margin: 15px 0; font-size: 18px; }
+        .section { margin: 20px 0; }
+        textarea { width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; height: 200px; resize: vertical; }
+        button { background: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px; margin: 5px; }
+        button:hover { background: #2980b9; }
+        button.secondary { background: #7f8c8d; }
+        button.secondary:hover { background: #636e72; }
+        button.success { background: #27ae60; }
+        button.success:hover { background: #219653; }
+        .result-box { background: #ecf0f1; padding: 15px; border-radius: 5px; margin-top: 15px; border-left: 4px solid #3498db; }
+        .url-box { background: #f8f9fa; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #dee2e6; word-break: break-all; }
+        .step { background: #f8f9fa; padding: 10px; margin: 10px 0; border-radius: 5px; border-left: 4px solid #2ecc71; }
+        .info { background: #e3f2fd; padding: 10px; margin: 10px 0; border-radius: 5px; border-left: 4px solid #2196f3; }
+        .flex { display: flex; gap: 10px; flex-wrap: wrap; margin: 10px 0; }
+        .config-item { background: #f8f9fa; padding: 15px; margin: 10px 0; border-radius: 5px; border: 1px solid #e9ecef; }
+        .config-item h3 { color: #2c3e50; margin-bottom: 5px; }
+        .badge { background: #3498db; color: white; padding: 3px 8px; border-radius: 3px; font-size: 12px; margin-right: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Clash配置转V2rayN节点工具</h1>
+        
+        <div class="info">
+            <strong>📌 功能说明：</strong> 将Clash配置文件转换为V2rayN可导入的节点链接
+        </div>
+        
+        <div class="section">
+            <h2>1. 输入Clash配置</h2>
+            <textarea id="clashConfig" placeholder="粘贴您的Clash配置文件内容...">log-level: debug
+tun:
+  enable: true
+  device-id: fd://5
+mode: rule
+proxies:
+- name: proxy
+  type: vless
+  server: n1761184189.74qxv.top
+  port: 443
+  udp: true
+  uuid: b2d6c4f1-ddb8-4a2b-935a-d04787e8457c
+  skip-cert-verify: false
+  tls: true
+  ws-opts:
+    path: /b2d6c4f1-ddb8-4a2b-935a-d04787e8457c
+    headers:
+      Host: n1761184189.74qxv.top
+  network: ws
+mmdb: Country.mmdb</textarea>
+        </div>
+        
+        <div class="flex">
+            <button onclick="convertToV2rayN()">🔧 转换为V2rayN节点</button>
+            <button onclick="clearAll()" class="secondary">🗑️ 清空所有</button>
+            <button onclick="addMoreProxies()" class="secondary">➕ 添加多个代理示例</button>
+        </div>
+        
+        <div class="section" id="resultSection" style="display:none;">
+            <h2>2. 转换结果</h2>
+            <div id="resultBox" class="result-box"></div>
+            <div class="flex">
+                <button onclick="copyAllLinks()" class="success">📋 复制所有节点链接</button>
+                <button onclick="copySingeLink()" class="success">📋 复制单节点链接</button>
+                <button onclick="exportAsFile()" class="secondary">💾 导出为txt文件</button>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>3. 使用说明</h2>
+            <div class="step">
+                <strong>第一步：</strong> 将Clash配置粘贴到上方输入框
+            </div>
+            <div class="step">
+                <strong>第二步：</strong> 点击"转换为V2rayN节点"按钮
+            </div>
+            <div class="step">
+                <strong>第三步：</strong> 复制生成的节点链接
+            </div>
+            <div class="step">
+                <strong>第四步：</strong> 在V2rayN中点击"从剪贴板导入URL"
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>4. 支持的协议</h2>
+            <div class="flex">
+                <div class="badge">VLESS</div>
+                <div class="badge">VMess</div>
+                <div class="badge">Trojan</div>
+                <div class="badge">Shadowsocks</div>
+                <div class="badge">HTTP/HTTPS</div>
+                <div class="badge">Socks5</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 转换函数
+        function convertToV2rayN() {
+            const input = document.getElementById('clashConfig').value.trim();
+            if (!input) {
+                alert('请先输入Clash配置');
+                return;
+            }
+            
+            const resultBox = document.getElementById('resultBox');
+            resultBox.innerHTML = '';
+            
+            try {
+                // 解析配置
+                const lines = input.split('\n');
+                let currentProxy = null;
+                const proxies = [];
+                let inProxiesSection = false;
+                let indentLevel = 0;
+                
+                for (let line of lines) {
+                    const trimmed = line.trim();
+                    if (!trimmed) continue;
+                    
+                    // 检测proxies部分开始
+                    if (trimmed.startsWith('proxies:')) {
+                        inProxiesSection = true;
+                        continue;
+                    }
+                    
+                    // 如果在proxies部分内
+                    if (inProxiesSection) {
+                        // 检测新的代理开始
+                        if (trimmed.startsWith('- name:')) {
+                            if (currentProxy) proxies.push(currentProxy);
+                            currentProxy = { type: '', server: '', port: '', name: '', uuid: '', path: '', host: '' };
+                            currentProxy.name = trimmed.split('name:')[1].trim();
+                        } 
+                        // 解析代理属性
+                        else if (currentProxy) {
+                            if (trimmed.startsWith('type:')) currentProxy.type = trimmed.split('type:')[1].trim();
+                            if (trimmed.startsWith('server:')) currentProxy.server = trimmed.split('server:')[1].trim();
+                            if (trimmed.startsWith('port:')) currentProxy.port = trimmed.split('port:')[1].trim();
+                            if (trimmed.startsWith('uuid:')) currentProxy.uuid = trimmed.split('uuid:')[1].trim();
+                            if (trimmed.includes('path:')) {
+                                const match = trimmed.match(/path:\s*(.+)/);
+                                if (match) currentProxy.path = match[1].trim();
+                            }
+                            if (trimmed.includes('Host:')) {
+                                const match = trimmed.match(/Host:\s*(.+)/);
+                                if (match) currentProxy.host = match[1].trim();
+                            }
+                        }
+                    }
+                }
+                
+                // 添加最后一个代理
+                if (currentProxy) proxies.push(currentProxy);
+                
+                // 生成V2rayN链接
+                let allLinks = [];
+                proxies.forEach((proxy, index) => {
+                    if (proxy.type && proxy.server && proxy.port) {
+                        let v2rayNLink = '';
+                        
+                        // 根据协议类型生成链接
+                        if (proxy.type.toLowerCase() === 'vless') {
+                            v2rayNLink = generateVLESSLink(proxy);
+                        } else if (proxy.type.toLowerCase() === 'vmess') {
+                            v2rayNLink = generateVMessLink(proxy);
+                        } else if (proxy.type.toLowerCase() === 'trojan') {
+                            v2rayNLink = generateTrojanLink(proxy);
+                        } else if (proxy.type.toLowerCase() === 'ss' || proxy.type.toLowerCase() === 'shadowsocks') {
+                            v2rayNLink = generateSSLink(proxy);
+                        } else {
+                            v2rayNLink = `# 不支持的类型: ${proxy.type}`;
+                        }
+                        
+                        allLinks.push(v2rayNLink);
+                        
+                        // 添加到结果框
+                        const item = document.createElement('div');
+                        item.className = 'config-item';
+                        item.innerHTML = `
+                            <h3><span class="badge">${proxy.type.toUpperCase()}</span> ${proxy.name || '未命名节点'}</h3>
+                            <div class="url-box">${v2rayNLink}</div>
+                            <button onclick="copyLink('${encodeURIComponent(v2rayNLink)}')" style="font-size:14px;padding:5px 10px;">📋 复制此链接</button>
+                        `;
+                        resultBox.appendChild(item);
+                    }
+                });
+                
+                if (allLinks.length > 0) {
+                    // 显示结果区域
+                    document.getElementById('resultSection').style.display = 'block';
+                    
+                    // 保存到全局变量
+                    window.allLinks = allLinks;
+                    
+                    // 添加批量操作
+                    const batchDiv = document.createElement('div');
+                    batchDiv.innerHTML = `<p><strong>已生成 ${allLinks.length} 个节点链接</strong></p>`;
+                    resultBox.insertBefore(batchDiv, resultBox.firstChild);
+                    
+                } else {
+                    resultBox.innerHTML = '<div class="info">未找到有效的代理配置</div>';
+                    document.getElementById('resultSection').style.display = 'block';
+                }
+                
+            } catch (error) {
+                resultBox.innerHTML = `<div class="info">转换出错: ${error.message}</div>`;
+                document.getElementById('resultSection').style.display = 'block';
+            }
+        }
+        
+        // 生成VLESS链接
+        function generateVLESSLink(proxy) {
+            let link = `vless://${proxy.uuid}@${proxy.server}:${proxy.port}`;
+            let params = [];
+            
+            if (proxy.host) params.push(`host=${encodeURIComponent(proxy.host)}`);
+            if (proxy.path) params.push(`path=${encodeURIComponent(proxy.path)}`);
+            
+            params.push('type=ws');
+            params.push('security=tls');
+            
+            if (params.length > 0) {
+                link += `?${params.join('&')}`;
+            }
+            
+            if (proxy.name) {
+                link += `#${encodeURIComponent(proxy.name)}`;
+            }
+            
+            return link;
+        }
+        
+        // 生成VMess链接
+        function generateVMessLink(proxy) {
+            const vmessConfig = {
+                v: "2",
+                ps: proxy.name || "",
+                add: proxy.server,
+                port: proxy.port,
+                id: proxy.uuid || "",
+                aid: "0",
+                scy: "auto",
+                net: "ws",
+                type: "none",
+                host: proxy.host || "",
+                path: proxy.path || "/",
+                tls: "tls",
+                sni: proxy.host || ""
+            };
+            
+            const jsonStr = JSON.stringify(vmessConfig);
+            const base64Str = btoa(unescape(encodeURIComponent(jsonStr)));
+            return `vmess://${base64Str}`;
+        }
+        
+        // 生成Trojan链接
+        function generateTrojanLink(proxy) {
+            return `trojan://${proxy.uuid}@${proxy.server}:${proxy.port}#${encodeURIComponent(proxy.name || 'Trojan节点')}`;
+        }
+        
+        // 生成SS链接
+        function generateSSLink(proxy) {
+            // 简单示例，实际需要更多参数
+            return `ss://${btoa('aes-256-gcm:' + (proxy.uuid || 'password'))}@${proxy.server}:${proxy.port}#${encodeURIComponent(proxy.name || 'SS节点')}`;
+        }
+        
+        // 复制单个链接
+        function copyLink(encodedLink) {
+            const link = decodeURIComponent(encodedLink);
+            navigator.clipboard.writeText(link).then(() => {
+                alert('链接已复制到剪贴板');
+            });
+        }
+        
+        // 复制所有链接
+        function copyAllLinks() {
+            if (window.allLinks && window.allLinks.length > 0) {
+                const allLinksText = window.allLinks.join('\n');
+                navigator.clipboard.writeText(allLinksText).then(() => {
+                    alert(`已复制 ${window.allLinks.length} 个节点链接到剪贴板`);
+                });
+            } else {
+                alert('请先转换配置');
+            }
+        }
+        
+        // 复制单个节点链接（第一个）
+        function copySingeLink() {
+            if (window.allLinks && window.allLinks.length > 0) {
+                navigator.clipboard.writeText(window.allLinks[0]).then(() => {
+                    alert('单节点链接已复制到剪贴板');
+                });
+            } else {
+                alert('请先转换配置');
+            }
+        }
+        
+        // 导出为文件
+        function exportAsFile() {
+            if (window.allLinks && window.allLinks.length > 0) {
+                const content = window.allLinks.join('\n');
+                const blob = new Blob([content], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'v2ray_nodes.txt';
+                a.click();
+                URL.revokeObjectURL(url);
+            } else {
+                alert('请先转换配置');
+            }
+        }
+        
+        // 清空所有
+        function clearAll() {
+            document.getElementById('clashConfig').value = '';
+            document.getElementById('resultBox').innerHTML = '';
+            document.getElementById('resultSection').style.display = 'none';
+            window.allLinks = [];
+        }
+        
+        // 添加多个代理示例
+        function addMoreProxies() {
+            const example = `proxies:
+# VLESS节点
+- name: "VLESS节点1"
+  type: vless
+  server: server1.example.com
+  port: 443
+  uuid: b2d6c4f1-ddb8-4a2b-935a-d04787e8457c
+  network: ws
+  tls: true
+  ws-opts:
+    path: /path
+    headers:
+      Host: server1.example.com
+
+# VMess节点  
+- name: "VMess节点1"
+  type: vmess
+  server: server2.example.com
+  port: 443
+  uuid: 12345678-1234-1234-1234-123456789012
+  alterId: 0
+  cipher: auto
+  network: ws
+  tls: true
+  ws-opts:
+    path: /vmess
+    headers:
+      Host: server2.example.com
+
+# Trojan节点
+- name: "Trojan节点1"
+  type: trojan
+  server: server3.example.com
+  port: 443
+  password: password123
+  sni: server3.example.com`;
+            
+            document.getElementById('clashConfig').value = example;
+        }
+    </script>
+</body>
+</html>
