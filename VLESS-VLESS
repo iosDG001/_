@@ -113,7 +113,7 @@
                 <button class="tab-btn" data-url="https://htmlpreview.github.io/?https://raw.githubusercontent.com/iosDG001/_/refs/heads/main/SS-V2">火箭转V2</button>
                 <button class="tab-btn" data-url="https://htmlpreview.github.io/?https://raw.githubusercontent.com/iosDG001/_/refs/heads/main/Clash-V2">配置转节点</button>
                 <button class="tab-btn" data-url="https://rnik-001.github.io/04/">密码替换</button>
-                <!-- <button class="tab-btn" data-url="https://example.com">新工具2</button> -->
+                <button class="tab-btn" data-url="https://rnik-001.github.io/JD/">Filza转换</button>
             </div>
         </header>
         
