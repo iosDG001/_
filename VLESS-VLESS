@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> VLESS工具箱🧰 </title>
+    <title>VLESS全能工具箱🧰</title>
     <style>
         * {
             margin: 0;
@@ -15,11 +15,9 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #f5f5f5;
             color: #333;
-            line-height: 1.6;
         }
         
         .container {
-            max-width: 100%;
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -29,27 +27,31 @@
             background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
             color: white;
             padding: 10px 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            z-index: 10;
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
         }
         
         h1 {
             font-size: 1.5rem;
-            font-weight: 500;
+            margin-bottom: 10px;
         }
         
-        .buttons-container {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-top: 5px;
+        /* 可滑动按钮容器 */
+        .tabs-container {
+            overflow-x: auto;
+            white-space: nowrap;
+            padding-bottom: 5px;
+        }
+        
+        .tabs-container::-webkit-scrollbar {
+            height: 4px;
+        }
+        
+        .tabs-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .tabs-container::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
         }
         
         .tab-btn {
@@ -60,21 +62,17 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 0.85rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-            white-space: nowrap;
+            margin-right: 8px;
+            display: inline-block;
         }
         
         .tab-btn:hover {
             background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-1px);
         }
         
         .tab-btn.active {
             background: rgba(255, 255, 255, 0.3);
-            border-color: rgba(255, 255, 255, 0.5);
-            font-weight: 500;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            font-weight: bold;
         }
         
         .content-area {
@@ -83,43 +81,15 @@
             background: white;
         }
         
-        .iframe-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: none;
-        }
-        
-        .iframe-container.active {
-            display: block;
-        }
-        
         iframe {
             width: 100%;
             height: 100%;
             border: none;
+            display: none;
         }
         
-        .loading {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            font-size: 1.2rem;
-            color: #666;
-        }
-        
-        .no-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            color: #888;
-            font-size: 1.1rem;
-            text-align: center;
-            padding: 20px;
+        iframe.active {
+            display: block;
         }
         
         footer {
@@ -130,72 +100,27 @@
             background: white;
             border-top: 1px solid #eee;
         }
-        
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .buttons-container {
-                width: 100%;
-                justify-content: center;
-                margin-top: 10px;
-            }
-            
-            h1 {
-                margin-bottom: 5px;
-            }
-            
-            .tab-btn {
-                padding: 5px 10px;
-                font-size: 0.8rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .buttons-container {
-                justify-content: space-between;
-            }
-            
-            .tab-btn {
-                flex: 1;
-                text-align: center;
-                min-width: 30%;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <div class="header-content">
-                <h1>VLESS工具箱🧰</h1>
-                <div class="buttons-container">
-
-                    <button class="tab-btn" data-url="https://rnik-001.github.io/JRZF/">算法助手转换</button>
-                    <button class="tab-btn active" data-url="https://htmlpreview.github.io/?https://raw.githubusercontent.com/iosDG001/_/refs/heads/main/SS-V2">SS-V2</button>
-                    <button class="tab-btn" data-url="https://htmlpreview.github.io/?https://raw.githubusercontent.com/iosDG001/_/refs/heads/main/Clash-V2">Clash-V2</button>
-                </div>
+            <h1>VLESS全能工具箱🧰</h1>
+            <div class="tabs-container" id="tabsContainer">
+                <!-- 您可以直接在这里添加按钮 -->
+                <button class="tab-btn active" data-url="https://rnik-001.github.io/JRZF/">算法提取</button>
+                <button class="tab-btn" data-url="https://rnik-001.github.io/VLESS/">BEE</button>
+                <button class="tab-btn" data-url="https://htmlpreview.github.io/?https://raw.githubusercontent.com/iosDG001/_/refs/heads/main/SS-V2">火箭转V2</button>
+                <button class="tab-btn" data-url="https://htmlpreview.github.io/?https://raw.githubusercontent.com/iosDG001/_/refs/heads/main/Clash-V2">配置转节点</button>
+                <!-- 添加更多按钮示例： -->
+                <!-- <button class="tab-btn" data-url="https://example.com">新工具1</button> -->
+                <!-- <button class="tab-btn" data-url="https://example.com">新工具2</button> -->
             </div>
         </header>
         
-        <main class="content-area">
-            <div class="iframe-container active">
-                <iframe src="https://rnik-001.github.io/JRZF/" title="SS-V2页面"></iframe>
-            </div>
-            
-            <div class="iframe-container">
-                <iframe src="about:blank" title="Clash-V2页面"></iframe>
-            </div>
-            
-            <div class="iframe-container">
-                <iframe src="about:blank" title="JRZF页面"></iframe>
-            </div>
-            
-            <div class="no-content">
-                请点击上方的按钮加载相应网页
-            </div>
+        <main class="content-area" id="contentArea">
+            <!-- iframe会自动创建 -->
+            <iframe src="https://rnik-001.github.io/JRZF/" class="active"></iframe>
         </main>
         
         <footer>
@@ -204,58 +129,34 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const tabButtons = document.querySelectorAll('.tab-btn');
-            const iframeContainers = document.querySelectorAll('.iframe-container');
-            const noContentMessage = document.querySelector('.no-content');
-            
-            // 初始化：显示第一个iframe，隐藏无内容消息
-            noContentMessage.style.display = 'none';
-            
-            // 为每个按钮添加点击事件
-            tabButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const url = this.getAttribute('data-url');
-                    
-                    // 移除所有按钮的active类
-                    tabButtons.forEach(btn => btn.classList.remove('active'));
-                    
-                    // 为当前点击的按钮添加active类
-                    this.classList.add('active');
-                    
-                    // 隐藏所有iframe容器
-                    iframeContainers.forEach(container => {
-                        container.classList.remove('active');
-                    });
-                    
-                    // 隐藏无内容消息
-                    noContentMessage.style.display = 'none';
-                    
-                    // 找到对应的iframe容器
-                    const index = Array.from(tabButtons).indexOf(this);
-                    const targetContainer = iframeContainers[index];
-                    
-                    // 显示目标容器
-                    targetContainer.classList.add('active');
-                    
-                    // 如果iframe的src是about:blank，则加载对应的URL
-                    const iframe = targetContainer.querySelector('iframe');
-                    if (iframe.src === 'about:blank' || iframe.src === '') {
-                        iframe.src = url;
-                    }
-                });
-            });
-            
-            // 处理iframe加载事件
-            document.querySelectorAll('iframe').forEach(iframe => {
-                iframe.addEventListener('load', function() {
-                    // 可以在这里添加加载完成的处理，如移除加载指示器
-                });
+        // 获取所有按钮
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const contentArea = document.getElementById('contentArea');
+        
+        // 为每个按钮添加点击事件
+        tabButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const url = this.getAttribute('data-url');
                 
-                iframe.addEventListener('error', function() {
-                    // 处理加载错误
-                    console.error('无法加载iframe内容:', this.src);
+                // 更新按钮状态
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                // 创建或显示对应的iframe
+                let iframe = document.querySelector(`iframe[src="${url}"]`);
+                
+                if (!iframe) {
+                    // 创建新的iframe
+                    iframe = document.createElement('iframe');
+                    iframe.src = url;
+                    contentArea.appendChild(iframe);
+                }
+                
+                // 显示当前iframe，隐藏其他
+                document.querySelectorAll('iframe').forEach(frame => {
+                    frame.classList.remove('active');
                 });
+                iframe.classList.add('active');
             });
         });
     </script>
