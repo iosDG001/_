@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SS配置提取</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(145deg, #1c1c1e, #2c2c2e);
+            color: #f2f2f7;
+            min-height: 100vh;
+            padding: 20px;
+            padding-top: 60px;
+        }
+        
+        .tg-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #229ED9, #0088cc);
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0, 136, 204, 0.4);
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+        
+        .tg-icon:hover {
+            transform: scale(1.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #32d74b, #64d2ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 8px;
+        }
+        
+        .header p {
+            font-size: 14px;
+            color: #8e8e93;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .card {
+            background: rgba(44, 44, 46, 0.8);
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        
+        .config-section, .results-section {
+            transition: all 0.3s ease;
+        }
+        
+        .results-section {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        
+        .results-section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .section-header h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #f2f2f7;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .section-header h2 i {
+            color: #32d74b;
+        }
+        
+        .back-btn {
+            background: rgba(99, 99, 102, 0.3);
+            border: none;
+            color: #aeaeb2;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .back-btn:active {
+            background: rgba(99, 99, 102, 0.5);
+        }
+        
+        .form-group {
+            margin-bottom: 18px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #98989d;
+            margin-bottom: 6px;
+            letter-spacing: -0.1px;
+        }
+        
+        .input-group {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .input-group i {
+            position: absolute;
+            left: 14px;
+            color: #32d74b;
+            font-size: 16px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 14px 14px 14px 42px;
+            background: rgba(28, 28, 30, 0.8);
+            border: 1px solid rgba(99, 99, 102, 0.5);
+            border-radius: 10px;
+            color: #f2f2f7;
+            font-size: 16px;
+            transition: all 0.2s;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #32d74b;
+            box-shadow: 0 0 0 3px rgba(50, 215, 75, 0.2);
+        }
+        
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #32d74b, #30d158);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 5px;
+        }
+        
+        .btn:active {
+            transform: scale(0.98);
+            background: linear-gradient(135deg, #2dc143, #2bc152);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #5c5c5e, #7c7c7e);
+            margin-top: 10px;
+        }
+        
+        .btn-secondary:active {
+            background: linear-gradient(135deg, #4c4c4e, #6c6c6e);
+        }
+        
+        .loader {
+            display: none;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid #32d74b;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 15px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .status {
+            padding: 12px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-size: 14px;
+            display: none;
+            text-align: center;
+        }
+        
+        .status.success {
+            background: rgba(50, 215, 75, 0.15);
+            border: 1px solid rgba(50, 215, 75, 0.3);
+            color: #32d74b;
+            display: block;
+        }
+        
+        .status.error {
+            background: rgba(255, 69, 58, 0.15);
+            border: 1px solid rgba(255, 69, 58, 0.3);
+            color: #ff453a;
+            display: block;
+        }
+        
+        .status.info {
+            background: rgba(90, 200, 245, 0.15);
+            border: 1px solid rgba(90, 200, 245, 0.3);
+            color: #5ac8f5;
+            display: block;
+        }
+        
+        .results-count {
+            background: #32d74b;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .result-item {
+            background: rgba(28, 28, 30, 0.8);
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(99, 99, 102, 0.3);
+            position: relative;
+            word-break: break-all;
+        }
+        
+        .result-city {
+            display: inline-block;
+            background: linear-gradient(135deg, #64d2ff, #5ac8f5);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .result-method {
+            display: inline-block;
+            background: rgba(255, 214, 10, 0.2);
+            color: #ffd60a;
+            padding: 3px 8px;
+            border-radius: 8px;
+            font-size: 11px;
+            margin-left: 6px;
+            border: 1px solid rgba(255, 214, 10, 0.3);
+        }
+        
+        .result-url {
+            font-size: 13px;
+            color: #aeaeb2;
+            margin-top: 8px;
+            font-family: 'SF Mono', monospace;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: rgba(99, 99, 102, 0.3);
+            border: none;
+            color: #aeaeb2;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .copy-btn:active {
+            background: rgba(99, 99, 102, 0.5);
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 40px 20px;
+            color: #8e8e93;
+            font-size: 15px;
+        }
+        
+        .no-results i {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: #5c5c5e;
+        }
+        
+        .results-list {
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 5px;
+            margin-top: 15px;
+        }
+        
+        .results-list::-webkit-scrollbar {
+            width: 5px;
+        }
+        
+        .results-list::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        
+        .results-list::-webkit-scrollbar-thumb {
+            background: #32d74b;
+            border-radius: 10px;
+        }
+        
+        /* 复制成功提示 */
+        .toast {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: rgba(44, 44, 46, 0.95);
+            color: white;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1001;
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 0.3s ease;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .toast.success {
+            border-left: 4px solid #32d74b;
+        }
+        
+        .toast.error {
+            border-left: 4px solid #ff453a;
+        }
+        
+        .toast.info {
+            border-left: 4px solid #5ac8f5;
+        }
+        
+        .toast i {
+            font-size: 16px;
+        }
+        
+        .toast.success i {
+            color: #32d74b;
+        }
+        
+        @media (max-width: 380px) {
+            body {
+                padding: 15px;
+                padding-top: 60px;
+            }
+            
+            .card {
+                padding: 16px;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .toast {
+                top: 70px;
+                right: 15px;
+                left: 15px;
+                transform: translateY(-100px);
+            }
+            
+            .toast.show {
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- TG频道图标 -->
+    <a href="https://t.me/iOSAWJ" target="_blank" class="tg-icon">
+        <i class="fab fa-telegram-plane"></i>
+    </a>
+    
+    <!-- 复制成功提示 -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span>复制成功</span>
+    </div>
+    
+    <!-- 头部 -->
+    <div class="header">
+        <h1>快捷加速器提取</h1>
+        <p>一键提取并解密Shadowsocks配置</p>
+    </div>
+    
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 主卡片 -->
+        <div class="card">
+            <!-- 配置部分 -->
+            <div class="config-section" id="configSection">
+                <div class="section-header">
+                    <h2><i class="fas fa-cog"></i> 配置参数</h2>
+                </div>
+                
+                <div class="form-group">
+                    <label>API地址</label>
+                    <div class="input-group">
+                        <i class="fas fa-link"></i>
+                        <input type="text" id="apiUrl" value="http://cnc07api.cnc07.com/api/cnc07apijm" placeholder="请输入API地址">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>加密密钥</label>
+                    <div class="input-group">
+                        <i class="fas fa-key"></i>
+                        <input type="text" id="encryptionKey" value="1kv10h7t*C3f8c@$" placeholder="请输入AES密钥">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>加密IV</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="text" id="encryptionIV" value="@$6l&bxb5n35c2w9" placeholder="请输入AES IV">
+                    </div>
+                </div>
+                
+                <button class="btn" id="fetchBtn">
+                    <i class="fas fa-download"></i> 提取配置
+                </button>
+                
+                <div class="loader" id="loader"></div>
+                
+                <div id="status" class="status info">
+                    <i class="fas fa-info-circle"></i> 点击上方按钮开始提取
+                </div>
+            </div>
+            
+            <!-- 结果部分 -->
+            <div class="results-section" id="resultsSection">
+                <div class="section-header">
+                    <button class="back-btn" id="backBtn">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h2><i class="fas fa-list-alt"></i> 提取结果</h2>
+                    <span class="results-count" id="resultsCount">0 个</span>
+                </div>
+                
+                <button class="btn btn-secondary" id="copyAllBtn">
+                    <i class="fas fa-copy"></i> 一键复制全部
+                </button>
+                
+                <div class="results-list" id="resultsList"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 显示状态信息
+        function showStatus(message, type = 'info') {
+            const statusEl = document.getElementById('status');
+            statusEl.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i> ${message}`;
+            statusEl.className = `status ${type}`;
+        }
+        
+        // 显示复制成功提示
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const icon = toast.querySelector('i');
+            const text = toast.querySelector('span');
+            
+            // 设置图标和颜色
+            if (type === 'success') {
+                icon.className = 'fas fa-check-circle';
+                toast.className = 'toast success';
+            } else if (type === 'error') {
+                icon.className = 'fas fa-exclamation-circle';
+                toast.className = 'toast error';
+            } else {
+                icon.className = 'fas fa-info-circle';
+                toast.className = 'toast info';
+            }
+            
+            text.textContent = message;
+            toast.classList.add('show');
+            
+            // 3秒后自动隐藏
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        // 显示/隐藏加载动画
+        function toggleLoader(show) {
+            document.getElementById('loader').style.display = show ? 'block' : 'none';
+        }
+        
+        // 显示配置部分，隐藏结果部分
+        function showConfigSection() {
+            document.getElementById('configSection').style.display = 'block';
+            document.getElementById('resultsSection').classList.remove('active');
+            setTimeout(() => {
+                document.getElementById('configSection').style.opacity = '1';
+            }, 10);
+        }
+        
+        // 显示结果部分，隐藏配置部分
+        function showResultsSection() {
+            document.getElementById('configSection').style.display = 'none';
+            document.getElementById('configSection').style.opacity = '0';
+            document.getElementById('resultsSection').classList.add('active');
+        }
+        
+        // 复制文本到剪贴板
+        function copyToClipboard(text, showNotification = true) {
+            navigator.clipboard.writeText(text).then(() => {
+                if (showNotification) {
+                    showToast('已复制到剪贴板!', 'success');
+                }
+            }).catch(err => {
+                console.error('复制失败:', err);
+                if (showNotification) {
+                    showToast('复制失败，请手动复制', 'error');
+                }
+            });
+        }
+        
+        // Base64编码（URL安全）
+        function base64UrlEncode(str) {
+            const base64 = btoa(str);
+            return base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+        }
+        
+        // AES-CBC解密函数（使用Web Crypto API）
+        async function decryptAesCbc(encryptedText, key, iv) {
+            try {
+                // 将Base64字符串转换为ArrayBuffer
+                const encryptedData = Uint8Array.from(atob(encryptedText), c => c.charCodeAt(0));
+                
+                // 导入密钥
+                const cryptoKey = await crypto.subtle.importKey(
+                    'raw',
+                    new TextEncoder().encode(key),
+                    { name: 'AES-CBC' },
+                    false,
+                    ['decrypt']
+                );
+                
+                // 解密
+                const decryptedData = await crypto.subtle.decrypt(
+                    {
+                        name: 'AES-CBC',
+                        iv: new TextEncoder().encode(iv)
+                    },
+                    cryptoKey,
+                    encryptedData
+                );
+                
+                // 将ArrayBuffer转换为字符串
+                return new TextDecoder().decode(decryptedData);
+            } catch (error) {
+                console.error('解密失败:', error);
+                throw new Error('AES解密失败: ' + error.message);
+            }
+        }
+        
+        // 提取并格式化数据
+        function extractAndFormatData(data) {
+            const results = [];
+            
+            // 正则表达式匹配IP、端口、方法和密码
+            const serverPattern = /SS\s*=\s*ss,\s*([\d.]+),\s*(\d+),\s*encrypt-method=([\w-]+),\s*password=(\w+)/g;
+            let match;
+            
+            while ((match = serverPattern.exec(data)) !== null) {
+                const ip = match[1];
+                const port = match[2];
+                const method = match[3];
+                const password = match[4];
+                
+                // 构建SS链接
+                const ssUrl = `${method}:${password}@${ip}:${port}`;
+                const encoded = base64UrlEncode(ssUrl);
+                
+                // 尝试提取城市信息
+                let city = "未知";
+                const cityPattern = new RegExp(`${ip}.*?"city":"([^"]+)"`, 's');
+                const cityMatch = cityPattern.exec(data);
+                if (cityMatch && cityMatch[1]) {
+                    city = cityMatch[1];
+                }
+                
+                results.push({
+                    fullUrl: `ss://${encoded}#${encodeURIComponent(city)}`,
+                    ip,
+                    port,
+                    method,
+                    password,
+                    city
+                });
+            }
+            
+            return results;
+        }
+        
+        // 渲染结果到页面
+        function renderResults(results) {
+            const resultsList = document.getElementById('resultsList');
+            const resultsCount = document.getElementById('resultsCount');
+            
+            // 更新结果数量
+            resultsCount.textContent = `${results.length} 个`;
+            
+            if (results.length === 0) {
+                resultsList.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <p>未找到任何配置</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            resultsList.innerHTML = '';
+            
+            results.forEach((result, index) => {
+                const resultEl = document.createElement('div');
+                resultEl.className = 'result-item';
+                
+                resultEl.innerHTML = `
+                    <div>
+                        <span class="result-city">${result.city}</span>
+                        <span class="result-method">${result.method}</span>
+                        <div style="font-size: 12px; color: #8e8e93; margin-top: 5px;">
+                            ${result.ip}:${result.port}
+                        </div>
+                        <div class="result-url">${result.fullUrl}</div>
+                        <button class="copy-btn" data-url="${result.fullUrl}">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                `;
+                
+                resultsList.appendChild(resultEl);
+            });
+            
+            // 添加复制按钮事件监听
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const url = btn.getAttribute('data-url');
+                    copyToClipboard(url);
+                    
+                    // 添加动画效果
+                    const icon = btn.querySelector('i');
+                    const originalClass = icon.className;
+                    icon.className = 'fas fa-check';
+                    setTimeout(() => {
+                        icon.className = originalClass;
+                    }, 1000);
+                });
+            });
+        }
+        
+        // 一键复制全部
+        function copyAllResults(results) {
+            if (results.length === 0) {
+                showToast('没有可复制的内容', 'error');
+                return;
+            }
+            
+            const allUrls = results.map(r => r.fullUrl).join('\n');
+            copyToClipboard(allUrls);
+            
+            // 添加按钮动画效果
+            const copyAllBtn = document.getElementById('copyAllBtn');
+            const originalText = copyAllBtn.innerHTML;
+            copyAllBtn.innerHTML = '<i class="fas fa-check"></i> 已复制全部';
+            copyAllBtn.style.background = 'linear-gradient(135deg, #2dc143, #2bc152)';
+            
+            setTimeout(() => {
+                copyAllBtn.innerHTML = originalText;
+                copyAllBtn.style.background = 'linear-gradient(135deg, #5c5c5e, #7c7c7e)';
+            }, 2000);
+        }
+        
+        // 主函数：获取和解密数据
+        async function fetchAndDecrypt() {
+            // 获取输入值
+            const apiUrl = document.getElementById('apiUrl').value;
+            const key = document.getElementById('encryptionKey').value;
+            const iv = document.getElementById('encryptionIV').value;
+            
+            // 验证输入
+            if (!apiUrl || !key || !iv) {
+                showStatus('请填写所有必填字段', 'error');
+                showToast('请填写所有必填字段', 'error');
+                return;
+            }
+            
+            // 显示加载动画
+            toggleLoader(true);
+            showStatus('正在获取加密数据...', 'info');
+            
+            try {
+                // 使用fetch获取数据（添加超时控制）
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 10000);
+                
+                const response = await fetch(apiUrl, {
+                    signal: controller.signal
+                });
+                
+                clearTimeout(timeoutId);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP错误: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                // 检查是否有servers字段
+                if (!data.servers) {
+                    throw new Error('API响应中没有找到servers字段');
+                }
+                
+                showStatus('数据获取成功，正在解密...', 'info');
+                
+                // 解密数据
+                const decryptedData = await decryptAesCbc(data.servers, key, iv);
+                
+                // 提取和格式化数据
+                const results = extractAndFormatData(decryptedData);
+                
+                // 渲染结果
+                renderResults(results);
+                
+                // 保存结果到全局变量，供一键复制使用
+                window.currentResults = results;
+                
+                // 切换到结果视图
+                showResultsSection();
+                
+                showStatus(`成功提取 ${results.length} 个配置`, 'success');
+                showToast(`成功提取 ${results.length} 个配置`, 'success');
+                
+            } catch (error) {
+                console.error('处理失败:', error);
+                
+                if (error.name === 'AbortError') {
+                    showStatus('请求超时，请检查网络', 'error');
+                    showToast('请求超时，请检查网络', 'error');
+                } else if (error.message.includes('解密失败')) {
+                    showStatus('解密失败，请检查密钥和IV', 'error');
+                    showToast('解密失败，请检查密钥和IV', 'error');
+                } else if (error.message.includes('HTTP错误')) {
+                    showStatus(`网络请求失败: ${error.message}`, 'error');
+                    showToast(`网络请求失败: ${error.message}`, 'error');
+                } else {
+                    showStatus(`错误: ${error.message}`, 'error');
+                    showToast(`错误: ${error.message}`, 'error');
+                }
+            } finally {
+                // 隐藏加载动画
+                toggleLoader(false);
+            }
+        }
+        
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            // 提取配置按钮事件
+            document.getElementById('fetchBtn').addEventListener('click', fetchAndDecrypt);
+            
+            // 返回按钮事件
+            document.getElementById('backBtn').addEventListener('click', showConfigSection);
+            
+            // 一键复制全部按钮事件
+            document.getElementById('copyAllBtn').addEventListener('click', () => {
+                if (window.currentResults && window.currentResults.length > 0) {
+                    copyAllResults(window.currentResults);
+                } else {
+                    showToast('请先提取配置', 'error');
+                }
+            });
+            
+            // 初始显示状态
+            showStatus('点击上方按钮开始提取', 'info');
+        });
+    </script>
+</body>
+</html>
