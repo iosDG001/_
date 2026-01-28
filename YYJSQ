@@ -6,7 +6,7 @@
     <title>SS配置提取</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* 所有CSS样式保持不变 */
+        /* === 你的原始UI样式（完全保持不变）=== */
         * {
             margin: 0;
             padding: 0;
@@ -23,7 +23,422 @@
             padding-top: 60px;
         }
         
-        /* ... [所有原有CSS代码保持不变] ... */
+        .tg-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #229ED9, #0088cc);
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0, 136, 204, 0.4);
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+        
+        .tg-icon:hover {
+            transform: scale(1.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #32d74b, #64d2ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 8px;
+        }
+        
+        .header p {
+            font-size: 14px;
+            color: #8e8e93;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .card {
+            background: rgba(44, 44, 46, 0.8);
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        
+        .config-section, .results-section {
+            transition: all 0.3s ease;
+        }
+        
+        .results-section {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        
+        .results-section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .section-header h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #f2f2f7;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .section-header h2 i {
+            color: #32d74b;
+        }
+        
+        .back-btn {
+            background: rgba(99, 99, 102, 0.3);
+            border: none;
+            color: #aeaeb2;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .back-btn:active {
+            background: rgba(99, 99, 102, 0.5);
+        }
+        
+        .form-group {
+            margin-bottom: 18px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #98989d;
+            margin-bottom: 6px;
+            letter-spacing: -0.1px;
+        }
+        
+        .input-group {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .input-group i {
+            position: absolute;
+            left: 14px;
+            color: #32d74b;
+            font-size: 16px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 14px 14px 14px 42px;
+            background: rgba(28, 28, 30, 0.8);
+            border: 1px solid rgba(99, 99, 102, 0.5);
+            border-radius: 10px;
+            color: #f2f2f7;
+            font-size: 16px;
+            transition: all 0.2s;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #32d74b;
+            box-shadow: 0 0 0 3px rgba(50, 215, 75, 0.2);
+        }
+        
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #32d74b, #30d158);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 5px;
+        }
+        
+        .btn:active {
+            transform: scale(0.98);
+            background: linear-gradient(135deg, #2dc143, #2bc152);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #5c5c5e, #7c7c7e);
+            margin-top: 10px;
+        }
+        
+        .btn-secondary:active {
+            background: linear-gradient(135deg, #4c4c4e, #6c6c6e);
+        }
+        
+        .loader {
+            display: none;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid #32d74b;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 15px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .status {
+            padding: 12px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-size: 14px;
+            display: none;
+            text-align: center;
+        }
+        
+        .status.success {
+            background: rgba(50, 215, 75, 0.15);
+            border: 1px solid rgba(50, 215, 75, 0.3);
+            color: #32d74b;
+            display: block;
+        }
+        
+        .status.error {
+            background: rgba(255, 69, 58, 0.15);
+            border: 1px solid rgba(255, 69, 58, 0.3);
+            color: #ff453a;
+            display: block;
+        }
+        
+        .status.info {
+            background: rgba(90, 200, 245, 0.15);
+            border: 1px solid rgba(90, 200, 245, 0.3);
+            color: #5ac8f5;
+            display: block;
+        }
+        
+        .results-count {
+            background: #32d74b;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .result-item {
+            background: rgba(28, 28, 30, 0.8);
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(99, 99, 102, 0.3);
+            position: relative;
+            word-break: break-all;
+        }
+        
+        .result-city {
+            display: inline-block;
+            background: linear-gradient(135deg, #64d2ff, #5ac8f5);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .result-method {
+            display: inline-block;
+            background: rgba(255, 214, 10, 0.2);
+            color: #ffd60a;
+            padding: 3px 8px;
+            border-radius: 8px;
+            font-size: 11px;
+            margin-left: 6px;
+            border: 1px solid rgba(255, 214, 10, 0.3);
+        }
+        
+        .result-url {
+            font-size: 13px;
+            color: #aeaeb2;
+            margin-top: 8px;
+            font-family: 'SF Mono', monospace;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: rgba(99, 99, 102, 0.3);
+            border: none;
+            color: #aeaeb2;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .copy-btn:active {
+            background: rgba(99, 99, 102, 0.5);
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 40px 20px;
+            color: #8e8e93;
+            font-size: 15px;
+        }
+        
+        .no-results i {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: #5c5c5e;
+        }
+        
+        .results-list {
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 5px;
+            margin-top: 15px;
+        }
+        
+        .results-list::-webkit-scrollbar {
+            width: 5px;
+        }
+        
+        .results-list::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        
+        .results-list::-webkit-scrollbar-thumb {
+            background: #32d74b;
+            border-radius: 10px;
+        }
+        
+        /* 复制成功提示 */
+        .toast {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: rgba(44, 44, 46, 0.95);
+            color: white;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1001;
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 0.3s ease;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .toast.success {
+            border-left: 4px solid #32d74b;
+        }
+        
+        .toast.error {
+            border-left: 4px solid #ff453a;
+        }
+        
+        .toast.info {
+            border-left: 4px solid #5ac8f5;
+        }
+        
+        .toast i {
+            font-size: 16px;
+        }
+        
+        .toast.success i {
+            color: #32d74b;
+        }
+        
+        /* === 新增的代理选项样式（与UI保持一致）=== */
+        .proxy-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 0;
+            margin-top: 5px;
+        }
+        
+        .proxy-checkbox {
+            width: 18px;
+            height: 18px;
+            accent-color: #32d74b;
+            cursor: pointer;
+        }
+        
+        .proxy-label {
+            font-size: 13px;
+            color: #98989d;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .proxy-label i {
+            color: #64d2ff;
+            font-size: 14px;
+        }
         
         @media (max-width: 380px) {
             body {
@@ -104,11 +519,14 @@
                     </div>
                 </div>
                 
+                <!-- 新增代理选项（与原UI风格一致） -->
                 <div class="form-group">
-                    <label>使用代理（解决跨域）</label>
-                    <div style="margin-top: 8px; font-size: 13px; color: #8e8e93;">
-                        <input type="checkbox" id="useProxy" checked>
-                        <label for="useProxy" style="margin-left: 5px;">启用CORS代理绕过跨域限制</label>
+                    <div class="proxy-option">
+                        <input type="checkbox" id="useProxy" class="proxy-checkbox" checked>
+                        <label for="useProxy" class="proxy-label">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>启用代理模式（解决GitHub预览跨域问题）</span>
+                        </label>
                     </div>
                 </div>
                 
@@ -220,53 +638,16 @@
         
         // 使用代理URL解决跨域问题
         function getProxyUrl(originalUrl) {
-            // 注意：这里使用的是公共代理，仅用于测试
-            // 生产环境建议使用自己的代理服务器
+            // 使用CORS代理绕过跨域限制
+            // 注意：这些是公共代理，仅用于临时解决GitHub预览问题
             const proxyUrls = [
-                'https://api.allorigins.win/raw?url=',
-                'https://corsproxy.io/?',
-                'https://cors-anywhere.herokuapp.com/'
+                'https://api.allorigins.win/raw?url=',  // 最稳定的代理
+                'https://corsproxy.io/?',  // 备用代理
+                'https://api.codetabs.com/v1/proxy?quest='  // 第二备用
             ];
             
             // 使用第一个可用的代理
-            const proxy = proxyUrls[0];
-            return proxy + encodeURIComponent(originalUrl);
-        }
-        
-        // 尝试使用代理获取数据
-        async function fetchWithProxy(apiUrl) {
-            const useProxy = document.getElementById('useProxy').checked;
-            
-            if (useProxy) {
-                // 使用代理
-                const proxyUrl = getProxyUrl(apiUrl);
-                showStatus('正在通过代理获取数据...', 'info');
-                
-                try {
-                    const response = await fetch(proxyUrl, {
-                        headers: {
-                            'Accept': 'application/json'
-                        }
-                    });
-                    
-                    if (!response.ok) {
-                        throw new Error(`代理请求失败: ${response.status}`);
-                    }
-                    
-                    return await response.json();
-                } catch (proxyError) {
-                    console.warn('代理失败，尝试直接请求:', proxyError);
-                    // 如果代理失败，尝试直接请求（可能会失败，但试试看）
-                }
-            }
-            
-            // 直接请求（在GitHub预览中会失败，但在本地或GitHub Pages中可能成功）
-            showStatus('正在直接获取数据...', 'info');
-            const response = await fetch(apiUrl);
-            if (!response.ok) {
-                throw new Error(`直接请求失败: ${response.status}`);
-            }
-            return await response.json();
+            return proxyUrls[0] + encodeURIComponent(originalUrl);
         }
         
         // AES-CBC解密函数（使用Web Crypto API）
@@ -427,6 +808,7 @@
             const apiUrl = document.getElementById('apiUrl').value;
             const key = document.getElementById('encryptionKey').value;
             const iv = document.getElementById('encryptionIV').value;
+            const useProxy = document.getElementById('useProxy').checked;
             
             // 验证输入
             if (!apiUrl || !key || !iv) {
@@ -437,19 +819,33 @@
             
             // 显示加载动画
             toggleLoader(true);
-            showStatus('正在获取数据...', 'info');
+            showStatus(useProxy ? '正在通过代理获取数据...' : '正在直接获取数据...', 'info');
             
             try {
-                // 使用fetchWithProxy获取数据（添加超时控制）
+                // 构建最终请求URL
+                let requestUrl = apiUrl;
+                if (useProxy) {
+                    requestUrl = getProxyUrl(apiUrl);
+                }
+                
+                // 使用fetch获取数据（添加超时控制）
                 const controller = new AbortController();
                 const timeoutId = setTimeout(() => controller.abort(), 15000);
                 
-                let data;
-                try {
-                    data = await fetchWithProxy(apiUrl);
-                } finally {
-                    clearTimeout(timeoutId);
+                const response = await fetch(requestUrl, {
+                    signal: controller.signal,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                clearTimeout(timeoutId);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP错误: ${response.status}`);
                 }
+                
+                const data = await response.json();
                 
                 // 检查是否有servers字段
                 if (!data.servers) {
@@ -494,8 +890,8 @@
                 }
                 
                 // 如果是跨域错误，给出具体建议
-                if (error.message.includes('Failed to fetch') || error.message.includes('CORS')) {
-                    showStatus('提示: 跨域请求被阻止。已启用代理模式，请重试。', 'info');
+                if (error.message.includes('Failed to fetch') || error.message.includes('CORS') || error.message.includes('blocked')) {
+                    showStatus('提示: 跨域请求被阻止。请确保代理模式已启用，或尝试GitHub Pages部署。', 'info');
                 }
             } finally {
                 // 隐藏加载动画
@@ -523,28 +919,11 @@
             // 初始显示状态
             showStatus('点击上方按钮开始提取', 'info');
             
-            // 添加测试按钮（用于调试）
-            const testBtn = document.createElement('button');
-            testBtn.className = 'btn btn-secondary';
-            testBtn.style.marginTop = '10px';
-            testBtn.innerHTML = '<i class="fas fa-vial"></i> 测试API连接';
-            testBtn.onclick = async () => {
-                const apiUrl = document.getElementById('apiUrl').value;
-                showStatus('正在测试API连接...', 'info');
-                
-                try {
-                    const response = await fetch(getProxyUrl(apiUrl));
-                    if (response.ok) {
-                        showStatus('API连接正常 ✓', 'success');
-                    } else {
-                        showStatus(`API连接失败: ${response.status}`, 'error');
-                    }
-                } catch (error) {
-                    showStatus(`测试失败: ${error.message}`, 'error');
-                }
-            };
-            
-            document.getElementById('configSection').appendChild(testBtn);
+            // 自动检测是否在GitHub预览中
+            if (window.location.hostname === 'htmlpreview.github.io') {
+                document.getElementById('useProxy').checked = true;
+                showStatus('检测到GitHub预览环境，已自动启用代理模式', 'info');
+            }
         });
     </script>
 </body>
