@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O-SASE办公平台：国际互联网加速与万物互联 - 橙汁科技</title>
+    <!-- 原站 meta 描述 -->
+    <meta name="description" content="“橙汁科技官网”由浙江橙汁科技有限公司所有和运营。我们制定《用户隐私政策》旨在说明处理您个人信息的规则。O-SASE安全办公平台与SD-WAN，为企业客户提供高速稳定、超低延迟的企业网络解决方案。">
+    <meta property="og:title" content="O-SASE办公平台: 国际互联网加速与万物互联">
+    <meta property="og:description" content="橙汁科技依托全球广泛布局的基础设施节点，通过O-SASE安全办公平台与SD-WAN，为企业客户提供高速、稳定、超低延迟且智能可靠的企业网络解决方案。">
+    <meta property="twitter:title" content="O-SASE办公平台: 国际互联网加速与万物互联">
+    <meta property="twitter:description" content="橙汁科技依托全球广泛布局的基础设施节点，通过O-SASE安全办公平台与SD-WAN，为企业客户提供高速、稳定、超低延迟且智能可靠的企业网络解决方案。">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- 使用 Font Awesome 6 免费图标库，确保所有图标专业显示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- 内联样式：完全复现原站视觉特点（现代、蓝色调、圆角、卡片感） -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: #ffffff;
+            color: #1e293b;
+            line-height: 1.5;
+        }
+        /* 导航栏 */
+        .navbar-no-shadow {
+            background-color: #ffffff;
+            border-bottom: 1px solid #f1f5f9;
+            padding: 0.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .container-regular {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        .navbar-wrapper-2 {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .nav-menu-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+        .nav-link {
+            text-decoration: none;
+            color: #1e293b;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+        .nav-link:hover {
+            color: #007aff;
+        }
+        .bold-text-6, .bold-text-7, .bold-text-8, .bold-text-9 {
+            font-weight: 600;
+        }
+        .nav-dropdown {
+            position: relative;
+        }
+        .nav-dropdown-toggle-2 {
+            cursor: pointer;
+        }
+        .nav-dropdown-list {
+            display: none;
+            position: absolute;
+            background: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            padding: 0.75rem 0;
+            margin-top: 0.5rem;
+            min-width: 200px;
+            z-index: 100;
+        }
+        .nav-dropdown:hover .nav-dropdown-list {
+            display: block;
+        }
+        .nav-dropdown-list a {
+            display: block;
+            padding: 0.5rem 1.5rem;
+            text-decoration: none;
+            color: #1e293b;
+            font-size: 0.95rem;
+        }
+        .nav-dropdown-list a:hover {
+            background-color: #f8fafc;
+            color: #007aff;
+        }
+        /* banner */
+        .banner {
+            background-color: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 0.5rem 2rem;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .wrap {
+            max-width: 1280px;
+            width: 100%;
+        }
+        .info {
+            padding-right: 2rem;
+        }
+        .text {
+            color: #334155;
+            font-size: 0.95rem;
+        }
+        .clear {
+            position: absolute;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            opacity: 0.6;
+            font-size: 1.2rem;
+            color: #64748b;
+        }
+        .clear:hover {
+            opacity: 1;
+        }
+        /* 按钮 */
+        .button-2 {
+            background-color: #007aff;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .button-2:hover {
+            background-color: #005bbf;
+        }
+        .button-2.infra-sec {
+            background-color: white;
+            color: #007aff;
+            border: 1px solid #007aff;
+        }
+        .button-2.infra-sec:hover {
+            background-color: #e6f0ff;
+        }
+        /* 布局容器 */
+        .container-2, .container-3 {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        .section {
+            padding: 2rem 0;
+        }
+        .section-hero {
+            background: linear-gradient(to bottom, #ffffff, #f9fcff);
+        }
+        .div-block-2, .div-icon {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        .div-block-23 {
+            display: inline-flex;
+            align-items: center;
+            background-color: #e6f0ff;
+            border-radius: 9999px;
+            padding: 0.4rem 1.2rem;
+            gap: 0.5rem;
+            color: #007aff;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        .div-block-23 i {
+            font-size: 1rem;
+        }
+        .heading {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.2;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+        }
+        .heading.middle {
+            font-size: 2.5rem;
+        }
+        .heading.right {
+            text-align: left;
+        }
+        .heading.wide {
+            max-width: 700px;
+        }
+        .p-middle {
+            text-align: center;
+            color: #475569;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        .p-right {
+            color: #475569;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        .div-block-3 {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .image-5 {
+            max-width: 100%;
+            height: auto;
+            margin-top: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+        /* 产品网格 */
+        .w-layout-layout {
+            display: grid;
+            gap: 2rem;
+        }
+        .quick-stack.home {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .w-layout-cell {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+            border: 1px solid #f1f5f9;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .w-layout-cell:hover {
+            box-shadow: 0 15px 30px rgba(0,122,255,0.1);
+            border-color: #dbeafe;
+        }
+        .div-block-8 {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        .div-block-9 {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .div-block-9 i {
+            font-size: 1.8rem;
+            color: #007aff;
+        }
+        .div-block-10 {
+            font-weight: 600;
+            color: #007aff;
+            background: #e6f0ff;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+        }
+        .div-block-11 {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .heading-3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .link-block-2, .link-block-3, .link-block-4 {
+            text-decoration: none;
+            color: inherit;
+        }
+        .image-6 {
+            font-size: 1.5rem;
+            color: #007aff;
+        }
+        /* 特性区域 */
+        .feature {
+            background-color: #fafdff;
+        }
+        .quick-stack-3, .quick-stack-2 {
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .div-block-16 {
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+        .text-block-2 {
+            font-size: 1.35rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        .image-9 {
+            font-size: 4rem;
+            color: #007aff;
+        }
+        /* 基础设施 */
+        .infra .quick-stack-4 {
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+        }
+        .image-10 {
+            max-width: 100%;
+            border-radius: 2rem;
+            background: #dbeafe;
+            width: 100%;
+            aspect-ratio: 1/1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            color: #007aff;
+        }
+        /* 资质认证 */
+        .certification {
+            background-color: #ffffff;
+        }
+        .quick-stack-5 {
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+        .cell-6 {
+            text-align: center;
+            background: #f9fcff;
+            border: 1px solid #e2efff;
+            padding: 2rem 1rem;
+            border-radius: 1.5rem;
+        }
+        .cell-6 i {
+            font-size: 3rem;
+            color: #007aff;
+            margin-bottom: 0.5rem;
+        }
+        .text-block-3 {
+            font-size: 1.2rem;
+            margin: 0.5rem 0 0.2rem;
+        }
+        .text-block-4 {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        /* 客户区域 */
+        .client {
+            background-color: #f5f9ff;
+        }
+        .quick-stack-6 {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        .list {
+            list-style: none;
+        }
+        .div-block-20 {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: white;
+            border-radius: 3rem;
+            padding: 0.5rem 1rem 0.5rem 0.5rem;
+            margin-bottom: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        .image-11 {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #dbeafe;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: #007aff;
+        }
+        .text-block-7 {
+            font-weight: 600;
+        }
+        .text-block-8 {
+            color: #64748b;
+            font-size: 0.8rem;
+        }
+        /* 联系表单 */
+        .contact {
+            background: white;
+        }
+        .quick-stack-7 {
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        .outer-bg {
+            background: #f5f9ff;
+            border-radius: 2rem;
+            padding: 2.5rem;
+            height: 100%;
+        }
+        .heading-4 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        .div-block-21 {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .div-block-21 i {
+            font-size: 2.5rem;
+            color: #007aff;
+        }
+        .text-field-3, .textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            font-size: 1rem;
+            background: white;
+        }
+        .submit-button-2 {
+            background: #007aff;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 3rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+        }
+        .checkbox-field {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        /* 底部 */
+        .footer {
+            background-color: #0f1825;
+            color: #cbd5e1;
+        }
+        .footer a {
+            color: #cbd5e1;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            color: white;
+        }
+        .quick-stack-10 {
+            grid-template-columns: 1.5fr 1fr 1.5fr;
+            gap: 3rem;
+        }
+        .cell-12 img {
+            margin-right: 0.5rem;
+        }
+        .text-block-12 {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        .list-2 {
+            list-style: none;
+            margin-top: 1rem;
+        }
+        .list-item-8 {
+            margin-bottom: 0.5rem;
+        }
+        .bold-text-17 {
+            color: white;
+        }
+        .cell-14 .outer-bg {
+            background: #1a2635;
+        }
+        .heading-4.location {
+            color: white;
+        }
+        .text-block-9.location {
+            color: #9aa8b9;
+        }
+        .quick-stack-12 {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            border-top: 1px solid #2a3747;
+            padding-top: 2rem;
+            margin-top: 2rem;
+        }
+        .cell-118 .w-row {
+            display: flex;
+            gap: 1.5rem;
+        }
+        .version {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .text-decoration-none {
+            text-decoration: none;
+        }
+        .text-color-333 {
+            color: #cbd5e1;
+        }
+        .bg-icon {
+            background: #1e2c3a;
+            border-radius: 50%;
+        }
+        .w-form-done, .w-form-fail {
+            display: none;
+        }
+        /* 辅助 */
+        .w-checkbox-input {
+            width: 1.2rem;
+            height: 1.2rem;
+        }
+        .cell-15 {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .fa-arrow-up-right {
+            font-size: 1.2rem;
+        }
+        @media (max-width: 768px) {
+            .quick-stack.home, .quick-stack-5, .quick-stack-7, .quick-stack-10 {
+                grid-template-columns: 1fr;
+            }
+            .nav-menu-wrapper {
+                flex-direction: column;
+                align-items: start;
+            }
+        }
+        .disabled-clicking {
+            pointer-events: none;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <!-- 公告横幅（清理了测试文本） -->
+    <div class="banner" id="banner">
+        <div class="wrap">
+            <div id="info" class="info">
+                <div class="inner" id="inner">
+                    <div class="text" id="text">
+                        <i class="fas fa-globe" style="margin-right: 0.3rem;"></i> 欢迎体验全新 O-SASE 3.0：国际互联网加速、AIGC加速、5G SD-WAN 现已全面升级 —— 免费试用进行中
+                    </div>
+                </div>
+            </div>
+        </div>
+        <i class="fas fa-times clear" id="clear"></i>
+    </div>
+
+    <!-- 导航栏 -->
+    <div class="navbar-no-shadow">
+        <div class="container-regular">
+            <div class="navbar-wrapper-2">
+                <a href="index.html" aria-current="page" class="navbar-brand" style="font-weight: 700; font-size: 1.5rem; color: #007aff; text-decoration: none;">
+                    <i class="fas fa-leaf" style="margin-right: 0.3rem;"></i>橙汁科技
+                </a>
+                <nav role="navigation" class="nav-menu-wrapper">
+                    <ul role="list" class="nav-menu header">
+                        <li class="list-item-6"><a href="index.html" aria-current="page" class="nav-link"><strong class="bold-text-6">首页</strong></a></li>
+                        <li class="list-item-7">
+                            <div class="nav-dropdown">
+                                <div class="nav-dropdown-toggle-2"><strong class="bold-text-7">产品与服务 <i class="fas fa-chevron-down" style="font-size: 0.8rem;"></i></strong></div>
+                                <nav class="nav-dropdown-list">
+                                    <a href="product/gia.html" class="nav-dropdown-link"><strong>国际互联网加速</strong></a>
+                                    <a href="product/live.html" class="nav-dropdown-link"><strong>直播加速</strong></a>
+                                    <a href="product/aigc.html" class="nav-dropdown-link"><strong>AIGC服务加速</strong></a>
+                                    <a href="product/5g.html" class="nav-dropdown-link"><strong>5G SD-WAN</strong></a>
+                                    <a href="product/sdwan.html" class="nav-dropdown-link"><strong>Magic SD-WAN</strong></a>
+                                </nav>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul role="list" class="nav-menu header _2">
+                        <li class="list-nav-right second">
+                            <i class="fas fa-language" style="margin-right: 0.3rem;"></i>
+                            <a href="#" class="nav-link"><strong class="bold-text-8">简体中文</strong></a>
+                        </li>
+                        <li class="list-nav-right2"><a href="https://console.osase.net" target="_blank" class="nav-link"><strong class="bold-text-9">登录控制台</strong></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero 区域 -->
+    <section class="section-hero">
+        <div class="container-2">
+            <div class="div-block-2">
+                <div class="div-block-23">
+                    <i class="fas fa-globe"></i>
+                    <div class="text-block-11">安全合规、高速稳定</div>
+                </div>
+            </div>
+            <div class="div-heading">
+                <h1 class="heading"><strong>O-SASE办公平台:<br>国际互联网加速与万物互联</strong></h1>
+            </div>
+            <div class="div-paragraph">
+                <p class="p-middle">橙汁科技依托全球广泛布局的基础设施节点，通过O-SASE安全办公平台与SD-WAN，为企业客户提供高速、稳定、超低延迟且智能可靠的企业网络解决方案。</p>
+            </div>
+            <div class="div-button">
+                <a href="#contactus" class="button-2">联系我们免费试用</a>
+            </div>
+            <div class="div-block-3">
+                <i class="fas fa-globe-asia" style="font-size: 3rem; color: #007aff; opacity: 0.5;"></i>
+            </div>
+            <div class="div-block-3">
+                <div class="image-5" style="background: #e2e8f0; width: 100%; height: 300px; border-radius: 2rem; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-chart-network" style="font-size: 6rem; color: #007aff;"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Magic SD-WAN 产品网格 -->
+    <section class="section">
+        <div class="container-2">
+            <div class="div-block-12">
+                <h1 class="heading middle"><strong>Magic SD-WAN<br>下一代网络服务</strong></h1>
+            </div>
+            <div class="div-block-4 home">
+                <div class="w-layout-layout quick-stack home">
+                    <!-- 单元格1 -->
+                    <div class="w-layout-cell cell">
+                        <div class="div-block-5">
+                            <div class="div-block-8">
+                                <div class="div-block-9">
+                                    <i class="fas fa-robot"></i>
+                                    <i class="fas fa-paint-brush"></i>
+                                </div>
+                                <div class="div-block-10"><span><strong>无缝接入全球创新</strong></span></div>
+                            </div>
+                            <div class="div-block-11">
+                                <div><a href="product/aigc.html" class="link-block-2"><h3 class="heading-3"><strong>AIGC服务加速</strong></h3></a></div>
+                                <div><a href="product/aigc.html"><i class="fas fa-arrow-up-right image-6"></i></a></div>
+                            </div>
+                        </div>
+                        <div class="div-block-6">
+                            <div class="div-block-8">
+                                <div class="div-block-9"><i class="fas fa-building"></i></div>
+                                <div class="div-block-10"><span><strong>灵活连接，快速部署</strong></span></div>
+                            </div>
+                            <div class="div-block-11">
+                                <div><h3 class="heading-3"><strong>企业分支组网</strong></h3></div>
+                                <div><i class="fas fa-arrow-up-right image-6"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 单元格2 (办公加速) -->
+                    <div class="w-layout-cell cell-3">
+                        <div class="div-block-8">
+                            <div class="div-block-9">
+                                <i class="fas fa-laptop"></i><i class="fas fa-cloud"></i>
+                            </div>
+                            <div class="div-block-10"><span><strong>办公更高效</strong></span></div>
+                        </div>
+                        <div class="div-block-11 middle">
+                            <div><a href="product/gia.html" class="link-block-3"><h3 class="heading-3"><strong>应用与办公网络加速</strong></h3></a></div>
+                            <div><a href="product/gia.html"><i class="fas fa-arrow-up-right image-6"></i></a></div>
+                        </div>
+                    </div>
+                    <!-- 单元格3 (直播+5G) -->
+                    <div class="w-layout-cell cell-2">
+                        <div class="div-block-5">
+                            <div class="div-block-8">
+                                <div class="div-block-9"><i class="fas fa-video"></i><i class="fas fa-broadcast-tower"></i></div>
+                                <div class="div-block-10"><span><strong>直播低延迟流畅</strong></span></div>
+                            </div>
+                            <div class="div-block-11">
+                                <div><h3 class="heading-3"><strong>直播平台加速</strong></h3></div>
+                                <div><i class="fas fa-arrow-up-right image-6"></i></div>
+                            </div>
+                        </div>
+                        <div class="div-block-6">
+                            <div class="div-block-8">
+                                <div class="div-block-9"><i class="fas fa-wifi"></i></div>
+                                <div class="div-block-10"><span><strong>万物连接</strong></span></div>
+                            </div>
+                            <div class="div-block-11">
+                                <div><a href="product/5g.html" class="link-block-4"><h3 class="heading-3"><strong>通过4/5G接入SD-WAN</strong></h3></a></div>
+                                <div><a href="product/5g.html"><i class="fas fa-arrow-up-right image-6"></i></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 特性块：卓越的网络 -->
+    <section class="section feature">
+        <div class="container-2">
+            <div class="div-icon">
+                <div class="div-block-23">
+                    <i class="fas fa-globe"></i>
+                    <div>容量充足、高速稳定</div>
+                </div>
+            </div>
+            <div class="div-block-13"><h1 class="heading middle"><strong>卓越的网络，卓越的服务</strong></h1></div>
+            <div class="div-block-14">
+                <div class="w-layout-layout quick-stack-3">
+                    <div class="w-layout-cell"><div class="div-block-16"><div class="text-block-2"><strong>多种服务合规加速</strong></div><div class="div-block-17"><i class="fas fa-shield-alt image-9"></i></div></div></div>
+                    <div class="w-layout-cell"><div class="div-block-16"><div class="text-block-2"><strong>零接触配置</strong></div><div class="div-block-17"><i class="fas fa-magic image-9"></i></div></div></div>
+                </div>
+                <div class="w-layout-layout quick-stack-2">
+                    <div class="w-layout-cell"><div class="div-block-16"><div class="text-block-2"><strong>超大网络容量</strong></div><div class="div-block-17"><i class="fas fa-database image-9"></i></div></div></div>
+                    <div class="w-layout-cell"><div class="div-block-16"><div class="text-block-2"><strong>基础设施与网络覆盖全球</strong></div><div class="div-block-17"><i class="fas fa-cloud-upload-alt image-9"></i></div></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 基础设施 -->
+    <section class="section infra">
+        <div class="container-3">
+            <div class="w-layout-layout quick-stack-4">
+                <div class="w-layout-cell cell-4">
+                    <div class="image-10"><i class="fas fa-globe-asia"></i></div>
+                </div>
+                <div class="w-layout-cell cell-5">
+                    <div class="div-icon"><div class="div-block-23"><i class="fas fa-globe"></i><div>卓越的基础设施</div></div></div>
+                    <div class="div-block-13"><h1 class="heading right"><strong>卓越的网络，<br>卓越的服务</strong></h1></div>
+                    <div class="div-paragraph"><p class="p-right">通过O-SASE安全办公平台与SD-WAN，结合遍布全球的基础设施节点，橙汁科技向企业客户交付快速稳定、超低延迟、智能可靠的企业网络解决方案。</p></div>
+                    <a href="#contactus" class="button-2 infra-sec">联系我们免费试用</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 资质认证 -->
+    <section class="section certification">
+        <div class="container-3">
+            <div class="div-icon"><div class="div-block-23"><i class="fas fa-globe"></i><div>通过多项认证</div></div></div>
+            <div class="div-block-13"><h1 class="heading middle"><strong>资质与认证</strong></h1></div>
+            <div class="div-paragraph"><p class="p-middle narrow">我们的产品、服务与运营资质经过监管部门批准；公司的管理与运营能力通过业务主管部门与国际标准化组织认证。</p></div>
+            <div class="div-block-19">
+                <div class="w-layout-layout quick-stack-5">
+                    <div class="w-layout-cell cell-6"><i class="fas fa-trophy"></i><div class="text-block-3"><strong>ISO27001:2022</strong></div><div class="text-block-4">41624ISZ0002R0</div></div>
+                    <div class="w-layout-cell cell-6"><i class="fas fa-trophy"></i><div class="text-block-3"><strong>ISO9001:2015</strong></div><div class="text-block-4">41624QZ639ER0</div></div>
+                    <div class="w-layout-cell cell-6"><i class="fas fa-trophy"></i><div class="text-block-3"><strong>A2-20223315</strong></div><div class="text-block-4">基础电信业务经营许可证</div></div>
+                    <div class="w-layout-cell cell-6"><i class="fas fa-trophy"></i><div class="text-block-3"><strong>B1-20223315</strong></div><div class="text-block-4">增值电信业务经营许可证</div></div>
+                    <div class="w-layout-cell cell-6"><i class="fas fa-trophy"></i><div class="text-block-3"><strong>12-G953-223181</strong></div><div class="text-block-4">电信设备进网许可证</div></div>
+                    <div class="w-layout-cell cell-6"><i class="fas fa-trophy"></i><div class="text-block-3"><strong>CCC</strong></div><div class="text-block-4">通过质量认证</div></div>
+                    <div class="w-layout-cell cell-6"><i class="fas fa-trophy"></i><div class="text-block-3"><strong>中国信通院</strong></div><div class="text-block-4">取得SD-WAN运营能力评估报告</div></div>
+                    <div class="w-layout-cell cell-6"><i class="fas fa-trophy"></i><div class="text-block-3"><strong>运营商</strong></div><div class="text-block-4">SD-WAN国际业务合作伙伴</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 客户信赖 -->
+    <section class="section client">
+        <div class="container-3">
+            <div class="w-layout-layout quick-stack-4">
+                <div class="w-layout-cell cell-5">
+                    <div class="div-icon"><div class="div-block-23"><i class="fas fa-globe"></i><div>深受客户信赖</div></div></div>
+                    <div class="div-block-13"><h1 class="heading right"><strong>客户信赖<br>行业选择</strong></h1></div>
+                    <div class="div-paragraph"><p class="p-right">O-SASE 安全办公平台与Magic SD-WAN深受高等院校、国家实验室、大型央企、跨境出口与互联网公司信赖。</p></div>
+                    <div class="text-block-5">暨南大学教育发展基金会 是广东省民政厅认证的“5A级社会组织”。基金会利用 O-SASE 解决方案向下辖科研项目与高校师生提供快速稳定的科研加速，极大提升了工作效率与科研产出。</div>
+                    <div class="text-block-6"><strong>Johnny Liu - 暨南大学</strong></div>
+                </div>
+                <div class="w-layout-cell cell-5">
+                    <div class="w-layout-layout quick-stack-6">
+                        <div class="w-layout-cell cell-7">
+                            <ul class="list">
+                                <li><div class="div-block-20"><span class="image-11"><i class="fas fa-university"></i></span><div><div class="text-block-7"><strong>暨南大学</strong></div><div class="text-block-8">高等学校</div></div></div></li>
+                                <li><div class="div-block-20"><span class="image-11"><i class="fas fa-university"></i></span><div><div class="text-block-7"><strong>复旦大学</strong></div><div class="text-block-8">高等学校</div></div></div></li>
+                                <li><div class="div-block-20"><span class="image-11"><i class="fas fa-flask"></i></span><div><div class="text-block-7"><strong>之江实验室</strong></div><div class="text-block-8">国家实验室基地</div></div></div></li>
+                            </ul>
+                        </div>
+                        <div class="w-layout-cell cell-8">
+                            <ul class="list second">
+                                <li><div class="div-block-20"><span class="image-11"><i class="fas fa-oil-can"></i></span><div><div class="text-block-7"><strong>国家管网集团</strong></div><div class="text-block-8">大型中央企业</div></div></div></li>
+                                <li><div class="div-block-20"><span class="image-11"><i class="fas fa-microscope"></i></span><div><div class="text-block-7"><strong>国科温州研究院</strong></div><div class="text-block-8">科研机构</div></div></div></li>
+                                <li><div class="div-block-20"><span class="image-11"><i class="fas fa-university"></i></span><div><div class="text-block-7"><strong>暨南大学</strong></div><div class="text-block-8">高等学校</div></div></div></li>
+                            </ul>
+                        </div>
+                        <div class="w-layout-cell cell-9">
+                            <ul class="list">
+                                <li><div class="div-block-20"><span class="image-11"><i class="fas fa-shopping-cart"></i></span><div><div class="text-block-7"><strong>朴朴超市</strong></div><div class="text-block-8">移动互联网购物平台</div></div></div></li>
+                                <li><div class="div-block-20"><span class="image-11"><i class="fas fa-coffee"></i></span><div><div class="text-block-7"><strong>瑞幸咖啡</strong></div><div class="text-block-8">咖啡连锁品牌</div></div></div></li>
+                                <li><div class="div-block-20"><span class="image-11"><i class="fas fa-rocket"></i></span><div><div class="text-block-7"><strong>Starblink</strong></div><div class="text-block-8">跨境出口</div></div></div></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系表单 -->
+    <section id="contactus" class="section contact">
+        <div class="container-3">
+            <div class="div-icon"><div class="div-block-23"><i class="fas fa-globe"></i><div>联系我们试用</div></div></div>
+            <div class="div-block-13"><h1 class="heading wide"><strong>联系我们体验<br>SD-WAN与5G创新应用</strong></h1></div>
+            <div class="div-block-19">
+                <div class="w-layout-layout quick-stack-7">
+                    <div class="w-layout-cell cell-10">
+                        <div class="outer-bg">
+                            <div class="div-block-22">
+                                <h3 class="heading-4">取得联系</h3>
+                                <div class="text-block-9">我们非常愿意通过各种方式与您共同探讨，寻找最适合贵公司的网络解决方案。立即通过下方即时通讯软件与我们联系，或在旁边的留言表格提交您的需求和联系方式，我们的技术专家将尽快为您提供个性化服务。</div>
+                                <div class="div-block-21">
+                                    <a href="#"><i class="fab fa-weixin"></i></a>
+                                    <a href="mailto:business@osase.net"><i class="fas fa-envelope"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-layout-cell cell-11">
+                        <div>
+                            <div class="w-form">
+                                <form>
+                                    <div class="text-block-10"><strong>向我们留言</strong></div>
+                                    <div class="w-layout-layout quick-stack-9" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                        <div class="w-layout-cell"><input class="text-field-3" maxlength="256" placeholder="姓名" type="text" required></div>
+                                        <div class="w-layout-cell"><input class="text-field-3" maxlength="256" placeholder="电话" type="tel" required></div>
+                                        <div class="w-layout-cell"><input class="text-field-3" maxlength="256" placeholder="公司" type="text" required></div>
+                                        <div class="w-layout-cell"><input class="text-field-3" maxlength="256" placeholder="Email" type="email" required></div>
+                                    </div>
+                                    <textarea required placeholder="留言" maxlength="5000" class="textarea" style="margin-top: 1rem;"></textarea>
+                                    <label class="checkbox-field">
+                                        <input type="checkbox" required> <span>勾选表明您接受个人信息处理与隐私政策。</span>
+                                    </label>
+                                    <input type="submit" class="submit-button-2" value="提交留言 →">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部 -->
+    <section class="section footer">
+        <div class="container-3 footer">
+            <div class="w-layout-layout quick-stack-10">
+                <div class="w-layout-cell cell-12">
+                    <div><i class="fas fa-certificate" style="font-size: 2rem; margin-right: 0.5rem;"></i><i class="fas fa-shield" style="font-size: 2rem;"></i></div>
+                    <div class="div-block-24">
+                        <span style="font-size: 1.5rem; font-weight: 700; color: white;"><i class="fas fa-leaf"></i> 橙汁科技</span>
+                        <div class="text-block-12">© 2026 橙汁科技。
+                            <a href="#" class="text-decoration-none"><span class="text-color-333">浙ICP备2022034310号</span></a>
+                            <a href="#" class="text-decoration-none"><i class="fas fa-shield-alt"></i> 浙公网安备33010902004092号</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-layout-cell cell-13">
+                    <div class="w-layout-layout quick-stack-11">
+                        <div class="w-layout-cell">
+                            <div><strong class="bold-text-17">产品与服务</strong></div>
+                            <ul class="list-2">
+                                <li class="list-item-8"><a href="product/gia.html" class="link-block">国际互联网加速</a></li>
+                                <li class="list-item-8"><a href="product/live.html" class="link-block">全球直播加速</a></li>
+                                <li class="list-item-8"><a href="product/aigc.html" class="link-block">AIGC服务加速</a></li>
+                                <li class="list-item-8"><a href="product/5g.html" class="link-block">5G SD-WAN</a></li>
+                                <li class="list-item-8"><a href="product/sdwan.html" class="link-block">Magic SD-WAN</a></li>
+                            </ul>
+                        </div>
+                        <div class="w-layout-cell">
+                            <div><strong class="bold-text-17">公司</strong></div>
+                            <ul class="list-2">
+                                <li class="list-item-8"><a href="tos.html" class="link-block">服务协议</a></li>
+                                <li class="list-item-8"><a href="privacy.html" class="link-block">隐私条款</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-layout-cell cell-14">
+                    <div class="outer-bg">
+                        <div class="div-block-22 location">
+                            <h3 class="heading-4 location"><strong>合作洽谈</strong></h3>
+                            <div class="text-block-9 location">杭州市：萧山区盈丰街道帆影路150号智力大厦1幢1002室(总部)<br>成都市：龙泉驿区外东洪路666号梵木创意区</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="div-block-25">
+                <div class="w-layout-layout quick-stack-12">
+                    <div class="w-layout-cell cell-16"><i class="fas fa-check-circle" style="color: #10b981;"></i> <span class="text-block-15">所有系统正常工作</span></div>
+                    <div class="w-layout-cell cell-118">
+                        <div class="w-row" style="display: flex; gap: 1rem;">
+                            <div><a class="version disabled-clicking"><i class="fab fa-windows"></i> <span>Windows版</span></a></div>
+                            <div><a class="version disabled-clicking"><i class="fab fa-android"></i> <span>Android版</span></a></div>
+                            <div><a href="#" class="w-inline-block"><i class="fab fa-apple"></i> <span>iOS/macOS</span></a></div>
+                        </div>
+                    </div>
+                    <div class="w-layout-cell cell-15">
+                        <a href="about.html" class="link-block">关于我们</a>
+                        <a href="tel:4000696700" class="link-block">联系电话：400 069 6700</a>
+                        <a href="#" class="cell-15" style="display: flex; align-items: center; gap: 0.3rem;"><i class="fas fa-comment-dots"></i>在线咨询</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关闭banner的脚本 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const clearBtn = document.getElementById('clear');
+            if (clearBtn) {
+                clearBtn.addEventListener('click', function() {
+                    document.getElementById('banner').style.display = 'none';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
