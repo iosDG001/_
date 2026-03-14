@@ -552,7 +552,7 @@ input:focus,input:active {
     <div class="beij">
         <div class="yindy">
             <a class="toux" href="https://t.me/iOSAWJ"></a>
-            <div class="wenzi">【光合战队】</div>
+            <div class="wenzi">【向僵尸开炮】</div>
         </div>
         <div class="gonneng">
             <button class="anniu active" onclick="switchTab(0)">公告</button>
