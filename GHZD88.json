@@ -1,7 +1,7 @@
 {
     "ZDK": false,
-    "ZDG": true,
-    "GSK": true,
-    "GSG": true,
+    "ZDG": false,
+    "GSK": false,
+    "GSG": false,
     "JS1": fasle
 }
