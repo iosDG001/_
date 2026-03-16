@@ -1,0 +1,20 @@
+{
+    "targetUrlContains": "refresh/token",
+    "vipFields": {
+        "adVipDt": 4092610661000,
+        "visitVipBoolean": true,
+        "normalVipForever": true,
+        "normalVipDt": 4092610661000,
+        "visitVipForever": true,
+        "visitVipDt": 4092610661000,
+        "visitVipDtSub": 4092610661000,
+        "adVipForever": true,
+        "adVipBoolean": true,
+        "normalVipBoolean": true
+    },
+    "nickName": "𝐓𝐆频道@𝐢𝐎𝐒𝐀𝐖𝐉",
+    "labelTexts": {
+        "aboutUs": "关于我们",
+        "replacement": "𝐓𝐆频道@𝐢𝐎𝐒𝐀𝐖𝐉已解锁𝐕𝐈𝐏🎉🎉"
+    }
+}
