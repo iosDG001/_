@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星云解密 🍎</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 30px 25px;
+        }
+        h1 {
+            font-size: 24px;
+            margin-top: 0;
+            color: #1a2332;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        h1 small {
+            font-size: 14px;
+            font-weight: 400;
+            color: #6b7a8f;
+            margin-left: auto;
+        }
+        .desc {
+            color: #4a5a6e;
+            font-size: 14px;
+            margin-bottom: 20px;
+            background: #f0f4ff;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border-left: 4px solid #4a90d9;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px 12px;
+            font-family: "SF Mono", "Menlo", "Monaco", monospace;
+            font-size: 12px;
+            border: 1px solid #d0d7de;
+            border-radius: 10px;
+            resize: vertical;
+            background: #fafbfc;
+            transition: border 0.2s;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #4a90d9;
+            box-shadow: 0 0 0 3px rgba(74,144,217,0.15);
+        }
+        #inputJson { height: 160px; }
+        .actions {
+            margin: 16px 0 22px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+        .btn {
+            background: #4a90d9;
+            color: #fff;
+            border: none;
+            padding: 10px 26px;
+            border-radius: 30px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn:hover { background: #3a7bc8; }
+        .btn:active { transform: scale(0.97); }
+        .btn-secondary { background: #e8ecf1; color: #2c3e50; }
+        .btn-secondary:hover { background: #d5dbe3; }
+        .btn-success { background: #28a745; }
+        .btn-success:hover { background: #218838; }
+        .node-count { font-weight: 500; color: #1a2332; margin-left: 10px; font-size: 14px; }
+
+        /* 三个协议窗口 */
+        .protocol-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin-top: 10px;
+        }
+        .protocol-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 14px 14px 12px;
+            border: 1px solid #e9ecf0;
+            display: flex;
+            flex-direction: column;
+        }
+        .protocol-card .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1a2332;
+            font-size: 14px;
+        }
+        .protocol-card .header .badge {
+            background: #4a90d9;
+            color: #fff;
+            font-size: 11px;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+        .protocol-card textarea {
+            height: 180px;
+            background: #fff;
+            font-size: 11px;
+            line-height: 1.5;
+            flex: 1;
+        }
+        .copy-btn-small {
+            background: #28a745;
+            color: #fff;
+            border: none;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.15s;
+            margin-top: 6px;
+            align-self: flex-end;
+        }
+        .copy-btn-small:hover { background: #218838; }
+        .status { margin-top: 12px; font-size: 14px; color: #28a745; }
+        .status.error { color: #d73a49; }
+        .footer {
+            margin-top: 24px;
+            font-size: 13px;
+            color: #8b9aae;
+            text-align: center;
+            border-top: 1px solid #e9ecf0;
+            padding-top: 18px;
+        }
+        @media (max-width: 700px) {
+            .protocol-grid { grid-template-columns: 1fr; }
+            .container { padding: 18px 14px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>
+        🔓 星云提取
+        <small>离线 RSA 解密 · 三协议独立</small>
+    </h1>
+    <div class="desc">
+        ⚡ 粘贴加密的完整 JSON 或 <code>msg</code> 字符串，点击解密并自动生成 <strong>VMess</strong>、<strong>VLESS Reality</strong>、<strong>Hysteria2</strong> 三种协议的节点列表。<br>
+        完全离线运行，不发送任何网络请求。
+    </div>
+
+    <textarea id="inputJson" placeholder="粘贴加密内容（完整 JSON 或 msg Base64）……"></textarea>
+
+    <div class="actions">
+        <button class="btn" id="decryptAndGenerate">🔓 解密并生成节点</button>
+        <button class="btn btn-secondary" id="clearBtn">🗑️ 清空</button>
+        <span class="node-count" id="nodeCount">未解析</span>
+    </div>
+
+    <!-- 三个协议窗口 -->
+    <div class="protocol-grid" id="protocolGrid">
+        <!-- VMess -->
+        <div class="protocol-card">
+            <div class="header">
+                <span>📦 VMess</span>
+                <span class="badge" id="vmessCount">0</span>
+            </div>
+            <textarea id="outputVmess" readonly placeholder="VMess 节点列表…"></textarea>
+            <button class="copy-btn-small" data-target="outputVmess">📋 复制 VMess</button>
+        </div>
+        <!-- VLESS Reality -->
+        <div class="protocol-card">
+            <div class="header">
+                <span>🔐 VLESS Reality</span>
+                <span class="badge" id="vlessCount">0</span>
+            </div>
+            <textarea id="outputVless" readonly placeholder="VLESS Reality 节点列表…"></textarea>
+            <button class="copy-btn-small" data-target="outputVless">📋 复制 VLESS</button>
+        </div>
+        <!-- Hysteria2 -->
+        <div class="protocol-card">
+            <div class="header">
+                <span>⚡ Hysteria2</span>
+                <span class="badge" id="hy2Count">0</span>
+            </div>
+            <textarea id="outputHy2" readonly placeholder="Hysteria2 节点列表…"></textarea>
+            <button class="copy-btn-small" data-target="outputHy2">📋 复制 Hysteria2</button>
+        </div>
+    </div>
+
+    <div id="statusMsg" class="status"></div>
+    <div class="footer">
+        适用于 NekoBox / Hiddify / V2RayNG / Shadowrocket 等客户端。
+    </div>
+</div>
+
+<script>
+    (function() {
+        // ---------- RSA 解密参数 ----------
+        const N = BigInt('0xc9b678f50102ae6b72bc1e7bea8b4c44d33a4544c2c27834456155cbf434a9cf5f489b75599ddfaa6ef954f0b774bb99447ddbfdc8bb10df590b95b13b63f0fce55245752048032e3b20056b81dc904ff9c70d45590fe44844cb65c4b479465fa7e63c02a8e82968d6c2cdda623ddfa0658e15c48ab033eeb5316dc0b9419c5beded195f0bf64fa25247ac41a72aa70d77f1670aa87d6c945bf10091c88875b42cf71e342c2e74a4774a4b5fa464966fd2b24ca56c1d083a25d14737883b515b245e2d37e938f9481da5cdaf8262aabfd8709ae4c147cd38d270fa4ba9954105553a7993dac13369d5cfb1f4c19ee6077b588d9a2f9bda0d47e2b5d6e174cedd');
+        const D = BigInt('0x5d77069f0803d50c0692f2511ac1c6ea5131bbecfb8d9ea321ced331790b79ef93c811f89338daed9f143aee7b2344d5e4eda8a4f480f1757c4e28e381907296cc2f8ded92b2ab7e9d78ddea0db744cb3a02a8bc8c6317b500e37a59660297c0350d329b4ce69e616cb9c126c2c4c6bd0cb184969868c2f785cfcc7a339d1a348feda3d02f9a71f3da36897f6433a4801e9405f4c42a730c308a941c9ccdcb9707d5ecd968c1e151d54d5e5668d3fa59cbfe5d4024b17da6b9f9be3336b6302626c40c7d284175d57cc6ceb490236c5dc842dbeaf1f2bf0797cc457bf78d1688358e3035eb4bb192b98b78d20a2adf8fa27358a6f53c976119dea3ef757d5da5');
+
+        function modPow(b, e, m) { let r = 1n; while (e) { if (e & 1n) r = r * b % m; b = b * b % m; e >>= 1n; } return r; }
+        function bytesToInt(a) { let x = 0n; for (const v of a) x = (x << 8n) | BigInt(v); return x; }
+        function intToBytes(x, n) { const a = new Uint8Array(n); for (let i = n - 1; i >= 0; i--) { a[i] = Number(x & 255n); x >>= 8n; } return a; }
+        function base64Bytes(s) { s = s.replace(/\s/g, '').replace(/-/g, '+').replace(/_/g, '/'); while (s.length % 4) s += '='; const b = atob(s); const a = new Uint8Array(b.length); for (let i = 0; i < b.length; i++) a[i] = b.charCodeAt(i); return a; }
+
+        function decryptPKCS1(msg) {
+            const raw = base64Bytes(msg);
+            if (!raw.length || raw.length % 256) throw new Error('msg 长度不是 256 字节 RSA 块的整数倍');
+            const chunks = [];
+            let size = 0;
+            for (let p = 0; p < raw.length; p += 256) {
+                const em = intToBytes(modPow(bytesToInt(raw.subarray(p, p + 256)), D, N), 256);
+                if (em[0] !== 0 || em[1] !== 2) throw new Error('RSA-PKCS#1 填充校验失败');
+                let z = 2;
+                while (z < em.length && em[z] !== 0) z++;
+                if (z < 10 || z === em.length) throw new Error('RSA-PKCS#1 数据块无效');
+                const part = em.subarray(z + 1);
+                chunks.push(part);
+                size += part.length;
+            }
+            const all = new Uint8Array(size);
+            let p = 0;
+            for (const part of chunks) {
+                all.set(part, p);
+                p += part.length;
+            }
+            return all;
+        }
+
+        // ---------- 解析加密内容 ----------
+        function getMsgFromInput(text) {
+            text = text.trim();
+            if (!text) throw new Error('请先粘贴加密内容');
+            // 尝试解析 JSON，提取 msg
+            if (text[0] === '{') {
+                const obj = JSON.parse(text);
+                if (typeof obj.msg !== 'string') throw new Error('JSON 中没有 msg 字符串');
+                return obj.msg;
+            }
+            // 否则直接作为 Base64 字符串
+            return text;
+        }
+
+        // ---------- 生成节点 URI 并分窗 ----------
+        function generateSplitUris(jsonText) {
+            let data;
+            try {
+                data = JSON.parse(jsonText);
+            } catch (e) {
+                throw new Error('JSON 格式错误：' + e.message);
+            }
+
+            const msg = data.msg;
+            if (!msg) throw new Error('未找到 msg 字段');
+
+            const nodeList = msg.nodeList || msg.nodeDisplayList || [];
+            const freeList = msg.freeNodeList || msg.freeNodeDisplayList || [];
+            const allNodes = nodeList.concat(freeList);
+            if (allNodes.length === 0) throw new Error('节点列表为空');
+
+            const vmessUris = [];
+            const vlessUris = [];
+            const hy2Uris = [];
+
+            for (const node of allNodes) {
+                const configs = node.configs || [];
+                const parentUuid = node.uuid || '';
+
+                for (const cfg of configs) {
+                    const protocol = cfg.protocol || '';
+                    let uri = '';
+
+                    // VMess
+                    if (protocol === 'vmess') {
+                        const id = cfg.id || cfg._id || parentUuid;
+                        const add = cfg.add || cfg.ip || '';
+                        const port = cfg.port ? String(cfg.port) : '';
+                        if (!add || !port || !id) continue;
+                        const aid = cfg.aid || '0';
+                        const net = cfg.net || 'ws';
+                        const type = cfg.type || 'none';
+                        const host = cfg.host || '';
+                        const path = cfg.path || '';
+                        const tls = cfg.tls || 'tls';
+                        const ps = cfg.ps || node.label || '';
+                        const vmessObj = {
+                            v: cfg.v || '2',
+                            ps: ps,
+                            add: add,
+                            port: port,
+                            id: id,
+                            aid: aid,
+                            net: net,
+                            type: type,
+                            host: host,
+                            path: path,
+                            tls: tls
+                        };
+                        Object.keys(vmessObj).forEach(k => {
+                            if (vmessObj[k] === '' || vmessObj[k] === undefined || vmessObj[k] === null) {
+                                delete vmessObj[k];
+                            }
+                        });
+                        const jsonStr = JSON.stringify(vmessObj);
+                        const encoded = btoa(jsonStr);
+                        uri = 'vmess://' + encoded;
+                        if (uri) vmessUris.push(uri);
+                    }
+                    // VLESS Reality
+                    else if (protocol === 'vr') {
+                        const uuid = cfg.uuid || parentUuid;
+                        const ip = cfg.ip || '';
+                        let port = cfg.port ? String(cfg.port) : (cfg.portFrom ? String(cfg.portFrom) : '');
+                        if (!uuid || !ip || !port) continue;
+                        const params = new URLSearchParams();
+                        params.set('encryption', 'none');
+                        params.set('security', 'reality');
+                        if (cfg.reality_dest) params.set('sni', cfg.reality_dest);
+                        if (cfg.public_key) params.set('pbk', cfg.public_key);
+                        if (cfg.short_id) params.set('sid', cfg.short_id);
+                        params.set('fp', 'chrome');
+                        params.set('type', 'tcp');
+                        params.set('flow', 'xtls-rprx-vision');
+                        uri = 'vless://' + uuid + '@' + ip + ':' + port + '?' + params.toString();
+                        if (uri) vlessUris.push(uri);
+                    }
+                    // Hysteria2
+                    else if (protocol === 'hy2' || protocol === 'hy') {
+                        let host = cfg.ip || cfg.add || '';
+                        let port = cfg.server_port ? String(cfg.server_port) : (cfg.portFrom ? String(cfg.portFrom) : '');
+                        if (!host || !port) continue;
+                        const params = new URLSearchParams();
+                        if (cfg.auth_str) params.set('auth', cfg.auth_str);
+                        if (cfg.server_name) params.set('peer', cfg.server_name);
+                        if (cfg.obfs) params.set('obfs', cfg.obfs);
+                        params.set('insecure', '1');
+                        uri = 'hy2://' + host + ':' + port + '?' + params.toString();
+                        if (uri) hy2Uris.push(uri);
+                    }
+                }
+            }
+
+            return {
+                vmess: vmessUris,
+                vless: vlessUris,
+                hy2: hy2Uris
+            };
+        }
+
+        // ---------- UI 元素 ----------
+        const inputJson = document.getElementById('inputJson');
+        const outputVmess = document.getElementById('outputVmess');
+        const outputVless = document.getElementById('outputVless');
+        const outputHy2 = document.getElementById('outputHy2');
+        const vmessCount = document.getElementById('vmessCount');
+        const vlessCount = document.getElementById('vlessCount');
+        const hy2Count = document.getElementById('hy2Count');
+        const statusMsg = document.getElementById('statusMsg');
+        const nodeCountSpan = document.getElementById('nodeCount');
+        const decryptBtn = document.getElementById('decryptAndGenerate');
+        const clearBtn = document.getElementById('clearBtn');
+
+        // 更新三个窗口
+        function updateUI(result) {
+            outputVmess.value = result.vmess.join('\n');
+            outputVless.value = result.vless.join('\n');
+            outputHy2.value = result.hy2.join('\n');
+            vmessCount.textContent = result.vmess.length;
+            vlessCount.textContent = result.vless.length;
+            hy2Count.textContent = result.hy2.length;
+            const total = result.vmess.length + result.vless.length + result.hy2.length;
+            statusMsg.textContent = `✅ 生成成功！共 ${total} 条链接（VMess: ${result.vmess.length}，VLESS: ${result.vless.length}，Hysteria2: ${result.hy2.length}）`;
+            statusMsg.className = 'status';
+            // 更新节点统计
+            nodeCountSpan.textContent = `节点对象: ${result.vmess.length + result.vless.length + result.hy2.length} 个配置`;
+        }
+
+        // 主逻辑：解密 + 生成节点
+        function decryptAndProcess() {
+            const rawText = inputJson.value.trim();
+            if (!rawText) {
+                statusMsg.textContent = '⚠️ 请先粘贴加密内容';
+                statusMsg.className = 'status error';
+                return;
+            }
+
+            try {
+                statusMsg.textContent = '⏳ 正在解密…';
+                statusMsg.className = 'status';
+
+                // 1. 提取 msg 字符串
+                const msgB64 = getMsgFromInput(rawText);
+                // 2. RSA 解密
+                const decryptedBytes = decryptPKCS1(msgB64);
+                const decryptedText = new TextDecoder().decode(decryptedBytes);
+                // 3. 解析节点
+                const result = generateSplitUris(decryptedText);
+                updateUI(result);
+                // 将解密后的 JSON 也显示在输出区？可选，但我们只显示节点。
+                // 为方便调试，可将解密后的 JSON 放到一个隐藏域或控制台，但这里不额外占用界面。
+            } catch (err) {
+                statusMsg.textContent = '❌ ' + err.message;
+                statusMsg.className = 'status error';
+                outputVmess.value = '';
+                outputVless.value = '';
+                outputHy2.value = '';
+                vmessCount.textContent = '0';
+                vlessCount.textContent = '0';
+                hy2Count.textContent = '0';
+                nodeCountSpan.textContent = '未解析';
+            }
+        }
+
+        // 清空
+        function clearAll() {
+            inputJson.value = '';
+            outputVmess.value = '';
+            outputVless.value = '';
+            outputHy2.value = '';
+            vmessCount.textContent = '0';
+            vlessCount.textContent = '0';
+            hy2Count.textContent = '0';
+            statusMsg.textContent = '';
+            statusMsg.className = 'status';
+            nodeCountSpan.textContent = '未解析';
+        }
+
+        // 复制按钮
+        document.querySelectorAll('.copy-btn-small').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const targetId = this.dataset.target;
+                const textarea = document.getElementById(targetId);
+                const text = textarea.value;
+                if (!text) {
+                    statusMsg.textContent = '⚠️ 该协议没有可复制的内容';
+                    statusMsg.className = 'status error';
+                    return;
+                }
+                navigator.clipboard.writeText(text).then(() => {
+                    statusMsg.textContent = `✅ 已复制 ${targetId.replace('output','')} 协议的全部链接！`;
+                    statusMsg.className = 'status';
+                    setTimeout(() => {
+                        if (statusMsg.textContent.includes('已复制')) statusMsg.textContent = '';
+                    }, 3000);
+                }).catch(() => {
+                    textarea.select();
+                    document.execCommand('copy');
+                    statusMsg.textContent = `✅ 已复制（降级方式）`;
+                    statusMsg.className = 'status';
+                });
+            });
+        });
+
+        // 事件绑定
+        decryptBtn.addEventListener('click', decryptAndProcess);
+        clearBtn.addEventListener('click', clearAll);
+
+        // 输入框实时统计（仅当为明文 JSON 时显示节点数，否则仅显示提示）
+        inputJson.addEventListener('input', function() {
+            const text = this.value.trim();
+            if (!text) { nodeCountSpan.textContent = '未解析'; return; }
+            // 尝试直接解析 JSON，若成功显示节点数（可能在明文状态下）
+            try {
+                const data = JSON.parse(text);
+                const msg = data.msg;
+                if (msg && (msg.nodeList || msg.nodeDisplayList)) {
+                    const nodeList = msg.nodeList || msg.nodeDisplayList || [];
+                    const freeList = msg.freeNodeList || msg.freeNodeDisplayList || [];
+                    const all = nodeList.concat(freeList);
+                    let total = 0;
+                    for (const n of all) {
+                        total += (n.configs || []).length;
+                    }
+                    nodeCountSpan.textContent = `节点对象: ${all.length} 个，配置条目: ${total} 个`;
+                } else {
+                    nodeCountSpan.textContent = '包含 msg 字符串（将解密）';
+                }
+            } catch {
+                // 可能是 Base64 字符串
+                nodeCountSpan.textContent = '将解密 Base64 数据';
+            }
+        });
+
+        // 初始状态
+        setTimeout(() => inputJson.dispatchEvent(new Event('input')), 100);
+    })();
+</script>
+</body>
+</html>
