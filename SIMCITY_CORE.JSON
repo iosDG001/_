@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "game": "SIMCITY",
+  "enabled": true,
+  "games": {
+    "com.ea.simcitymobile.bv@1.84.1": {
+      "date": "261105",
+      "enabled": true,
+      "block_cn_ip": true,
+      "sha256": "b330a14ead0bb164f89652a274fa09d1f75f509896e4013d64cada5e6c656fd8",
+      "core": "SU9TQ09SRTEBAAAABwAAAAAAAAAAAAAAoxH95taGMZmZ2oPpD6eIiwAAAAAAAAAAkIk4AAAAAADw9jgAAAAAAHSu7QAAAAAANBfuAAAAAACEcjABAAAAALCebQEAAAAACDVbAQAAAAA="
+    }
+  }
+}
