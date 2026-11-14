@@ -33,6 +33,8 @@ if (obj.data) {
     obj.data.freeNum = 99999;            
     obj.data.importImageNum = 99999;     
     obj.data.controlCameraNum = 99999;   
-    obj.data.beautyNum = 99999;      
+    obj.data.beautyNum = 99999;
+
+}
 
 $done({ body: JSON.stringify(obj) });
